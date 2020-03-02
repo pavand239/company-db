@@ -32,7 +32,9 @@ const EmployeeDetail = ({employeeId, companyDBService, user:{user:{groups}}}) =>
     if (error) {
         return  error.message
     }
-    let moreDetail = '';
+    let moreDetail = '',
+        incomeDetail = '',
+        educationDetail = '';
 
     if (groups.includes('Chief') || 
         groups.includes('Accounting') || 
@@ -41,22 +43,44 @@ const EmployeeDetail = ({employeeId, companyDBService, user:{user:{groups}}}) =>
     } else if (groups.includes('Admin')) {
         moreDetail = <EmployeeDetailAdmin data={data} />
     }
+
+    if (groups.includes('Chief') || 
+        groups.includes('Accounting')) {
+            incomeDetail=(
+                <div>
+                    <p>Доходы:</p>
+                    <div className='ml-3 my-3'>
+                        <EmployeeIncomeTable employeeId={employeeId}/>
+                    </div>
+                </div>
+            )
+    }
+
+    if (groups.includes('Chief') || 
+        groups.includes('Accounting') || 
+        groups.includes('HumanResource') ||
+        groups.includes('Admin')) {
+            educationDetail=(
+                <div>
+                    <p>Образование:</p>
+                    <div className='ml-3 my-3'>
+                        <EmployeeEducationTable employeeId={employeeId}/>
+                    </div>
+                </div>
+            )
+        }
+
+
     return (
         <div>
             <EmployeeDetailDefault data={data} />
             {moreDetail}
-            <p>Доходы:</p>
-            <div className='ml-3 my-3'>
-                <EmployeeIncomeTable employeeId={employeeId}/>
-            </div>
+            {educationDetail}
             <p>Дети:</p>
             <div className='ml-3 my-3'>
                 <EmployeeChildrenTable employeeId={employeeId}/>
             </div>
-            <p>Образование:</p>
-            <div className='ml-3 my-3'>
-                <EmployeeEducationTable employeeId={employeeId}/>
-            </div>
+            {incomeDetail}
             
         </div>
     )
