@@ -18,7 +18,10 @@ const EmployeeChildrenTable=({employeeId, companyDBService})=>{
         return <LoadingIndicator />
     }
     if (error) {
-        return  error.message
+        return  <p className='text-danger font-weight-bold'>{error.message}</p>
+    }
+    if (data.length===0) {
+        return <p className='font-weight-bold'>Нет информации о детях</p>
     }
     return (
         <Table responsive bordered>
