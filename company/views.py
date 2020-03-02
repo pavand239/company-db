@@ -25,7 +25,8 @@ class EmployeeViewSet(viewsets.ModelViewSet):
         children=Child.objects.filter(employee=pk)
         serializer=ChildSerializer(children,many=True)
         return Response(serializer.data)
-    @action(detail=True)
+    @action(detail=True,
+            permission_classes=[is_group_member_perm(['Chief','Accounting','HumanResource','Admin'])])
     def get_education(self,request, pk=None):
         education=Education.objects.filter(employee=pk)
         serializer=EducationSerializer(education,many=True)
