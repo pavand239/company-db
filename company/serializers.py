@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Employee, Education, Reward, Child, Income
 
 class EmployeeDefaultSerializer(serializers.ModelSerializer):
-    sex= serializers.CharField(source='get_sex_display')
+    gender= serializers.CharField(source='get_gender_display')
     class Meta:
         model=Employee
         fields=['id','surname','name', 'patronymic','birth_date','department','position','sex']
@@ -16,7 +16,7 @@ class EmployeeChiefSerializer(EmployeeDefaultSerializer):
         fields='__all__'
         read_only_fields=[
             "id","surname","name",
-            "patronymic","birth_date","birth_place","sex",
+            "patronymic","birth_date","birth_place","gender",
             "department","attitude_to_conscription",
             "marital_status","passport_series","passport_ID","address","salary"
         ]

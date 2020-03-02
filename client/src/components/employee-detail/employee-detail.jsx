@@ -26,7 +26,7 @@ const EmployeeDetail = ({employeeId, companyDBService}) => {
     let {surname, name, patronymic, birth_date, birth_place, 
         department, position, passport_series, passport_ID,
         address, salary, attitude_to_conscription:attToCons, 
-        marital_status:maritalStatus, sex} = data;
+        marital_status:maritalStatus, gender} = data;
     return (
         <div>
             <h3>{surname} {name} {patronymic}</h3>
@@ -34,7 +34,7 @@ const EmployeeDetail = ({employeeId, companyDBService}) => {
             <p>Отдел: {department}</p>
             <p>Должность: {position}</p>
             <p>Оклад: {salary} руб.</p>
-            <p>Пол: {sex}</p>
+            <p>Пол: {gender}</p>
             <p>Паспорт: {passport_series} {passport_ID}</p>
             <p>Проживает: {address}</p>
             <p>Семейное положение: {maritalStatus}</p>

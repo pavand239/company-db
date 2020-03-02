@@ -10,7 +10,7 @@ class Employee(models.Model):
     patronymic = models.CharField(max_length=100, verbose_name='Отчество')
     birth_date = models.DateField(verbose_name='Дата рождения')
     birth_place = models.CharField(max_length=250)
-    sex = models.CharField(max_length=1,
+    gender = models.CharField(max_length=1,
                             choices=[
                                 ('m','Мужской'),
                                 ('f','Женский')
