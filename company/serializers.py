@@ -5,8 +5,8 @@ class EmployeeDefaultSerializer(serializers.ModelSerializer):
     gender= serializers.CharField(source='get_gender_display')
     class Meta:
         model=Employee
-        fields=['id','surname','name', 'patronymic','birth_date','department','position','sex']
-        read_only_fields=['id','surname','name', 'patronymic','birth_date','department','position']
+        fields=['id','surname','name', 'patronymic','birth_date','birth_place','department','position','gender']
+        read_only_fields=['id','surname','name', 'patronymic','birth_date','birth_place','department','position']
 
 class EmployeeChiefSerializer(EmployeeDefaultSerializer):
     attitude_to_conscription = serializers.CharField(source='get_attitude_to_conscription_display')
@@ -38,12 +38,12 @@ class EmployeeAdminSerializer(EmployeeChiefSerializer):
 class IncomeChiefSerializer(serializers.ModelSerializer):
     class Meta:
         model=Income
-        fields='__all__'
+        fields=['id','employee','income_date','percent','premium','tax','salary','get_total']
         read_only_fields=['id','employee','income_date','percent','tax','salary','get_total']
 class IncomeAccountingSerializer(serializers.ModelSerializer):
     class Meta:
         model=Income
-        fields='__all__'
+        fields=['id','employee','income_date','percent','premium','tax','salary','get_total']
         read_only_fields=['premium','salary','get_total']
 
         
