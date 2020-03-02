@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Employee, Education, Reward, Child, Income
+from .models import *
 
 # Register your models here.
 @admin.register(Employee)
@@ -24,8 +24,12 @@ class IncomeAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': (
-                'employee', 'tax', 'salary', 'percent','premium','income_date',
+                'employee', 'tax', 'salary', 'percent','premium','income_date','total',
             ),
         }),
     )
-    readonly_fields=('salary',)
+    readonly_fields=('salary','total', 'tax')
+
+@admin.register(Taxes)
+class TaxesAdmin(admin.ModelAdmin):
+    pass

@@ -92,7 +92,7 @@ class Child(models.Model):
 
 
 class Income(models.Model):
-    tax = models.FloatField(default=0.13)
+    tax = models.FloatField()
     employee = models.ForeignKey('Employee', related_name='income', on_delete=models.CASCADE)
     percent = models.DecimalField(max_digits=3, decimal_places=2,
                                 default=0,
@@ -114,13 +114,26 @@ class Income(models.Model):
     def get_salary(self):
         return self.employee.salary
     @property
+    def get_tax(self):
+        return Taxes.objects.get(name='НДФЛ').value
+    @property
     def get_total(self):
         return (self.salary+self.salary*float(self.percent)+self.premium)*(1-self.tax)
 
     def save(self, *args, **kwargs):
-        self.salary=self.get_salary
-        self.total=self.get_total
+        if not self.salary:
+            self.salary=self.get_salary
+        if not self.tax:
+            self.tax=self.get_tax
+        if not self.total:
+            self.total=self.get_total
         super(Income, self).save(*args, **kwargs)
+
+class Taxes(models.Model):
+    name=models.CharField(default='НДФЛ',max_length=50)
+    value=models.FloatField(default=0.13)
+    def __str__(self):
+        return self.name
 
 
 
