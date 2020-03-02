@@ -20,16 +20,16 @@ class EmployeeChiefSerializer(EmployeeDefaultSerializer):
             "department","attitude_to_conscription",
             "marital_status","passport_series","passport_ID","address","salary"
         ]
-class EmployeeAccountingSerializer(EmployeeChiefSerializer,):
+class EmployeeAccountingSerializer(EmployeeChiefSerializer):
     class Meta:
         model=Employee
         exclude=["attitude_to_conscription","marital_status",
                  "passport_series","passport_ID","address"]
-class EmployeeHumanResourceSerializer(serializers.ModelSerializer):
+class EmployeeHumanResourceSerializer(EmployeeChiefSerializer):
     class Meta:
         model=Employee
         fields='__all__'
-class EmployeeAdminSerializer(serializers.ModelSerializer):
+class EmployeeAdminSerializer(EmployeeChiefSerializer):
     class Meta:
         model=Employee
         exclude=["passport_series","passport_ID"]
@@ -38,18 +38,14 @@ class EmployeeAdminSerializer(serializers.ModelSerializer):
 class IncomeChiefSerializer(serializers.ModelSerializer):
     class Meta:
         model=Income
-        fields=['id','employee','income_date','percent','premium','tax','salary','get_total']
+        fields='__all__'
         read_only_fields=['id','employee','income_date','percent','tax','salary','get_total']
 class IncomeAccountingSerializer(serializers.ModelSerializer):
     class Meta:
         model=Income
-        fields=['id','employee','income_date','percent','premium','tax','salary','get_total']
-        read_only_fields=['premium','salary','get_total']
-class IncomeAdminSerializer(serializers.ModelSerializer):
-    class Meta:
-        model=Income
         fields='__all__'
-        read_only_fields=['id','employee','income_date','percent','premium','tax','salary','get_total']
+        read_only_fields=['premium','salary','get_total']
+
         
 class ChildSerializer(serializers.ModelSerializer):
     class Meta:
