@@ -105,16 +105,22 @@ class Income(models.Model):
     premium = models.FloatField(default=0, 
                                 validators=[MinValueValidator(limit_value=0,message='Премия не меньше 0')])
     income_date = models.DateField()
-
+    salary = models.FloatField()
+    total = models.FloatField()
     def __str__(self):
         return '{} {}.{} Сумма: {}'.format(self.employee, self.income_date.month, self.income_date.year, self.get_total)
 
     @property
-    def salary(self):
+    def get_salary(self):
         return self.employee.salary
     @property
     def get_total(self):
         return (self.salary+self.salary*float(self.percent)+self.premium)*(1-self.tax)
+
+    def save(self, *args, **kwargs):
+        self.salary=self.get_salary
+        self.total=self.get_total
+        super(Income, self).save(*args, **kwargs)
 
 
 
