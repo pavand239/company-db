@@ -1,13 +1,17 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useContext} from 'react';
 import {connect} from 'react-redux';
 
 import { withCompanyDBService } from '../hoc';
 import {useGetData} from "../hooks";
-import EmployeeIncomeTable from '../empoyee-income-table';
-import EmployeeChildrenTable from '../empoyee-children-table';
-import EmployeeEducationTable from '../empoyee-education-table';
-import ErrorIndicator from "../error-indicator";
+import CompanyDBServiceContext from "../company-db-service-context"
+import {
+    EmployeeIncomeTable,
+    EmployeeEducationTable,
+    EmployeeChildrenTable
+} from '../tables';
 import LoadingIndicator from "../loading-indicator";
+import ItemDetail from "../item-detail";
+import ItemRecord from "../item-record";
 
 // Possible data fields
 // {surname, name, patronymic, birth_date, birth_place, 
@@ -18,114 +22,67 @@ import LoadingIndicator from "../loading-indicator";
 //['Admin','Chief','Accounting','HumanResource','Union']
 
 
-const EmployeeDetail = ({employeeId, companyDBService, user:{user:{groups}}}) => {
-    const useGetEmployee = () => {
-        let token = localStorage.getItem('token'),
-            getEmployee = useCallback(()=>companyDBService.getEmployee(token,employeeId),[employeeId, token]);
-        return useGetData(getEmployee);
-    }
-    let {data, isLoading, error} = useGetEmployee();
-    console.log(data)
-    if (isLoading && !error) {
-        return <LoadingIndicator />
-    }
-    if (error) {
-        return  error.message
-    }
-    let moreDetail = '',
-        incomeDetail = '',
-        educationDetail = '';
-
-    if (groups.includes('Chief') || 
-        groups.includes('Accounting') || 
-        groups.includes('HumanResource')) {
-            moreDetail = <EmployeeDetailChief data={data} />
+const EmployeeDetail = ({ user:{groups}}) => {
+    let {getEmployee} = useContext(CompanyDBServiceContext);
+    let defaultDetail = [
+            <ItemRecord label={'Дата рождения'} field={'birth_date'} />,
+            <ItemRecord label={'Место рождения'} field={'birth_place'} />,
+            <ItemRecord label={'Отдел'} field={'department'} />,
+            <ItemRecord label={'Должность'} field={'position'} />
+        ],
+        adminDetail = [
+            <ItemRecord label={'Адрес:'} field={'address'} />,
+            <ItemRecord label={'Семейное положение'} field={'marital_status'} />,
+            <ItemRecord label={'Отношение к воинской обязанности'} field={'attitude_to_conscription'} />,
+        ],
+        humanResDetail = [
+            <ItemRecord label={'Серия паспорта'} field={'passport_series'} />,
+            <ItemRecord label={'Номер паспорта'} field={'passport_ID'} />,
+        ],
+        accountingDetail = [
+            <ItemRecord label={'Оклад'} field={'salary'} />,
+        ],
+        detail = [...defaultDetail];
+    if (groups.includes('Chief')) {
+        detail=[...detail, ...adminDetail, ...humanResDetail, ...accountingDetail]
+    } else if (groups.includes('Accounting')) {
+        detail=[...detail, ...humanResDetail, ...accountingDetail]
+    } else if (groups.includes('HumanResource')) {
+        detail=[...detail, ...adminDetail, ...humanResDetail];
     } else if (groups.includes('Admin')) {
-        moreDetail = <EmployeeDetailAdmin data={data} />
+        detail=[...detail, adminDetail];
     }
-
+    
+    
+    if (groups.includes('Chief') || 
+        groups.includes('Accounting') ||
+        groups.includes('Admin') ||
+        groups.includes('Union') ||
+        groups.includes('HumanResource')) {
+            detail=[...detail, <EmployeeChildrenTable />]
+    }
+    if (groups.includes('Chief') || 
+        groups.includes('Admin') ||
+        groups.includes('HumanResource')) {
+            detail=[...detail, <EmployeeEducationTable />]
+    }
     if (groups.includes('Chief') || 
         groups.includes('Accounting')) {
-            incomeDetail=(
-                <div>
-                    <p>Доходы:</p>
-                    <div className='ml-3 my-3'>
-                        <EmployeeIncomeTable employeeId={employeeId}/>
-                    </div>
-                </div>
-            )
+            detail=[...detail, <EmployeeIncomeTable />]
     }
 
-    if (groups.includes('Chief') || 
-        groups.includes('Accounting') || 
-        groups.includes('HumanResource') ||
-        groups.includes('Admin')) {
-            educationDetail=(
-                <div>
-                    <p>Образование:</p>
-                    <div className='ml-3 my-3'>
-                        <EmployeeEducationTable employeeId={employeeId}/>
-                    </div>
-                </div>
-            )
-        }
-
 
     return (
         <div>
-            <EmployeeDetailDefault data={data} />
-            {moreDetail}
-            {educationDetail}
-            <p>Дети:</p>
-            <div className='ml-3 my-3'>
-                <EmployeeChildrenTable employeeId={employeeId}/>
-            </div>
-            {incomeDetail}
-            
+            <ItemDetail getData={getEmployee}>
+                {detail}
+            </ItemDetail>
         </div>
     )
 }
-const EmployeeDetailDefault = ({data}) => {
-    let {surname, name, patronymic, birth_date, birth_place, 
-        department, position, gender} = data;
-    return (
-        <div>
-            <h3>{surname} {name} {patronymic}</h3>
-            <p>Родился в {birth_date}, {birth_place}</p>
-            <p>Отдел: {department}</p>
-            <p>Должность: {position}</p>
-            <p>Пол: {gender}</p>
-        </div>
-    )
-}
-const EmployeeDetailAdmin=({data}) => {
-    let {address, salary, attitude_to_conscription:attToCons, 
-        marital_status:maritalStatus} = data;
-    return (
-        <div>
-            <p>Оклад: {salary} руб.</p>
-            <p>Проживает: {address}</p>
-            <p>Семейное положение: {maritalStatus}</p>
-            <p>Отношение к воинской обязанности: {attToCons}</p>
-        </div>
-    )
-}
-const EmployeeDetailChief=({data}) => {
-    let {passport_series, passport_ID,
-        address, salary, attitude_to_conscription:attToCons, 
-        marital_status:maritalStatus} = data;
-    return (
-        <div>
-            <p>Оклад: {salary} руб.</p>
-            <p>Паспорт: {passport_series} {passport_ID}</p>
-            <p>Проживает: {address}</p>
-            <p>Семейное положение: {maritalStatus}</p>
-            <p>Отношение к воинской обязанности: {attToCons}</p>
-        </div>
-    )
-}
+
 
 const mapStateToProps = (state) => ({
-    user:state.user
+    ...state.user
 })
 export default connect(mapStateToProps)(withCompanyDBService(EmployeeDetail));

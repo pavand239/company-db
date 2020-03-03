@@ -21,10 +21,11 @@ class EmployeeChiefSerializer(EmployeeDefaultSerializer):
             "marital_status","passport_series","passport_ID","address","salary"
         ]
 class EmployeeAccountingSerializer(EmployeeChiefSerializer):
+    attitude_to_conscription = None
+    marital_status = None
     class Meta:
         model=Employee
-        exclude=["attitude_to_conscription","marital_status",
-                 "passport_series","passport_ID","address"]
+        exclude=["attitude_to_conscription","marital_status","address"]
 class EmployeeHumanResourceSerializer(EmployeeChiefSerializer):
     class Meta:
         model=Employee

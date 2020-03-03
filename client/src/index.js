@@ -11,7 +11,6 @@ import CompanyDBService from "./services/company-db-service";
 import CompanyDBServiceContext from "./components/company-db-service-context";
 
 const companyDBService = new CompanyDBService();
-
 ReactDOM.render(
     <Provider store={store}>
         <ErrorBoundry>
