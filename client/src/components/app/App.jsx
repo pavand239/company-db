@@ -8,6 +8,7 @@ import CompanyDBServiceContext from "../company-db-service-context";
 import EmployeePage from "../employee-page";
 import AppHeader from "../app-header";
 import LoginPage from "../login-page"
+import {EmployeeEditChief} from "../forms"
 
 export const App = () => {
     return (
@@ -17,6 +18,9 @@ export const App = () => {
                 <Switch>
                     <Route exact path='/employee/:id?'>
                         <EmployeePage/>
+                    </Route>
+                    <Route exact path='/employee/:id/edit'>
+                        <EmployeeEditChief />
                     </Route>
                     <Route exact path='/'>
                         <LoginPage />
