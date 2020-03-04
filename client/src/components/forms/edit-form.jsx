@@ -10,6 +10,7 @@ import {useGetData} from "../hooks";
 const EditForm = ({getData,patchData,match,formConfig}) => {
     let {id} = match.params,
         [isUploading, setIsUploading] = useState(false),
+        [isUploaded, setIsUploaded] = useState(false),
         [uploadError, setUploadError] = useState(null);
 
     const useGetDataCallback = () => {
@@ -41,7 +42,7 @@ const EditForm = ({getData,patchData,match,formConfig}) => {
                 onSubmit={values => {
                     setIsUploading(true);
                     patchData(localStorage.getItem('token'), id, values)
-                        .then(()=>setIsUploading(false))
+                        .then(()=>{setIsUploading(false);setIsUploaded(true);})
                         .catch(err=>setUploadError(err));
                 }}
             >
@@ -49,37 +50,67 @@ const EditForm = ({getData,patchData,match,formConfig}) => {
                     <form onSubmit={props.handleSubmit}>
                         {
                             formFields.map(
-                                (field, idx)=>(
-                                    <Form.Row>
-                                        <Col xs={3} >
-                                            <Form.Label className = 'font-weight-bold mb-0 py-2'>{field.label}</Form.Label> 
-                                        </Col>
-                                        <Col>
-                                            <Form.Control 
-                                                id = {field.name}
-                                                name = {field.name}
-                                                type = {field.type}
-                                                readOnly = {field.readOnly}
-                                                plaintext = {field.readOnly}
-                                                onChange={props.handleChange}
-                                                defaultValue={data[field.name]}
-                                                value={props.values[field.name]}/>
-                                        </Col>
-                                    </Form.Row>
-                                )
+                                (field, idx)=>{
+                                    
+                                    let defaultProps = {
+                                        id:field.name,
+                                        name:field.name,
+                                        readOnly:field.readOnly,
+                                        plaintext:field.readOnly,
+                                        onChange:props.handleChange,
+                                        defaultValue:data[field.name],
+                                        value:props.values[field.name]
+                                    },
+                                        options='',
+                                        form=null;
+                                    if (field.element) {
+                                        if (field.readOnly) {
+                                            form = <Form.Control {...defaultProps} />
+                                        } else {
+                                            form = (
+                                                <Form.Control {...defaultProps} as={field.element}>
+                                                    {field.options.map((option,idx)=>(
+                                                        <option value={field.optionsValues[idx]}>{option}</option>
+                                                    ))}
+                                                </Form.Control>
+                                            )
+                                        }
+                                    }
+                                    else {
+                                        form = <Form.Control {...defaultProps} type={field.type} />
+                                    }
+                                    console.log(field.name);
+                                    return (
+                                        
+                                        <Form.Row>
+                                            <Col xs={3} >
+                                                <Form.Label className = 'font-weight-bold mb-0 py-2'>{field.label}</Form.Label> 
+                                            </Col>
+                                            <Col>
+                                                {form}   
+                                            </Col>
+                                        </Form.Row>
+                                    )
+                                }
                             )
                         }
 
+                        <div className='d-flex align-items-baseline m-3'>
+                        {
+                            isUploading?
+                                <LoadingIndicator />
+                            :
+                                <Button className='mx-3' type={'submit'}>Submit</Button>
+                        }
                         {
                             uploadError?
                                 <p className='text-weight-bold text-danger'>uploadError.message</p>:''
                         }
                         {
-                            isUploading?
-                                <LoadingIndicator />
-                            :
-                                <Button type={'submit'}>Submit</Button>
-                        }                       
+                            isUploaded?
+                                <p className='text-weight-bold text-success'>Данные успешно обновлены</p>:''
+                        }
+                        </div>                     
                     </form>
                 )}
             </ Formik>
