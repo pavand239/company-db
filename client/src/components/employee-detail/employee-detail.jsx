@@ -45,15 +45,15 @@ const EmployeeDetail = ({ user:{groups}}) => {
         accountingDetail = [
             <ItemRecord label={'Оклад'} field={'salary'} />,
         ],
-        detail = [...defaultDetail];
+        detail = [];
     if (groups.includes('Chief')) {
-        detail=[...detail, ...adminDetail, ...humanResDetail, ...accountingDetail]
+        detail=[...defaultDetail, ...adminDetail, ...humanResDetail, ...accountingDetail]
     } else if (groups.includes('Accounting')) {
-        detail=[...detail, ...humanResDetail, ...accountingDetail]
+        detail=[...defaultDetail, ...humanResDetail, ...accountingDetail]
     } else if (groups.includes('HumanResource')) {
-        detail=[...detail, ...adminDetail, ...humanResDetail];
+        detail=[...defaultDetail, ...adminDetail, ...humanResDetail];
     } else if (groups.includes('Admin')) {
-        detail=[...detail, adminDetail];
+        detail=[...defaultDetail, adminDetail];
     }
     
     
