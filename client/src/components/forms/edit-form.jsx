@@ -51,7 +51,7 @@ const EditForm = ({getData,patchData,match,formConfig}) => {
                             formFields.map(
                                 (field, idx)=>(
                                     <Form.Row>
-                                        <Col className='text-right'>
+                                        <Col xs={3} >
                                             <Form.Label className = 'font-weight-bold mb-0 py-2'>{field.label}</Form.Label> 
                                         </Col>
                                         <Col>

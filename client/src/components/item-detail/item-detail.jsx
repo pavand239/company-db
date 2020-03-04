@@ -15,6 +15,9 @@ const ItemDetail = ({getData, match, children}) => {
     }
     let {data, isLoading, error} = useGetDataCallback();
     console.log(data)
+    if (!id){
+        return <h3>Выберите работника из списка</h3>
+    }
     if (isLoading && !error) {
         return <LoadingIndicator />
     }

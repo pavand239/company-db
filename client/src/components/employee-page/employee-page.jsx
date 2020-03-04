@@ -19,9 +19,7 @@ const EmployeePage = ({history,match,user}) => {
             </Col>
             <Col sm={9}>
                 <div  className='border rounded p-5 w-100'>
-                    {id?
-                        <EmployeeDetail employeeId={id}/>:
-                        <h3>Выберите работника из списка</h3>}
+                    <EmployeeDetail />
                 </div>
             </Col>
         </Row>
