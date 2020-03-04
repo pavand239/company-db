@@ -21,10 +21,8 @@ const ItemDetail = ({getData, match, children}) => {
     if (error) {
         return  error.message
     }
-    let {surname, name, patronymic} = data;
     return (
         <div>
-            <h3>{surname} {name} {patronymic}</h3>
             <ListGroup>
                     {React.Children.map(children, (child)=>(
                         <ListGroup.Item>

@@ -25,6 +25,9 @@ import ItemRecord from "../item-record";
 const EmployeeDetail = ({ user:{groups}}) => {
     let {getEmployee} = useContext(CompanyDBServiceContext);
     let defaultDetail = [
+            <ItemRecord label={'Фамилия'} field={'surname'} />,
+            <ItemRecord label={'Имя'} field={'name'} />,
+            <ItemRecord label={'Отчество'} field={'patronymic'} />,
             <ItemRecord label={'Дата рождения'} field={'birth_date'} />,
             <ItemRecord label={'Место рождения'} field={'birth_place'} />,
             <ItemRecord label={'Отдел'} field={'department'} />,
