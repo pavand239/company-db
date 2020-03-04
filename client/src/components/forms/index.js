@@ -1,7 +1,11 @@
 import {
-    EmployeeEditChief
-} from "./employee-edit-chief";
+    EmployeeEditChief,
+    EmployeeEditAccounting,
+    EmployeeEditHumanResource
+} from "./employee-edit";
 
 export {
-    EmployeeEditChief
+    EmployeeEditChief,
+    EmployeeEditAccounting,
+    EmployeeEditHumanResource
 }

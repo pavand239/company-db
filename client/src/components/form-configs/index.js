@@ -1,5 +1,11 @@
-import {EmployeeEditChiefConfig } from "./employee-edit-chief-config";
+import {
+    EmployeeEditChiefConfig,
+    EmployeeEditAccountingConfig,
+    EmployeeEditHumanResourceConfig
+} from "./employee-edit-configs";
 
 export {
-    EmployeeEditChiefConfig
+    EmployeeEditChiefConfig,
+    EmployeeEditAccountingConfig,
+    EmployeeEditHumanResourceConfig
 }
