@@ -1,6 +1,16 @@
 import React from 'react'
+import {Row, Col} from "react-bootstrap"
 
 const Record = ({data, field, label}) => {
-    return <span><span className = 'font-weight-bold'>{label}:</span> {data[field]}</span>
+    return ( 
+        <Row>
+            <Col xs={3}>
+                <span className = 'font-weight-bold'>{label}:</span> 
+            </Col>
+            <Col>
+                <span>{data[field]}</span>
+            </Col>
+        </Row>
+    )
 }
 export default Record
