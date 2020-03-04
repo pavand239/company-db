@@ -1,15 +1,14 @@
-import React, {useCallback, useContext} from 'react';
+import React, { useContext} from 'react';
+import {useHistory} from "react-router-dom";
 import {connect} from 'react-redux';
 
-import { withCompanyDBService } from '../hoc';
-import {useGetData} from "../hooks";
-import CompanyDBServiceContext from "../company-db-service-context"
+
+import CompanyDBServiceContext from "../company-db-service-context";
 import {
     EmployeeIncomeTable,
     EmployeeEducationTable,
     EmployeeChildrenTable
 } from '../tables';
-import LoadingIndicator from "../loading-indicator";
 import ItemDetail from "../item-detail";
 import ItemRecord from "../item-record";
 
@@ -28,6 +27,7 @@ const EmployeeDetail = ({ user:{groups}}) => {
             <ItemRecord label={'Фамилия'} field={'surname'} />,
             <ItemRecord label={'Имя'} field={'name'} />,
             <ItemRecord label={'Отчество'} field={'patronymic'} />,
+            <ItemRecord label={'Пол'} field={'gender'} />,
             <ItemRecord label={'Дата рождения'} field={'birth_date'} />,
             <ItemRecord label={'Место рождения'} field={'birth_place'} />,
             <ItemRecord label={'Отдел'} field={'department'} />,
@@ -54,7 +54,7 @@ const EmployeeDetail = ({ user:{groups}}) => {
         detail=[...defaultDetail, ...adminDetail, ...humanResDetail];
     } else if (groups.includes('Admin')) {
         detail=[...defaultDetail, adminDetail];
-    }
+    } 
     
     
     if (groups.includes('Chief') || 
@@ -74,9 +74,10 @@ const EmployeeDetail = ({ user:{groups}}) => {
             detail=[...detail, <EmployeeIncomeTable />]
     }
 
-
+    let history = useHistory();
     return (
         <div>
+            <i class="fa fa-cog float-right" aria-hidden="true" onClick={()=>history.push('edit')}></i>
             <ItemDetail getData={getEmployee}>
                 {detail}
             </ItemDetail>
@@ -88,4 +89,4 @@ const EmployeeDetail = ({ user:{groups}}) => {
 const mapStateToProps = (state) => ({
     ...state.user
 })
-export default connect(mapStateToProps)(withCompanyDBService(EmployeeDetail));
+export default connect(mapStateToProps)(EmployeeDetail);
