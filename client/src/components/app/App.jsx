@@ -14,14 +14,12 @@ export const App = () => {
     return (
         <>
             <AppHeader />
-            <Container>
+            <Container fluid>
                 <Switch>
-                    <Route exact path='/employee/:id?'>
+                    <Route path='/employee/:id?/'>
                         <EmployeePage/>
                     </Route>
-                    <Route exact path='/employee/:id/edit'>
-                        <EmployeeEditChief />
-                    </Route>
+
                     <Route exact path='/'>
                         <LoginPage />
                     </Route>
