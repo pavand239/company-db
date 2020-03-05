@@ -35,8 +35,8 @@ const EmployeeDetailAdditionalTable = ({getData, match, tableLabel, fields, labe
                         {data.map((item,idx)=>(
                             <tr key = {idx}>
                                 <td>{idx+1}</td>
-                                {fields.map(field=>(
-                                    <td>{item[field]}</td>
+                                {fields.map((field, idx)=>(
+                                    <td key = {idx}>{item[field]}</td>
                                 ))}
                             </tr>
                         ))}

@@ -60,12 +60,12 @@ const EditForm = ({getData,patchData,formConfig}) => {
                                         form=null;
                                     if (field.element) {
                                         if (field.readOnly) {
-                                            form = <Form.Control {...defaultProps} />
+                                            form = <Form.Control key={idx} {...defaultProps} />
                                         } else {
                                             form = (
-                                                <Form.Control {...defaultProps} as={field.element}>
+                                                <Form.Control key={idx} {...defaultProps} as={field.element}>
                                                     {field.options.map((option,idx)=>(
-                                                        <option value={field.optionsValues[idx]}>{option}</option>
+                                                        <option key={idx} value={field.optionsValues[idx]}>{option}</option>
                                                     ))}
                                                 </Form.Control>
                                             )

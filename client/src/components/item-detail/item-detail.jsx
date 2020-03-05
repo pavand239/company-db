@@ -27,8 +27,8 @@ const ItemDetail = ({getData, match, children}) => {
     return (
         <div>
             <ListGroup>
-                    {React.Children.map(children, (child)=>(
-                        <ListGroup.Item>
+                    {React.Children.map(children, (child, idx)=>(
+                        <ListGroup.Item key={data.id}>
                             {React.cloneElement(child, { data })}
                         </ListGroup.Item>)
                     )}

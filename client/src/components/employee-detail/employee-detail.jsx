@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import {useHistory, useParams} from "react-router-dom";
 import {connect} from 'react-redux';
 
-
 import CompanyDBServiceContext from "../company-db-service-context";
 import {
     EmployeeIncomeTable,
@@ -98,7 +97,7 @@ const EmployeeDetail = ({ user:{groups}}) => {
         <div>
             <div className='d-flex flex-row-reverse'>
             {buttonEdit && id?
-                <i class="fa fa-cog p-3" aria-hidden="true" onClick={()=>history.push('edit')}></i>:''
+                <i className="fa fa-cog p-3" aria-hidden="true" onClick={()=>history.push('edit')}></i>:''
             }
             </div>
             <ItemDetail getData={getEmployee}>

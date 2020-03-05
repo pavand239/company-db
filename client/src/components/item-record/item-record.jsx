@@ -1,7 +1,7 @@
 import React from 'react'
 import {Row, Col} from "react-bootstrap"
 
-const Record = ({data, field, label}) => {
+const ItemRecord = ({data, field, label}) => {
     return ( 
         <Row>
             <Col xs={3}>
@@ -13,4 +13,4 @@ const Record = ({data, field, label}) => {
         </Row>
     )
 }
-export default Record
+export default ItemRecord
