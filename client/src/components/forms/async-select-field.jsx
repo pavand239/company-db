@@ -3,7 +3,7 @@ import {Form} from "react-bootstrap";
 import LoadingIndicator from "../loading-indicator";
 import {useGetData} from "../hooks";
 
-export const AsyncSelectField = ({service, getData, labelKeys, name, readOnly, value, onChange}) => {
+export const AsyncSelectField = ({service, getData, labelKeys, name, readOnly, defaultValue, value, onChange}) => {
 
     const useGetDataCallback = () => {
         let token = localStorage.getItem('token'),
@@ -22,13 +22,13 @@ export const AsyncSelectField = ({service, getData, labelKeys, name, readOnly, v
         optionValues=data.map(item=>item.id);
     if(readOnly) {
         return (
-            <Form.Control readOnly plaintext value={options[optionValues.indexOf(value)]}/>
+            <Form.Control readOnly plaintext value={options[optionValues.indexOf(defaultValue)]}/>
         )
     }
     return (
         <Form.Control id={name} name={name} onChange={onChange} as='select'>
             {options.map((option,idx)=>(
-                <option key={idx} value={optionValues[idx]}>{option}</option>
+                <option key={idx} value={optionValues[idx]} selected = {optionValues[idx]==defaultValue?true:false}>{option}</option>
             ))}
         </Form.Control>
     )
