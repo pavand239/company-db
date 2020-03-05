@@ -3,12 +3,13 @@ import {Form, Col, Button} from "react-bootstrap";
 import {EmployeeEditChief} from "../form-configs";
 import {useFormik, Formik} from "formik";
 import CompanyDBServiceContext from "../company-db-service-context"
-import {withRouter} from "react-router-dom"
+import {useParams, useHistory} from "react-router-dom"
 import LoadingIndicator from "../loading-indicator";
 import {useGetData} from "../hooks";
 
-const EditForm = ({getData,patchData,match,formConfig}) => {
-    let {id} = match.params,
+const EditForm = ({getData,patchData,formConfig}) => {
+    let {id} = useParams(),
+        history = useHistory(),
         [isUploading, setIsUploading] = useState(false),
         [isUploaded, setIsUploaded] = useState(false),
         [uploadError, setUploadError] = useState(null);
@@ -19,13 +20,7 @@ const EditForm = ({getData,patchData,match,formConfig}) => {
         return useGetData(getDataCallback);
     }
     let {data, isLoading, error} = useGetDataCallback();
-    
-    const formik = useFormik({
-        initialValues:data,
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
-        },
-    });
+
     console.log(data)
     if (isLoading && !error) {
         return <LoadingIndicator />
@@ -36,6 +31,9 @@ const EditForm = ({getData,patchData,match,formConfig}) => {
     let {formName, formFields} = formConfig;
     return (
         <div>
+            <div className='d-flex flex-row-reverse'>
+                <i class="fa fa-times p-3" aria-hidden="true" onClick={()=>history.goBack()}></i>
+            </div>
             <h3>{formName}</h3>
             <Formik
                 initialValues={formConfig.getInitialValues(data)}
@@ -118,4 +116,4 @@ const EditForm = ({getData,patchData,match,formConfig}) => {
     )
 }
 
-export default withRouter(EditForm)
+export default EditForm;
