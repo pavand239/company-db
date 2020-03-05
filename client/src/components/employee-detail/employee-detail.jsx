@@ -1,4 +1,4 @@
-import React, { useContext} from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {useHistory} from "react-router-dom";
 import {connect} from 'react-redux';
 
@@ -22,7 +22,9 @@ import ItemRecord from "../item-record";
 
 
 const EmployeeDetail = ({ user:{groups}}) => {
-    let {getEmployee} = useContext(CompanyDBServiceContext);
+    let {getEmployee} = useContext(CompanyDBServiceContext),
+        [detail, setDetail] = useState([]),
+        [buttonEdit, setButtonEdit] = useState(false);
     let defaultDetail = [
             <ItemRecord label={'Фамилия'} field={'surname'} />,
             <ItemRecord label={'Имя'} field={'name'} />,
@@ -44,40 +46,60 @@ const EmployeeDetail = ({ user:{groups}}) => {
         ],
         accountingDetail = [
             <ItemRecord label={'Оклад'} field={'salary'} />,
-        ],
-        detail = [];
-    if (groups.includes('Chief')) {
-        detail=[...defaultDetail, ...adminDetail, ...humanResDetail, ...accountingDetail]
-    } else if (groups.includes('Accounting')) {
-        detail=[...defaultDetail, ...humanResDetail, ...accountingDetail]
-    } else if (groups.includes('HumanResource')) {
-        detail=[...defaultDetail, ...adminDetail, ...humanResDetail];
-    } else if (groups.includes('Admin')) {
-        detail=[...defaultDetail, adminDetail];
-    } 
+        ];
+        useEffect(()=>{
+            if (groups.includes('Chief')) {
+                setDetail([...defaultDetail, ...adminDetail, ...humanResDetail, ...accountingDetail])
+            } else if (groups.includes('Accounting')) {
+                setDetail([...defaultDetail, ...humanResDetail, ...accountingDetail])
+            } else if (groups.includes('HumanResource')) {
+                setDetail([...defaultDetail, ...adminDetail, ...humanResDetail])
+            } else if (groups.includes('Admin')) {
+                setDetail([...defaultDetail, ...adminDetail])
+            } else {
+                setDetail([...defaultDetail])
+            }
+            
+            
+            if (groups.includes('Chief') || 
+                groups.includes('Accounting') ||
+                groups.includes('Admin') ||
+                groups.includes('Union') ||
+                groups.includes('HumanResource')) {
+                    setDetail(prevState =>([...prevState, <EmployeeChildrenTable />]))
+                    // detail=[...detail, <EmployeeChildrenTable />]
+            }
+            if (groups.includes('Chief') || 
+                groups.includes('Admin') ||
+                groups.includes('HumanResource')) {
+                    setDetail(prevState =>([...prevState, <EmployeeEducationTable />]))
+                    // detail=[...detail, <EmployeeEducationTable />]
+            }
+            if (groups.includes('Chief') || 
+                groups.includes('Accounting')) {
+                    setDetail(prevState =>([...prevState, <EmployeeIncomeTable />]))
+                    // detail=[...detail, <EmployeeIncomeTable />]
+            }
+            if (groups.includes('Chief') || 
+                groups.includes('Accounting') ||
+                groups.includes('Admin') ||
+                groups.includes('HumanResource')){
+                    setButtonEdit(true)
+            }
+        },[])
     
     
-    if (groups.includes('Chief') || 
-        groups.includes('Accounting') ||
-        groups.includes('Admin') ||
-        groups.includes('Union') ||
-        groups.includes('HumanResource')) {
-            detail=[...detail, <EmployeeChildrenTable />]
-    }
-    if (groups.includes('Chief') || 
-        groups.includes('Admin') ||
-        groups.includes('HumanResource')) {
-            detail=[...detail, <EmployeeEducationTable />]
-    }
-    if (groups.includes('Chief') || 
-        groups.includes('Accounting')) {
-            detail=[...detail, <EmployeeIncomeTable />]
-    }
+
+
 
     let history = useHistory();
     return (
         <div>
-            <i class="fa fa-cog float-right" aria-hidden="true" onClick={()=>history.push('edit')}></i>
+            <div className='d-flex flex-row-reverse'>
+            {buttonEdit? 
+                <i class="fa fa-cog p-3" aria-hidden="true" onClick={()=>history.push('edit')}></i>:''
+            }
+            </div>
             <ItemDetail getData={getEmployee}>
                 {detail}
             </ItemDetail>
