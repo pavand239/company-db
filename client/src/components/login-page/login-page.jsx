@@ -6,9 +6,9 @@ import {withCompanyDBService} from "../hoc";
 import {fetchUser} from '../../actions';
 import LoadingIndicator from "../loading-indicator";
 import { Redirect } from 'react-router-dom';
-import {bindActionCreators} from 'redux'
 
-const LoginPage = ({user, error, isLoading, fetchUser}) => {
+
+const LoginPage = ({user, error, isLoading, afterLoginRedirectPath, fetchUser}) => {
     let [username, setUsername] = useState(''),
         [password, setPassword] = useState(''),
         [errorLogin, setErrorLogin] = useState(''),
@@ -38,6 +38,7 @@ const LoginPage = ({user, error, isLoading, fetchUser}) => {
     if (isLoading){
         return <LoadingIndicator />
     }
+    console.log(afterLoginRedirectPath);
     return (
             <Form className='w-50 mx-auto'>
                 {errorLogin?
@@ -52,7 +53,7 @@ const LoginPage = ({user, error, isLoading, fetchUser}) => {
                     </Form.Text>:''
                 }
                 {user?
-                    <Redirect to='/employee/'/>:''
+                    <Redirect to={afterLoginRedirectPath}/>:''
                 }
                 <Form.Group controlId="formUsername">
                     <Form.Label>Username</Form.Label>
@@ -77,7 +78,8 @@ const LoginPage = ({user, error, isLoading, fetchUser}) => {
 }
 
 const mapStateToProps = (state)=>({
-    ...state.user
+    ...state.user,
+    afterLoginRedirectPath:state.afterLoginRedirectPath
 })
 
 const mapDispatchToProps = (dispatch,{companyDBService})=> (

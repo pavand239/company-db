@@ -1,6 +1,7 @@
 import React from 'react';
 import {Row, Col, Jumbotron} from "react-bootstrap";
 
+import {setAfterLoginRedirectPath} from "../../actions";
 import EmployeeList from "../employee-list";
 import EmployeeDetail from "../employee-detail";
 import { connect } from 'react-redux';
@@ -11,9 +12,10 @@ import {
     EmployeeEditHumanResource
 } from "../forms"
 
-const EmployeePage = ({user}) => {
+const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
     let history = useHistory();
     if (!user) {
+        setAfterLoginRedirectPath(history.location.pathname);
         return <Redirect to='/'/>
     }
     let editPage = <h3>У вас не доступа для редактирования этого содержимого</h3>,
@@ -48,5 +50,8 @@ const EmployeePage = ({user}) => {
 const mapStateToProps = (state) => ({
     ...state.user
 })
+const mapActionsToProps = (dispatch) => ({
+    setAfterLoginRedirectPath:(path) => dispatch(setAfterLoginRedirectPath(path))
+})
 
-export default connect(mapStateToProps)(EmployeePage)
+export default connect(mapStateToProps,mapActionsToProps)(EmployeePage)
