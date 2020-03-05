@@ -1,11 +1,11 @@
 import React from 'react';
-import {Row, Col, Jumbotron} from "react-bootstrap";
+import {Row, Col} from "react-bootstrap";
 
 import {setAfterLoginRedirectPath} from "../../actions";
 import EmployeeList from "../employee-list";
 import EmployeeDetail from "../employee-detail";
 import { connect } from 'react-redux';
-import { Redirect, Route, Switch , useHistory, useParams} from 'react-router-dom';
+import { Redirect, Route, Switch , useHistory} from 'react-router-dom';
 import {
     EmployeeEditChief,
     EmployeeEditAccounting,

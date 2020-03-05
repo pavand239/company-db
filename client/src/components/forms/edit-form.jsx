@@ -1,8 +1,6 @@
-import React, {useCallback, useState , useContext} from 'react';
+import React, {useCallback, useState} from 'react';
 import {Form, Col, Button} from "react-bootstrap";
-import {EmployeeEditChief} from "../form-configs";
-import {useFormik, Formik} from "formik";
-import CompanyDBServiceContext from "../company-db-service-context"
+import {Formik} from "formik";
 import {useParams, useHistory} from "react-router-dom"
 import LoadingIndicator from "../loading-indicator";
 import {useGetData} from "../hooks";
@@ -59,7 +57,6 @@ const EditForm = ({getData,patchData,formConfig}) => {
                                         defaultValue:data[field.name],
                                         value:props.values[field.name]
                                     },
-                                        options='',
                                         form=null;
                                     if (field.element) {
                                         if (field.readOnly) {
