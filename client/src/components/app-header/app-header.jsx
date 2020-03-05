@@ -20,7 +20,6 @@ const AppHeader = ({user,userLogout}) => (
                     onClick={userLogout}>Выход</Button>
             </Navbar.Collapse>
         :''}
-        {console.log(user)}
     </Navbar>
 )
 

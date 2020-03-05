@@ -12,16 +12,13 @@ const userError=(err)=>({
 const userLogout=()=>({
     type: 'USER_LOGOUT'
 })
-const setAfterLoginRedirectPath = (path) =>{
-    console.log(path);
-    return {
-        type: 'SET_AFTER_LOGIN_REDIRECT',
-        payload:path
-    }
-}
+const setAfterLoginRedirectPath = (path) =>({
+    type: 'SET_AFTER_LOGIN_REDIRECT',
+    payload:path
+})
+
 
 const fetchUser = (companyDBService) => (token) => (dispatch)=>{
-    console.log(token)
     dispatch(userRequested());
     companyDBService.getMe(token)
         .then(user=>dispatch(userLoaded(user)))

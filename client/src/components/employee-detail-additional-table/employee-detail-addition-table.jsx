@@ -12,7 +12,6 @@ const EmployeeDetailAdditionalTable = ({getData, match, tableLabel, fields, labe
         return useGetData(getDataCallback);
     }
     let {data, isLoading, error} = useGetDataCallback();
-    console.log(data)
     if (isLoading && !error) {
         return <LoadingIndicator />
     }

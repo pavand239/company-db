@@ -14,7 +14,7 @@ const ItemDetail = ({getData, match, children}) => {
         return useGetData(getDataCallback);
     }
     let {data, isLoading, error} = useGetDataCallback();
-    console.log(data)
+    // console.log(data)
     if (!id){
         return <h3>Выберите работника из списка</h3>
     }

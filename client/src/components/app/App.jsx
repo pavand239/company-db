@@ -1,14 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Container} from "react-bootstrap";
 import {Switch, Route} from "react-router-dom";
 
-import CompanyDBServiceTest from "../../services/company-db-service-test";
-import CompanyDBService from "../../services/company-db-service";
-import CompanyDBServiceContext from "../company-db-service-context";
 import EmployeePage from "../employee-page";
 import AppHeader from "../app-header";
 import LoginPage from "../login-page"
-import {EmployeeEditChief} from "../forms"
+
 
 export const App = () => {
     return (

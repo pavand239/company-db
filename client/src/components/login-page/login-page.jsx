@@ -38,7 +38,6 @@ const LoginPage = ({user, error, isLoading, afterLoginRedirectPath, fetchUser}) 
     if (isLoading){
         return <LoadingIndicator />
     }
-    console.log(afterLoginRedirectPath);
     return (
             <Form className='w-50 mx-auto'>
                 {errorLogin?

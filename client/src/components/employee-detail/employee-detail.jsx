@@ -47,46 +47,46 @@ const EmployeeDetail = ({ user:{groups}}) => {
         accountingDetail = [
             <ItemRecord label={'Оклад'} field={'salary'} />,
         ];
-        useEffect(()=>{
-            if (groups.includes('Chief')) {
-                setDetail([...defaultDetail, ...adminDetail, ...humanResDetail, ...accountingDetail])
-            } else if (groups.includes('Accounting')) {
-                setDetail([...defaultDetail, ...humanResDetail, ...accountingDetail])
-            } else if (groups.includes('HumanResource')) {
-                setDetail([...defaultDetail, ...adminDetail, ...humanResDetail])
-            } else if (groups.includes('Admin')) {
-                setDetail([...defaultDetail, ...adminDetail])
-            } else {
-                setDetail([...defaultDetail])
-            }
-            
-            
-            if (groups.includes('Chief') || 
-                groups.includes('Accounting') ||
-                groups.includes('Admin') ||
-                groups.includes('Union') ||
-                groups.includes('HumanResource')) {
-                    setDetail(prevState =>([...prevState, <EmployeeChildrenTable />]))
-                    // detail=[...detail, <EmployeeChildrenTable />]
-            }
-            if (groups.includes('Chief') || 
-                groups.includes('Admin') ||
-                groups.includes('HumanResource')) {
-                    setDetail(prevState =>([...prevState, <EmployeeEducationTable />]))
-                    // detail=[...detail, <EmployeeEducationTable />]
-            }
-            if (groups.includes('Chief') || 
-                groups.includes('Accounting')) {
-                    setDetail(prevState =>([...prevState, <EmployeeIncomeTable />]))
-                    // detail=[...detail, <EmployeeIncomeTable />]
-            }
-            if (groups.includes('Chief') || 
-                groups.includes('Accounting') ||
-                groups.includes('Admin') ||
-                groups.includes('HumanResource')){
-                    setButtonEdit(true)
-            }
-        },[])
+    useEffect(()=>{
+        if (groups.includes('Chief')) {
+            setDetail([...defaultDetail, ...adminDetail, ...humanResDetail, ...accountingDetail])
+        } else if (groups.includes('Accounting')) {
+            setDetail([...defaultDetail, ...humanResDetail, ...accountingDetail])
+        } else if (groups.includes('HumanResource')) {
+            setDetail([...defaultDetail, ...adminDetail, ...humanResDetail])
+        } else if (groups.includes('Admin')) {
+            setDetail([...defaultDetail, ...adminDetail])
+        } else {
+            setDetail([...defaultDetail])
+        }
+        
+        
+        if (groups.includes('Chief') || 
+            groups.includes('Accounting') ||
+            groups.includes('Admin') ||
+            groups.includes('Union') ||
+            groups.includes('HumanResource')) {
+                setDetail(prevState =>([...prevState, <EmployeeChildrenTable />]))
+                // detail=[...detail, <EmployeeChildrenTable />]
+        }
+        if (groups.includes('Chief') || 
+            groups.includes('Admin') ||
+            groups.includes('HumanResource')) {
+                setDetail(prevState =>([...prevState, <EmployeeEducationTable />]))
+                // detail=[...detail, <EmployeeEducationTable />]
+        }
+        if (groups.includes('Chief') || 
+            groups.includes('Accounting')) {
+                setDetail(prevState =>([...prevState, <EmployeeIncomeTable />]))
+                // detail=[...detail, <EmployeeIncomeTable />]
+        }
+        if (groups.includes('Chief') || 
+            groups.includes('Accounting') ||
+            groups.includes('Admin') ||
+            groups.includes('HumanResource')){
+                setButtonEdit(true)
+        }
+    },[])
     
     
 
