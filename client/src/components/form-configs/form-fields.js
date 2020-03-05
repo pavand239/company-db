@@ -99,13 +99,17 @@ export const percentField = (readOnly=true) => ({
     name:'percent',
     label:'Процент',
     readOnly: readOnly,
-    type:'number'
+    type:'number',
+    step:'0.01',
+    min:'0',
+    max:'1'
 });
 export const premiumField = (readOnly=true) => ({
     name:'premium',
     label:'Премия',
     readOnly: readOnly,
-    type:'number'
+    type:'number',
+    step:'1'
 });
 export const totalField = (readOnly=true) => ({
     name:'total',
