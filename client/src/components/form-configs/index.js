@@ -4,7 +4,8 @@ import {
     EmployeeEditHumanResourceConfig
 } from "./employee-edit-configs";
 import {
-    IncomeEditChiefConfig
+    IncomeEditChiefConfig,
+    IncomeEditAccountingConfig
 } from "./income-edit-configs"
 export {
     EmployeeEditChiefConfig,
