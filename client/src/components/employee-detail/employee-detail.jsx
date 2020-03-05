@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import {useHistory} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import {connect} from 'react-redux';
 
 
@@ -92,11 +92,12 @@ const EmployeeDetail = ({ user:{groups}}) => {
 
 
 
-    let history = useHistory();
+    let history = useHistory(),
+        {id} = useParams();
     return (
         <div>
             <div className='d-flex flex-row-reverse'>
-            {buttonEdit? 
+            {buttonEdit && id?
                 <i class="fa fa-cog p-3" aria-hidden="true" onClick={()=>history.push('edit')}></i>:''
             }
             </div>
