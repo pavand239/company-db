@@ -4,8 +4,9 @@ import {Formik} from "formik";
 import {useParams, useHistory} from "react-router-dom"
 import LoadingIndicator from "../loading-indicator";
 import {useGetData} from "../hooks";
+import {AsyncSelectField} from "./async-select-field";
 
-const EditForm = ({getData,patchData,formConfig}) => {
+const EditForm = ({getData,patchData,formConfig, service=null}) => {
     let {id} = useParams(),
         history = useHistory(),
         [isUploading, setIsUploading] = useState(false),
@@ -47,7 +48,6 @@ const EditForm = ({getData,patchData,formConfig}) => {
                         {
                             formFields.map(
                                 (field, idx)=>{
-                                    
                                     let defaultProps = {
                                         id:field.name,
                                         name:field.name,
@@ -58,10 +58,11 @@ const EditForm = ({getData,patchData,formConfig}) => {
                                         value:props.values[field.name]
                                     },
                                         form=null;
-                                    if (field.element) {
+                                    if (field.element==='select') {
                                         if (field.readOnly) {
                                             form = <Form.Control key={idx} {...defaultProps} />
                                         } else {
+                                            console.log(field.options)
                                             form = (
                                                 <Form.Control key={idx} {...defaultProps} as={field.element}>
                                                     {field.options.map((option,idx)=>(
@@ -70,8 +71,13 @@ const EditForm = ({getData,patchData,formConfig}) => {
                                                 </Form.Control>
                                             )
                                         }
-                                    }
-                                    else {
+                                    } else if (field.element==='asyncSelect'){
+                                        form = <AsyncSelectField {...defaultProps} 
+                                                            service={service}
+                                                            labelKeys={field.labelKeys}
+                                                            getData={field.getData}
+                                                            />
+                                    } else {
                                         form = <Form.Control {...defaultProps} type={field.type} />
                                     }
                                     console.log(field.name);
