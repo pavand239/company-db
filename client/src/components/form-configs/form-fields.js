@@ -89,3 +89,36 @@ export const genderField = (readOnly=true) => ({
     options:['Мужской', 'Женский'],
     optionsValues:['m','f']
 });
+export const incomeDateField = (readOnly=true) => ({
+    name:'income_date',
+    label:'Дата получения',
+    readOnly: readOnly,
+    type:'date'
+});
+export const percentField = (readOnly=true) => ({
+    name:'percent',
+    label:'Процент',
+    readOnly: readOnly,
+    type:'number'
+});
+export const premiumField = (readOnly=true) => ({
+    name:'premium',
+    label:'Премия',
+    readOnly: readOnly,
+    type:'number'
+});
+export const totalField = (readOnly=true) => ({
+    name:'total',
+    label:'Итого',
+    readOnly: readOnly,
+    type:'number'
+});
+export const employeeField = (readOnly=true) => {
+    return {
+        name:'employee',
+        label:'Работник',
+        readOnly: readOnly,
+        element:'asyncSelect',
+        labelKeys:['surname','name','patronymic'],
+        getData:'getEmployeeList'
+    }};
