@@ -113,8 +113,39 @@ export default class CompanyDBService {
             throw new Error(`Что-то пошло не так... ${response.status}`)
         }
     }
+    getIncome = async (token,id) => {
+        let response = await fetch(`http://localhost:8000/api/1.0/income/${id}/`,{
+            headers:{
+                'Authorization':`Token ${token}`
+            }
+        })
+        if (response.ok){
+            return response.json()
+        } else if (response.status===401 || response.status===403) {
+            throw new Error('У вас нет прав для просмотра этого содержимого')
+        } else {
+            throw new Error(`Что-то пошло не так... ${response.status}`)
+        }
+    }
     patchEmployee = async (token,id,data) => {
         let response = await fetch(`http://localhost:8000/api/1.0/employee/${id}/`,{
+            method:'PATCH',
+            headers:{
+                'Authorization':`Token ${token}`,
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        if (response.ok){
+            return response.json()
+        } else if (response.status===401 || response.status===403) {
+            throw new Error('У вас нет прав для изменения')
+        } else {
+            throw new Error(`Что-то пошло не так... ${response.status}`)
+        }
+    }
+    patchIncome = async (token,id,data) => {
+        let response = await fetch(`http://localhost:8000/api/1.0/income/${id}/`,{
             method:'PATCH',
             headers:{
                 'Authorization':`Token ${token}`,
