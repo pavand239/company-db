@@ -50,12 +50,10 @@ const EditForm = ({getData,patchData,formConfig, service=null}) => {
                                 (field, idx)=>{
                                     let defaultProps = {
                                         id:field.name,
-                                        name:field.name,
-                                        readOnly:field.readOnly,
-                                        plaintext:field.readOnly,
                                         onChange:props.handleChange,
                                         defaultValue:data[field.name],
-                                        value:props.values[field.name]
+                                        value:props.values[field.name],
+                                        ...field
                                     },
                                         form=null;
                                     if (field.element==='select') {
