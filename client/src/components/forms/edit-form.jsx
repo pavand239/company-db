@@ -31,7 +31,7 @@ const EditForm = ({getData,patchData,formConfig, service=null}) => {
     return (
         <div>
             <div className='d-flex flex-row-reverse'>
-                <i class="fa fa-times p-3" aria-hidden="true" onClick={()=>history.goBack()}></i>
+                <i class="fa fa-times p-1" aria-hidden="true" onClick={()=>history.goBack()}></i>
             </div>
             <h3>{formName}</h3>
             <Formik
