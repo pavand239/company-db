@@ -125,8 +125,7 @@ class Income(models.Model):
             self.salary=self.get_salary
         if not self.tax:
             self.tax=self.get_tax
-        if not self.total:
-            self.total=self.get_total
+        self.total=self.get_total
         super(Income, self).save(*args, **kwargs)
 
 class Taxes(models.Model):
