@@ -1,2 +1,2 @@
-import EmployeeIncomeTableRow from "./income-detail";
-export default EmployeeIncomeTableRow;
+import IncomeDetail from "./income-detail";
+export default IncomeDetail;
