@@ -22,13 +22,13 @@ export const AsyncSelectField = ({service, getData, labelKeys, name, readOnly, d
         optionValues=data.map(item=>item.id);
     if(readOnly) {
         return (
-            <Form.Control readOnly plaintext value={options[optionValues.indexOf(defaultValue)]}/>
+            <Form.Control readOnly plaintext defaultValue={options[optionValues.indexOf(defaultValue)]}/>
         )
     }
     return (
-        <Form.Control id={name} name={name} onChange={onChange} as='select'>
+        <Form.Control id={name} name={name} value={value} onChange={onChange} as='select'>
             {options.map((option,idx)=>(
-                <option key={idx} value={optionValues[idx]} selected = {optionValues[idx]==defaultValue?true:false}>{option}</option>
+                <option key={idx} value={optionValues[idx]}>{option}</option>
             ))}
         </Form.Control>
     )
