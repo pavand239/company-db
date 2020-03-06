@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import CompanyDBServiceContext from "../company-db-service-context"
 import EmployeeDetailAdditionalTable from "../employee-detail-additional-table"
+import { useHistory } from 'react-router-dom';
 
 // const {
 //     getEmployeeIncome,
@@ -10,10 +11,12 @@ import EmployeeDetailAdditionalTable from "../employee-detail-additional-table"
 
 export const EmployeeIncomeTable = () => {
     const {getEmployeeIncome} = useContext(CompanyDBServiceContext);
+    let history = useHistory();
     return <EmployeeDetailAdditionalTable getData = {getEmployeeIncome}
                 tableLabel={'Доходы'}
                 fields = {['income_date','salary','percent','premium','total']}
-                labels = {["Дата","Оклад","Процент","Премия","Всего"]} />
+                labels = {["Дата","Оклад","Процент","Премия","Всего"]}
+                onClick ={(id)=>history.push(`/employee/income/${id}/`)}  />
 }
 export const EmployeeEducationTable = () => {
     const {getEmployeeEducation} = useContext(CompanyDBServiceContext);

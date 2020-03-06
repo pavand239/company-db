@@ -4,7 +4,7 @@ import { Table } from 'react-bootstrap';
 
 import {useGetData} from "../hooks"
 import LoadingIndicator from "../loading-indicator";
-const EmployeeDetailAdditionalTable = ({getData, match, tableLabel, fields, labels}) => {
+const EmployeeDetailAdditionalTable = ({getData, match, tableLabel, fields, labels, onClick=()=>{}}) => {
     let {id} = match.params;
     const useGetDataCallback = () => {
         let token = localStorage.getItem('token'),
@@ -33,11 +33,12 @@ const EmployeeDetailAdditionalTable = ({getData, match, tableLabel, fields, labe
                     </thead>
                     <tbody>
                         {data.map((item,idx)=>(
-                            <tr key = {idx}>
-                                <td>{idx+1}</td>
-                                {fields.map((field, idx)=>(
-                                    <td key = {idx}>{item[field]}</td>
-                                ))}
+                            <tr onClick={()=>{onClick(item.id);console.log(item.id)}}
+                                key = {item.id}>
+                                    <td>{idx+1}</td>
+                                    {fields.map((field, idx)=>(
+                                        <td key={idx}>{item[field]}</td>
+                                    ))}
                             </tr>
                         ))}
                     </tbody>
