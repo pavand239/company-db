@@ -10,6 +10,11 @@ import {
     EmployeeEditChief,
     EmployeeEditAccounting,
     EmployeeEditHumanResource
+} from "../forms";
+import IncomeDetail from "../income-detail";
+import {
+    IncomeEditChief,
+    IncomeEditAccounting
 } from "../forms"
 
 const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
@@ -18,14 +23,17 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
         setAfterLoginRedirectPath(history.location.pathname);
         return <Redirect to='/'/>
     }
-    let editPage = <h3>У вас не доступа для редактирования этого содержимого</h3>,
+    let editEmployeePage = <h3>У вас не доступа для редактирования этого содержимого</h3>,
+        editIncomePage = <h3>У вас не доступа для редактирования этого содержимого</h3>,
         {groups} = user;
     if (groups.includes('Chief')) {
-        editPage = <EmployeeEditChief />
+        editEmployeePage = <EmployeeEditChief />;
+        editIncomePage = <IncomeEditChief />;
     } else if (groups.includes('Accounting')) {
-        editPage = <EmployeeEditAccounting />
+        editEmployeePage = <EmployeeEditAccounting />
+        editIncomePage = <IncomeEditAccounting />;
     } else if (groups.includes('HumanResource')) {
-        editPage = <EmployeeEditHumanResource />
+        editEmployeePage = <EmployeeEditHumanResource />
     }
     return (
         <Row  className='m-4'>
@@ -36,10 +44,16 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
                 <div  className='border rounded p-5 w-100'>
                     <Switch>
                         <Route path='/employee/:id/edit/'>
-                            {editPage}
+                            {editEmployeePage}
                         </Route>
                         <Route exact path='/employee/:id?/'>
                             <EmployeeDetail />
+                        </Route>
+                        <Route exact path='/employee/income/:id/'>
+                            <IncomeDetail />
+                        </Route>
+                        <Route  path='/employee/income/:id/edit'>
+                            {editIncomePage}
                         </Route>
                     </Switch>
                 </div>
