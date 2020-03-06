@@ -9,7 +9,7 @@ import {
     EmployeeChildrenTable
 } from '../tables';
 import ItemDetail from "../item-detail";
-import ItemRecord from "../item-record";
+import ItemRecord, {ManyFieldItemRecord} from "../item-record";
 
 // Possible data fields
 // {surname, name, patronymic, birth_date, birth_place, 
@@ -25,7 +25,7 @@ const EmployeeDetail = ({ user:{groups}}) => {
         [detail, setDetail] = useState([]),
         [buttonEdit, setButtonEdit] = useState(false);
     let defaultDetail = [
-            <ItemRecord label={'Фамилия'} field={'surname'} />,
+            <ManyFieldItemRecord fieldToDisplay={['surname','name','patronymic']} className='h3'/>,
             <ItemRecord label={'Имя'} field={'name'} />,
             <ItemRecord label={'Отчество'} field={'patronymic'} />,
             <ItemRecord label={'Пол'} field={'gender'} />,
