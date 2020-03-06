@@ -97,7 +97,7 @@ const EmployeeDetail = ({ user:{groups}}) => {
         <div>
             <div className='d-flex flex-row-reverse'>
             {buttonEdit && id?
-                <i className="fa fa-cog p-3" aria-hidden="true" onClick={()=>history.push('edit')}></i>:''
+                <i className="fa fa-cog p-1" aria-hidden="true" onClick={()=>history.push('edit')}></i>:''
             }
             </div>
             <ItemDetail getData={getEmployee}>
