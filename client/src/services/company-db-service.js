@@ -127,6 +127,20 @@ export default class CompanyDBService {
             throw new Error(`Что-то пошло не так... ${response.status}`)
         }
     }
+    getIncomeList = async (token) => {
+        let response = await fetch(`http://localhost:8000/api/1.0/income/`,{
+            headers:{
+                'Authorization':`Token ${token}`
+            }
+        })
+        if (response.ok){
+            return response.json()
+        } else if (response.status===401 || response.status===403) {
+            throw new Error('У вас нет прав для просмотра этого содержимого')
+        } else {
+            throw new Error(`Что-то пошло не так... ${response.status}`)
+        }
+    }
     patchEmployee = async (token,id,data) => {
         let response = await fetch(`http://localhost:8000/api/1.0/employee/${id}/`,{
             method:'PATCH',
