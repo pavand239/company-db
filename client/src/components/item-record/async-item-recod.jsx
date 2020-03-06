@@ -3,7 +3,7 @@ import LoadingIndicator from "../loading-indicator";
 import {useGetData} from "../hooks";
 import ManyFieldItemRecord from "./many-field-item-record"
 
-const AsyncItemRecord = ({getData, field, item, fieldToDisplay, label=null})=>{
+const AsyncItemRecord = ({getData, field, item, fieldToDisplay, label=null, className})=>{
     const useGetDataCallback = () => {
         let token = localStorage.getItem('token'),
             getDataCallback = useCallback(()=>getData(token, item[field]),[token]);
@@ -17,6 +17,6 @@ const AsyncItemRecord = ({getData, field, item, fieldToDisplay, label=null})=>{
     if (error){
         return error.message
     }
-    return <ManyFieldItemRecord item={data} fieldToDisplay={fieldToDisplay} label={label} />
+    return <ManyFieldItemRecord item={data} fieldToDisplay={fieldToDisplay} label={label} className={className} />
 }
 export default AsyncItemRecord;
