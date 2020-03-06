@@ -4,11 +4,13 @@ import {
     EmployeeEditHumanResource
 } from "./employee-edit";
 import {
-    IncomeEditChief
+    IncomeEditChief,
+    IncomeEditAccounting
 } from "./income-form"
 export {
     EmployeeEditChief,
     EmployeeEditAccounting,
     EmployeeEditHumanResource,
-    IncomeEditChief
+    IncomeEditChief,
+    IncomeEditAccounting
 }

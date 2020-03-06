@@ -2,7 +2,8 @@ import React, {useContext} from 'react';
 import EditForm from "./edit-form";
 import CompanyDBServiceContext from "../company-db-service-context"
 import {
-    IncomeEditChiefConfig
+    IncomeEditChiefConfig,
+    IncomeEditAccountingConfig
 } from "../form-configs";
 
 const IncomeEdit = ({formConfig}) => {
@@ -16,3 +17,4 @@ const IncomeEdit = ({formConfig}) => {
 }
 
 export const IncomeEditChief =()=> <IncomeEdit formConfig={IncomeEditChiefConfig} />
+export const IncomeEditAccounting =()=> <IncomeEdit formConfig={IncomeEditAccountingConfig} />

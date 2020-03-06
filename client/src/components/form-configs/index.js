@@ -11,5 +11,6 @@ export {
     EmployeeEditChiefConfig,
     EmployeeEditAccountingConfig,
     EmployeeEditHumanResourceConfig,
-    IncomeEditChiefConfig
+    IncomeEditChiefConfig,
+    IncomeEditAccountingConfig
 }
