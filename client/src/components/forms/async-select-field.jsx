@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, {useCallback} from 'react';
 import {Form} from "react-bootstrap";
 import LoadingIndicator from "../loading-indicator";
 import {useGetData} from "../hooks";
