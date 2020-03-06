@@ -13,13 +13,13 @@ const EditForm = ({getData,patchData,formConfig, service=null}) => {
         [isUploaded, setIsUploaded] = useState(false),
         [uploadError, setUploadError] = useState(null);
 
+
     const useGetDataCallback = () => {
         let token = localStorage.getItem('token'),
             getDataCallback = useCallback(()=>getData(token,id),[id, token]);
         return useGetData(getDataCallback);
     }
     let {data, isLoading, error} = useGetDataCallback();
-
     console.log(data)
     if (isLoading && !error) {
         return <LoadingIndicator />
@@ -31,7 +31,7 @@ const EditForm = ({getData,patchData,formConfig, service=null}) => {
     return (
         <div>
             <div className='d-flex flex-row-reverse'>
-                <i class="fa fa-times p-1" aria-hidden="true" onClick={()=>history.goBack()}></i>
+                <i className="fa fa-times p-1" aria-hidden="true" onClick={()=>history.goBack()}></i>
             </div>
             <h3>{formName}</h3>
             <Formik
@@ -51,18 +51,26 @@ const EditForm = ({getData,patchData,formConfig, service=null}) => {
                                     let defaultProps = {
                                         id:field.name,
                                         onChange:props.handleChange,
-                                        defaultValue:data[field.name],
-                                        value:props.values[field.name],
                                         ...field
                                     },
-                                        form=null;
+                                        form=null,
+                                        valueProps={};
+                                    if (field.readOnly) {
+                                        valueProps={
+                                            defaultValue:data[field.name]
+                                        }
+                                    } else {
+                                        valueProps={
+                                            value:props.values[field.name]
+                                        }
+                                    }
                                     if (field.element==='select') {
                                         if (field.readOnly) {
-                                            form = <Form.Control key={idx} {...defaultProps} />
+                                            form = <Form.Control key={idx} {...defaultProps} {...valueProps}/>
                                         } else {
                                             console.log(field.options)
                                             form = (
-                                                <Form.Control key={idx} {...defaultProps} as={field.element}>
+                                                <Form.Control key={idx} {...defaultProps} {...valueProps} as={field.element}>
                                                     {field.options.map((option,idx)=>(
                                                         <option key={idx} value={field.optionsValues[idx]}>{option}</option>
                                                     ))}
@@ -74,14 +82,16 @@ const EditForm = ({getData,patchData,formConfig, service=null}) => {
                                                             service={service}
                                                             labelKeys={field.labelKeys}
                                                             getData={field.getData}
+                                                            {...valueProps}
+                                                            key={idx}
                                                             />
                                     } else {
-                                        form = <Form.Control {...defaultProps} type={field.type} />
+                                        form = <Form.Control {...defaultProps} {...valueProps} type={field.type} key={idx} />
                                     }
-                                    console.log(field.name);
+
                                     return (
                                         
-                                        <Form.Row>
+                                        <Form.Row key={idx}>
                                             <Col xs={3} >
                                                 <Form.Label className = 'font-weight-bold mb-0 py-2'>{field.label}</Form.Label> 
                                             </Col>
