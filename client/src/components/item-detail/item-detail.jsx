@@ -1,20 +1,20 @@
 import React, {useCallback} from 'react';
-import {withRouter} from "react-router-dom";
+import {useParams} from "react-router-dom";
 
 import {useGetData} from "../hooks"
 import LoadingIndicator from "../loading-indicator";
 import { ListGroup } from 'react-bootstrap';
 
 
-const ItemDetail = ({getData, match, children}) => {
-    let {id} = match.params;
+const ItemDetail = ({getData, children}) => {
+    let {id} = useParams();
     const useGetDataCallback = () => {
         let token = localStorage.getItem('token'),
             getDataCallback = useCallback(()=>getData(token,id),[id, token]);
         return useGetData(getDataCallback);
     }
-    let {data, isLoading, error} = useGetDataCallback();
-    // console.log(data)
+    let {data:item, isLoading, error} = useGetDataCallback();
+
     if (!id){
         return <h3>Выберите работника из списка</h3>
     }
@@ -28,8 +28,8 @@ const ItemDetail = ({getData, match, children}) => {
         <div>
             <ListGroup>
                     {React.Children.map(children, (child, idx)=>(
-                        <ListGroup.Item key={data.id}>
-                            {React.cloneElement(child, { data })}
+                        <ListGroup.Item key={item.id}>
+                            {React.cloneElement(child, { item })}
                         </ListGroup.Item>)
                     )}
             </ListGroup>
@@ -38,4 +38,4 @@ const ItemDetail = ({getData, match, children}) => {
 
 }
 
-export default withRouter(ItemDetail);
+export default ItemDetail;

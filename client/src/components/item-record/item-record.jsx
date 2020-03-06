@@ -1,14 +1,14 @@
 import React from 'react'
 import {Row, Col} from "react-bootstrap"
 
-const ItemRecord = ({data, field, label}) => {
+const ItemRecord = ({item, field, label}) => {
     return ( 
         <Row>
             <Col xs={3}>
                 <span className = 'font-weight-bold'>{label}:</span> 
             </Col>
             <Col>
-                <span>{data[field]}</span>
+                <span>{item[field]}</span>
             </Col>
         </Row>
     )
