@@ -65,6 +65,7 @@ class Education(models.Model):
         ],
         blank=True,
         null=True)
+    faculty_name = models.CharField(max_length=100, blank=True)
     speciality_name = models.CharField(max_length=100, blank=True)
     diploma_num = models.CharField(max_length=25, unique=True, blank=True) 
     degree = models.CharField(max_length=100, blank=True)
