@@ -6,7 +6,7 @@ import {
 import {
     IncomeEditChief,
     IncomeEditAccounting
-} from "./income-form"
+} from "./income-edit"
 export {
     EmployeeEditChief,
     EmployeeEditAccounting,
