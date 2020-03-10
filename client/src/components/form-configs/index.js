@@ -7,10 +7,12 @@ import {
     IncomeEditChiefConfig,
     IncomeEditAccountingConfig
 } from "./income-edit-configs"
+import { EducationEditForm } from "./education-edit-configs";
 export {
     EmployeeEditChiefConfig,
     EmployeeEditAccountingConfig,
     EmployeeEditHumanResourceConfig,
     IncomeEditChiefConfig,
-    IncomeEditAccountingConfig
+    IncomeEditAccountingConfig,
+    EducationEditForm
 }
