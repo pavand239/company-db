@@ -117,12 +117,66 @@ export const totalField = (readOnly=true) => ({
     readOnly: readOnly,
     type:'number'
 });
-export const employeeField = (readOnly=true) => {
-    return {
-        name:'employee',
-        label:'Работник',
-        readOnly: readOnly,
-        element:'asyncSelect',
-        labelKeys:['surname','name','patronymic'],
-        getData:'getEmployeeList'
-    }};
+export const employeeField = (readOnly=true) => ({
+    name:'employee',
+    label:'Работник',
+    readOnly: readOnly,
+    element:'asyncSelect',
+    labelKeys:['surname','name','patronymic'],
+    getData:'getEmployeeList'
+});
+export const eduInstNameField = (readOnly=true) => ({
+    name:'edu_inst_name',
+    label:'Наименование УЗ',
+    readOnly: readOnly,
+    type:'text'
+});
+export const eduInstAdddressField = (readOnly=true) => ({
+    name:'edu_inst_address',
+    label:'Адрес УЗ',
+    readOnly: readOnly,
+    type:'text'
+});
+export const eduTypeField = (readOnly=true) => ({
+    name:'edu_inst_name',
+    label:'Наименование УЗ',
+    readOnly: readOnly,
+    element:'select',
+    options:['Очная', 'Заочная'],
+    optionsValues:['ft','pt']
+});
+export const admYearField = (readOnly=true) => ({
+    name:'admission_year',
+    label:'Год поступления',
+    readOnly: readOnly,
+    type:'number',
+    min:1900,
+    max:new Date.getFullYear()
+});
+export const gradYearField = (readOnly=true) => ({
+    name:'graduate_year',
+    label:'Год выпуска',
+    readOnly: readOnly,
+    type:'number',
+    min:1900,
+    max:new Date.getFullYear()
+});
+export const specialityField = (readOnly=true) => ({
+    name:'speciality',
+    label:'Специальность',
+    readOnly: readOnly,
+    type:'text'
+});
+export const diplomaNumField = (readOnly=true) => ({
+    name:'edu_inst_address',
+    label:'Номер диплома',
+    readOnly: readOnly,
+    type:'text'
+});
+export const degreeField = (readOnly=true) => ({
+    name:'degree',
+    label:'Научная степень, звание',
+    readOnly: readOnly,
+    type:'text'
+});
+
