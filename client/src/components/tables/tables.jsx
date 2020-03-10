@@ -20,12 +20,14 @@ export const EmployeeIncomeTable = () => {
 }
 export const EmployeeEducationTable = () => {
     const {getEmployeeEducation} = useContext(CompanyDBServiceContext);
+    let history = useHistory();
     return <EmployeeDetailAdditionalTable getData = {getEmployeeEducation}
                 tableLabel={'Образование'}
-                fields = {['edu_inst_name','edu_inst_address','edu_type','admission_year',
+                fields = {['edu_inst_name','edu_inst_address','faculty_name','edu_type','admission_year',
                             'graduate_year','speciality_name','diploma_num','degree']}
-                labels = {["УЗ","Адрес УЗ","Форма обучения","Год поступления",
-                            "Год окончания","Специальность","№ диплома", "Научная степень, звание"]} />
+                labels = {["УЗ","Адрес УЗ","Факультет","Форма обучения","Год поступления",
+                            "Год окончания","Специальность","№ диплома", "Научная степень, звание"]} 
+                onClick = {(id)=>history.push(`/employee/education/${id}/`)}/>
 }
 export const EmployeeChildrenTable = () => {
     const {getEmployeeChildren} = useContext(CompanyDBServiceContext);
