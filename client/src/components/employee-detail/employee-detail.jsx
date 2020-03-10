@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import {useHistory, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {connect} from 'react-redux';
 
 import CompanyDBServiceContext from "../company-db-service-context";
@@ -91,19 +91,11 @@ const EmployeeDetail = ({ user:{groups}}) => {
 
 
 
-    let history = useHistory(),
-        {id} = useParams();
+    let {id} = useParams();
     return (
-        <div>
-            <div className='d-flex flex-row-reverse'>
-            {buttonEdit && id?
-                <i className="fa fa-cog p-1" aria-hidden="true" onClick={()=>history.push('edit')}></i>:''
-            }
-            </div>
-            <ItemDetail getData={getEmployee}>
-                {detail}
-            </ItemDetail>
-        </div>
+        <ItemDetail getData={getEmployee} buttonEdit={buttonEdit && id}>
+            {detail}
+        </ItemDetail>
     )
 }
 

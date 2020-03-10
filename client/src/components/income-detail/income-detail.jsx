@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import CompanyDBServiceContext from "../company-db-service-context";
 import ItemDetail from "../item-detail";
 import ItemRecord, {AsyncItemRecord} from "../item-record";
-import { useParams, useHistory} from "react-router-dom"
+import { useParams } from "react-router-dom"
 
 // all fields
 // 'id','employee','income_date','percent','premium','tax','salary','total'
@@ -35,20 +35,12 @@ const IncomeDetail=({user:{groups}})=>{
         }
     }, [])
 
-    let history = useHistory(),
-        {id} = useParams();
+    let {id} = useParams();
 
     return (
-        <div>
-            <div className='d-flex flex-row-reverse'>
-                {buttonEdit && id?
-                    <i className="fa fa-cog p-1" aria-hidden="true" onClick={()=>history.push('edit')}></i>:''
-                }
-            </div>
-            <ItemDetail getData={getIncome}>
-                {details}
-            </ItemDetail>
-        </div>
+        <ItemDetail getData={getIncome} buttonEdit={buttonEdit && id}>
+            {details}
+        </ItemDetail>
     )
 }
 
