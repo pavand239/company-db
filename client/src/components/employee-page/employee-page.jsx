@@ -9,13 +9,14 @@ import { Redirect, Route, Switch , useHistory} from 'react-router-dom';
 import {
     EmployeeEditChief,
     EmployeeEditAccounting,
-    EmployeeEditHumanResource
+    EmployeeEditHumanResource,
+    IncomeEditChief,
+    IncomeEditAccounting,
+    EducationEditDefault
 } from "../forms";
 import IncomeDetail from "../income-detail";
-import {
-    IncomeEditChief,
-    IncomeEditAccounting
-} from "../forms"
+import EducationDetail from "../education-detail";
+
 
 const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
     let history = useHistory();
@@ -25,6 +26,7 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
     }
     let editEmployeePage = <h3>У вас не доступа для редактирования этого содержимого</h3>,
         editIncomePage = <h3>У вас не доступа для редактирования этого содержимого</h3>,
+        editEducationPage = <h3>У вас не доступа для редактирования этого содержимого</h3>,
         {groups} = user;
     if (groups.includes('Chief')) {
         editEmployeePage = <EmployeeEditChief />;
@@ -33,7 +35,10 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
         editEmployeePage = <EmployeeEditAccounting />
         editIncomePage = <IncomeEditAccounting />;
     } else if (groups.includes('HumanResource')) {
-        editEmployeePage = <EmployeeEditHumanResource />
+        editEmployeePage = <EmployeeEditHumanResource />;
+        editEducationPage = <EducationEditDefault />;
+    } else if (groups.includes('Admin')) {
+        editEducationPage = <EducationEditDefault />;
     }
     return (
         <Row  className='m-4'>
@@ -54,6 +59,12 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
                         </Route>
                         <Route  path='/employee/income/:id/edit'>
                             {editIncomePage}
+                        </Route>
+                        <Route exact path='/employee/education/:id/'>
+                            <EducationDetail />
+                        </Route>
+                        <Route  path='/employee/education/:id/edit'>
+                            {editEducationPage}
                         </Route>
                     </Switch>
                 </div>
