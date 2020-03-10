@@ -151,7 +151,7 @@ export const admYearField = (readOnly=true) => ({
     readOnly: readOnly,
     type:'number',
     min:1900,
-    max:new Date.getFullYear()
+    max:new Date().getFullYear()
 });
 export const gradYearField = (readOnly=true) => ({
     name:'graduate_year',
@@ -159,10 +159,16 @@ export const gradYearField = (readOnly=true) => ({
     readOnly: readOnly,
     type:'number',
     min:1900,
-    max:new Date.getFullYear()
+    max:new Date().getFullYear()
+});
+export const facultyField = (readOnly=true) => ({
+    name:'faculty_name',
+    label:'Факультет',
+    readOnly: readOnly,
+    type:'text'
 });
 export const specialityField = (readOnly=true) => ({
-    name:'speciality',
+    name:'speciality_name',
     label:'Специальность',
     readOnly: readOnly,
     type:'text'
