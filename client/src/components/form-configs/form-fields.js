@@ -139,8 +139,8 @@ export const eduInstAdddressField = (readOnly=true) => ({
     type:'text'
 });
 export const eduTypeField = (readOnly=true) => ({
-    name:'edu_inst_name',
-    label:'Наименование УЗ',
+    name:'edu_type',
+    label:'Форма обучения',
     readOnly: readOnly,
     element:'select',
     options:['Очная', 'Заочная'],
@@ -175,7 +175,7 @@ export const specialityField = (readOnly=true) => ({
     type:'text'
 });
 export const diplomaNumField = (readOnly=true) => ({
-    name:'edu_inst_address',
+    name:'diploma_num',
     label:'Номер диплома',
     readOnly: readOnly,
     type:'text'
