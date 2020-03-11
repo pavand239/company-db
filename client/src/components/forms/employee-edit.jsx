@@ -4,7 +4,8 @@ import CompanyDBServiceContext from "../company-db-service-context"
 import {
     EmployeeEditChiefConfig,
     EmployeeEditAccountingConfig,
-    EmployeeEditHumanResourceConfig
+    EmployeeEditHumanResourceConfig,
+    EmployeeEditAdminConfig
 } from "../form-configs";
 
 const EmployeeEdit = ({formConfig}) => {
@@ -18,3 +19,4 @@ const EmployeeEdit = ({formConfig}) => {
 export const EmployeeEditChief = () => <EmployeeEdit formConfig={EmployeeEditChiefConfig} />
 export const EmployeeEditAccounting = () => <EmployeeEdit formConfig={EmployeeEditAccountingConfig} />
 export const EmployeeEditHumanResource = () =><EmployeeEdit formConfig={EmployeeEditHumanResourceConfig} />
+export const EmployeeEditAdmin = () =><EmployeeEdit formConfig={EmployeeEditAdminConfig} />
