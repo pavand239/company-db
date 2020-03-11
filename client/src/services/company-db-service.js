@@ -155,6 +155,20 @@ export default class CompanyDBService {
             throw new Error(`Что-то пошло не так... ${response.status}`)
         }
     }
+    getChild = async (token,id) => {
+        let response = await fetch(`http://localhost:8000/api/1.0/child/${id}/`,{
+            headers:{
+                'Authorization':`Token ${token}`
+            }
+        })
+        if (response.ok){
+            return response.json()
+        } else if (response.status===401 || response.status===403) {
+            throw new Error('У вас нет прав для просмотра этого содержимого')
+        } else {
+            throw new Error(`Что-то пошло не так... ${response.status}`)
+        }
+    }
     patchEmployee = async (token,id,data) => {
         let response = await fetch(`http://localhost:8000/api/1.0/employee/${id}/`,{
             method:'PATCH',
@@ -191,6 +205,23 @@ export default class CompanyDBService {
     }
     patchEducation = async (token,id,data) => {
         let response = await fetch(`http://localhost:8000/api/1.0/education/${id}/`,{
+            method:'PATCH',
+            headers:{
+                'Authorization':`Token ${token}`,
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        if (response.ok){
+            return response.json()
+        } else if (response.status===401 || response.status===403) {
+            throw new Error('У вас нет прав для изменения')
+        } else {
+            throw new Error(`Что-то пошло не так... ${response.status}`)
+        }
+    }
+    patchChild = async (token,id,data) => {
+        let response = await fetch(`http://localhost:8000/api/1.0/child/${id}/`,{
             method:'PATCH',
             headers:{
                 'Authorization':`Token ${token}`,
