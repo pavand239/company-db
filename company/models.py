@@ -7,7 +7,7 @@ from django.core.validators import RegexValidator, MaxValueValidator, MinValueVa
 class Employee(models.Model):
     surname = models.CharField(max_length=100, verbose_name='Фамилия')
     name = models.CharField(max_length=100, verbose_name='Имя')
-    patronymic = models.CharField(max_length=100, verbose_name='Отчество')
+    patronymic = models.CharField(max_length=100, verbose_name='Отчество', blank=True)
     birth_date = models.DateField(verbose_name='Дата рождения')
     birth_place = models.CharField(max_length=250)
     gender = models.CharField(max_length=1,
