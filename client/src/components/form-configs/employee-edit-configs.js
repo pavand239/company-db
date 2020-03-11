@@ -1,7 +1,15 @@
-import * as fields from "./form-fields"
+import * as fields from "./form-fields";
+import * as Yup from "yup";
+
+
 
 export const EmployeeEditChiefConfig = {
     formName:'Редактирование информации о сотруднике (Руководитель организации)',
+    validationSchema:Yup.object().shape({
+        position:Yup.string()
+            .max(100,'Максимальная длина 100')
+            .required('Необходимое поле')
+    }),
     getInitialValues:(data)=>({
         position:data['position']
     }),
@@ -24,6 +32,29 @@ export const EmployeeEditChiefConfig = {
 }
 export const EmployeeEditAccountingConfig = {
     formName:'Редактирование информации о сотруднике (Бухгалтер)',
+    validationSchema:Yup.object().shape({
+        surname:Yup.string()
+            .min(2,'Минимальная длина 2 символа')
+            .max(100,'Максимальная длина 100 символов')
+            .required('Необходимое поле'),
+        name:Yup.string()
+            .min(2,'Минимальная длина 2 символа')
+            .max(100,'Максимальная длина 100 символов')
+            .required('Необходимое поле'),
+        patronymic: Yup.string()
+            .min(2,'Минимальная длина 2 символа')
+            .max(100,'Максимальная длина 100 символов'),
+        position:Yup.string()
+            .max(100,'Максимальная длина 100')
+            .required('Необходимое поле'),
+        department:Yup.string()
+            .max(100,'Максимальная длина 100')
+            .required('Необходимое поле'),
+        salary:Yup.number()
+            .positive('Оклад должен быть больше 0')
+            .required('Необходимое поле')
+        
+    }),
     getInitialValues:(data)=>({
         surname:data['surname'],
         name:data['name'],
@@ -51,6 +82,52 @@ export const EmployeeEditHumanResourceConfig = {
     getInitialValues:(data)=>({
         ...data
     }),
+    validationSchema:Yup.object().shape({
+        surname:Yup.string()
+            .min(2,'Минимальная длина 2 символа')
+            .max(100,'Максимальная длина 100 символов')
+            .required('Необходимое поле'),
+        name:Yup.string()
+            .min(2,'Минимальная длина 2 символа')
+            .max(100,'Максимальная длина 100 символов')
+            .required('Необходимое поле'),
+        patronymic: Yup.string()
+            .min(2,'Минимальная длина 2 символа')
+            .max(100,'Максимальная длина 100 символов'),
+        gender: Yup.string()
+            .matches(/(m|f)/)
+            .required('Необходимое поле'),
+        birth_date: Yup.date()
+            .min(new Date('1900-1-1'),'Неправильная дата')
+            .max(new Date(),'Неправильная дата')
+            .required('Необходимое поле'),
+        birth_place: Yup.string()
+            .max(250,'Максимальная длина 250')
+            .required('Необходимое поле'),
+        position:Yup.string()
+            .max(100,'Максимальная длина 100')
+            .required('Необходимое поле'),
+        department:Yup.string()
+            .max(100,'Максимальная длина 100')
+            .required('Необходимое поле'),
+        address:Yup.string()
+            .max(200,'Максимальная длина 200')
+            .required('Необходимое поле'),
+        marital_status: Yup.string()
+            .matches(/(y|n)/)
+            .required('Необходимое поле'),
+        attitude_to_conscription:Yup.string()
+            .matches(/(neu|neg|pos)/)
+            .required('Необходимое поле'),
+        passport_series:Yup.string()
+            .matches(/(\d{4})/,'Серия паспорта - 4 цифры')
+            .length(4,'Серия паспорта - 4 цифры')
+            .required('Необходимое поле'),
+        passport_ID:Yup.string()
+            .matches(/(\d{6})/,'Номер паспорта - 6 цифр')
+            .length(6,'Серия паспорта - 6 цифры')
+            .required('Необходимое поле'),
+    }),
     formFields:[
         fields.surnameField(false),
         fields.nameField(false),
@@ -71,6 +148,38 @@ export const EmployeeEditAdminConfig = {
     formName:'Редактирование информации о сотруднике (Отдел кадров)',
     getInitialValues:(data)=>({
         ...data
+    }),
+    validationSchema:Yup.object().shape({
+        surname:Yup.string()
+            .min(2,'Минимальная длина 2 символа')
+            .max(100,'Максимальная длина 100 символов')
+            .required('Необходимое поле'),
+        name:Yup.string()
+            .min(2,'Минимальная длина 2 символа')
+            .max(100,'Максимальная длина 100 символов')
+            .required('Необходимое поле'),
+        patronymic: Yup.string()
+            .min(2,'Минимальная длина 2 символа')
+            .max(100,'Максимальная длина 100 символов'),
+        gender: Yup.string()
+            .matches(/(m|f)/)
+            .required('Необходимое поле'),
+        birth_date: Yup.date()
+            .min(new Date('1900-1-1'),'Неправильная дата')
+            .max(new Date(),'Неправильная дата')
+            .required('Необходимое поле'),
+        birth_place: Yup.string()
+            .max(250,'Максимальная длина 250')
+            .required('Необходимое поле'),
+        address:Yup.string()
+            .max(200,'Максимальная длина 200')
+            .required('Необходимое поле'),
+        marital_status: Yup.string()
+            .matches(/(y|n)/)
+            .required('Необходимое поле'),
+        attitude_to_conscription:Yup.string()
+            .matches(/(neu|neg|pos)/)
+            .required('Необходимое поле'),
     }),
     formFields:[
         fields.surnameField(false),
