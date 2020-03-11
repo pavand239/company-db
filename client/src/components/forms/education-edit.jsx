@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import EditForm from "./edit-form";
 import CompanyDBServiceContext from "../company-db-service-context"
 import {
-    EducationEditForm
+    EducationEditConfig
 } from "../form-configs";
 
 const EducationEdit = ({formConfig}) => {
@@ -15,4 +15,4 @@ const EducationEdit = ({formConfig}) => {
                     service = {companyDBService}/>
 }
 
-export const EducationEditDefault = () => <EducationEdit formConfig={EducationEditForm} />
+export const EducationEditDefault = () => <EducationEdit formConfig={EducationEditConfig} />

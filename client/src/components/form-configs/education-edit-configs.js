@@ -1,6 +1,6 @@
 import * as fields from "./form-fields"
 
-export const EducationEditForm = {
+export const EducationEditConfig = {
     formName: 'Редактирование информации об образовании сотрудника',
     getInitialValues:   (data)=>({
                             ...data
