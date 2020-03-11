@@ -31,8 +31,10 @@ export const EmployeeEducationTable = () => {
 }
 export const EmployeeChildrenTable = () => {
     const {getEmployeeChildren} = useContext(CompanyDBServiceContext);
+    let history = useHistory();
     return <EmployeeDetailAdditionalTable getData = {getEmployeeChildren}
                 tableLabel={'Дети'}
                 fields = {['surname','name','patronymic','birth_date']}
-                labels = {["Фамилия","Имя","Отчество","Дата рождения"]} />
+                labels = {["Фамилия","Имя","Отчество","Дата рождения"]} 
+                onClick = {(id)=>history.push(`/employee/child/${id}/`)}/>
 }

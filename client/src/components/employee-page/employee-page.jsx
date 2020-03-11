@@ -10,12 +10,15 @@ import {
     EmployeeEditChief,
     EmployeeEditAccounting,
     EmployeeEditHumanResource,
+    EmployeeEditAdmin,
     IncomeEditChief,
     IncomeEditAccounting,
-    EducationEditDefault
+    EducationEditDefault,
+    ChildEditDefault
 } from "../forms";
 import IncomeDetail from "../income-detail";
 import EducationDetail from "../education-detail";
+import ChildDetail from "../child-detail";
 
 
 const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
@@ -27,6 +30,7 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
     let editEmployeePage = <h3>У вас не доступа для редактирования этого содержимого</h3>,
         editIncomePage = <h3>У вас не доступа для редактирования этого содержимого</h3>,
         editEducationPage = <h3>У вас не доступа для редактирования этого содержимого</h3>,
+        editChildPage = <h3>У вас не доступа для редактирования этого содержимого</h3>,
         {groups} = user;
     if (groups.includes('Chief')) {
         editEmployeePage = <EmployeeEditChief />;
@@ -37,8 +41,11 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
     } else if (groups.includes('HumanResource')) {
         editEmployeePage = <EmployeeEditHumanResource />;
         editEducationPage = <EducationEditDefault />;
+        editChildPage = <ChildEditDefault />
     } else if (groups.includes('Admin')) {
         editEducationPage = <EducationEditDefault />;
+        editChildPage = <ChildEditDefault />;
+        editEmployeePage = <EmployeeEditAdmin />;
     }
     return (
         <Row  className='m-4'>
@@ -65,6 +72,12 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
                         </Route>
                         <Route  path='/employee/education/:id/edit'>
                             {editEducationPage}
+                        </Route>
+                        <Route exact path='/employee/child/:id/'>
+                            <ChildDetail />
+                        </Route>
+                        <Route  path='/employee/child/:id/edit'>
+                            {editChildPage}
                         </Route>
                     </Switch>
                 </div>
