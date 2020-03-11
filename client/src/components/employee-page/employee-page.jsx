@@ -14,7 +14,8 @@ import {
     IncomeEditChief,
     IncomeEditAccounting,
     EducationEditDefault,
-    ChildEditDefault
+    ChildEditDefault,
+    EmployeeCreate
 } from "../forms";
 import IncomeDetail from "../income-detail";
 import EducationDetail from "../education-detail";
@@ -55,6 +56,9 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
             <Col sm={9}>
                 <div  className='border rounded p-5 w-100'>
                     <Switch>
+                        <Route  path='/employee/create/'>
+                            <EmployeeCreate />
+                        </Route>
                         <Route path='/employee/:id/edit/'>
                             {editEmployeePage}
                         </Route>
@@ -79,6 +83,7 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
                         <Route  path='/employee/child/:id/edit'>
                             {editChildPage}
                         </Route>
+
                     </Switch>
                 </div>
             </Col>
