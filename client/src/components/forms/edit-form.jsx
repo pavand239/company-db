@@ -86,7 +86,7 @@ const EditForm = ({getData,patchData,formConfig, service=null}) => {
                                                             key={idx}
                                                             />
                                     } else {
-                                        form = <Form.Control {...defaultProps} {...valueProps} type={field.type} key={idx} />
+                                        form = <Form.Control {...defaultProps} {...valueProps} {...field} key={idx} />
                                     }
 
                                     return (
