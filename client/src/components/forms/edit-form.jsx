@@ -35,6 +35,7 @@ const EditForm = ({getData,patchData,formConfig, service=null}) => {
             <h3>{formName}</h3>
             <Formik
                 initialValues={formConfig.getInitialValues(data)}
+                validationSchema={formConfig.validationSchema}
                 onSubmit={values => {
                     setIsUploading(true);
                     patchData(localStorage.getItem('token'), id, values)
@@ -96,6 +97,9 @@ const EditForm = ({getData,patchData,formConfig, service=null}) => {
                                             </Col>
                                             <Col>
                                                 {form}   
+                                                {props.errors[field.name]?
+                                                    <p className='text-weight-bold text-danger'>{props.errors[field.name]}</p>
+                                                :''}
                                             </Col>
                                         </Form.Row>
                                     )
