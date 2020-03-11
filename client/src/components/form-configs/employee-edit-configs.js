@@ -95,7 +95,6 @@ export const EmployeeEditHumanResourceConfig = {
             .min(2,'Минимальная длина 2 символа')
             .max(100,'Максимальная длина 100 символов'),
         gender: Yup.string()
-            .matches(/(m|f)/)
             .required('Необходимое поле'),
         birth_date: Yup.date()
             .min(new Date('1900-1-1'),'Неправильная дата')
@@ -114,10 +113,8 @@ export const EmployeeEditHumanResourceConfig = {
             .max(200,'Максимальная длина 200')
             .required('Необходимое поле'),
         marital_status: Yup.string()
-            .matches(/(y|n)/)
             .required('Необходимое поле'),
         attitude_to_conscription:Yup.string()
-            .matches(/(neu|neg|pos)/)
             .required('Необходимое поле'),
         passport_series:Yup.string()
             .matches(/(\d{4})/,'Серия паспорта - 4 цифры')
@@ -175,10 +172,8 @@ export const EmployeeEditAdminConfig = {
             .max(200,'Максимальная длина 200')
             .required('Необходимое поле'),
         marital_status: Yup.string()
-            .matches(/(y|n)/)
             .required('Необходимое поле'),
         attitude_to_conscription:Yup.string()
-            .matches(/(neu|neg|pos)/)
             .required('Необходимое поле'),
     }),
     formFields:[
