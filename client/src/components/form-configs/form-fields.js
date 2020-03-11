@@ -49,7 +49,7 @@ export const passportSeriesField = (readOnly=true) => ({
 });
 export const passportIDField = (readOnly=true) => ({
     name:'passport_ID',
-    label:'Номер пасспорта',
+    label:'Номер паспорта',
     readOnly: readOnly,
     type:'text'
 });

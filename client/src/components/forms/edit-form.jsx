@@ -51,7 +51,7 @@ const EditForm = ({getData,patchData,formConfig, service=null}) => {
                                     let defaultProps = {
                                         id:field.name,
                                         onChange:props.handleChange,
-                                        ...field
+                                        readOnly:field.readOnly
                                     },
                                         form=null,
                                         valueProps={};
@@ -68,7 +68,7 @@ const EditForm = ({getData,patchData,formConfig, service=null}) => {
                                         if (field.readOnly) {
                                             form = <Form.Control key={idx} {...defaultProps} {...valueProps}/>
                                         } else {
-                                            console.log(field.options)
+                                            console.log(valueProps)
                                             form = (
                                                 <Form.Control key={idx} {...defaultProps} {...valueProps} as={field.element}>
                                                     {field.options.map((option,idx)=>(
