@@ -67,3 +67,22 @@ export const EmployeeEditHumanResourceConfig = {
         fields.passportIDField(false),
     ]
 }
+export const EmployeeEditAdminConfig = {
+    formName:'Редактирование информации о сотруднике (Отдел кадров)',
+    getInitialValues:(data)=>({
+        ...data
+    }),
+    formFields:[
+        fields.surnameField(false),
+        fields.nameField(false),
+        fields.patronymicField(false),
+        fields.genderField(false),
+        fields.birthDateField(false),
+        fields.birthPlaceField(false),
+        fields.positionField(),
+        fields.departmentField(),
+        fields.addressField(false),
+        fields.maritalStatusField(false),
+        fields.attToConsField(false),
+    ]
+}
