@@ -3,14 +3,16 @@ import LoadingIndicator from "../loading-indicator";
 import {useGetData} from "../hooks";
 import ManyFieldItemRecord from "./many-field-item-record"
 
-const AsyncItemRecord = ({getData, field, item, fieldToDisplay, label=null, className})=>{
+const AsyncItemRecord = ({getData, field, item, fieldToDisplay, className,label=null, id=null})=>{
+    if(!id) {
+        id = item[field]
+    }
     const useGetDataCallback = () => {
         let token = localStorage.getItem('token'),
-            getDataCallback = useCallback(()=>getData(token, item[field]),[token]);
+            getDataCallback = useCallback(()=>getData(token, id),[token]);
         return useGetData(getDataCallback);
     }
     let {data, error, isLoading} = useGetDataCallback();
-    console.log(label)
     if (!error && isLoading){
         return <LoadingIndicator />
     }
