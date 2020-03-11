@@ -1,14 +1,12 @@
 import React, {useCallback, useState} from 'react';
-import {Form, Col, Button} from "react-bootstrap";
-import {Formik} from "formik";
-import {useParams, useHistory} from "react-router-dom"
+import {Button} from "react-bootstrap";
+import {useParams} from "react-router-dom"
 import LoadingIndicator from "../loading-indicator";
 import {useGetData} from "../hooks";
-import {AsyncSelectField} from "./async-select-field";
+import { FormTemplate } from "./form-template";
 
 const EditForm = ({getData,patchData,formConfig, service=null}) => {
     let {id} = useParams(),
-        history = useHistory(),
         [isUploading, setIsUploading] = useState(false),
         [isUploaded, setIsUploaded] = useState(false),
         [uploadError, setUploadError] = useState(null);
@@ -19,6 +17,12 @@ const EditForm = ({getData,patchData,formConfig, service=null}) => {
             getDataCallback = useCallback(()=>getData(token,id),[id, token]);
         return useGetData(getDataCallback);
     }
+    const onSubmit = (values) => {
+        setIsUploading(true);
+        patchData(localStorage.getItem('token'), id, values)
+            .then(()=>{setIsUploading(false);setIsUploaded(true);})
+            .catch(err=>setUploadError(err));
+    }
     let {data, isLoading, error} = useGetDataCallback();
     if (isLoading && !error) {
         return <LoadingIndicator />
@@ -26,108 +30,30 @@ const EditForm = ({getData,patchData,formConfig, service=null}) => {
     if (error) {
         return  error.message
     }
-    let {formName, formFields} = formConfig;
-    return (
-        <div>
-            <div className='d-flex flex-row-reverse'>
-                <i className="fa fa-times p-1" aria-hidden="true" onClick={()=>history.goBack()}></i>
-            </div>
-            <h3>{formName}</h3>
-            <Formik
-                initialValues={formConfig.getInitialValues(data)}
-                validationSchema={formConfig.validationSchema}
-                onSubmit={values => {
-                    setIsUploading(true);
-                    patchData(localStorage.getItem('token'), id, values)
-                        .then(()=>{setIsUploading(false);setIsUploaded(true);})
-                        .catch(err=>setUploadError(err));
-                }}
-            >
-                { props => (
-                    <form onSubmit={props.handleSubmit}>
-                        {
-                            formFields.map(
-                                (field, idx)=>{
-                                    let defaultProps = {
-                                        id:field.name,
-                                        onChange:props.handleChange,
-                                        readOnly:field.readOnly
-                                    },
-                                        form=null,
-                                        valueProps={};
-                                    if (field.readOnly) {
-                                        valueProps={
-                                            defaultValue:data[field.name]
-                                        }
-                                    } else {
-                                        valueProps={
-                                            value:props.values[field.name]
-                                        }
-                                    }
-                                    if (field.element==='select') {
-                                        if (field.readOnly) {
-                                            form = <Form.Control key={idx} {...defaultProps} {...valueProps}/>
-                                        } else {
-                                            console.log(valueProps)
-                                            form = (
-                                                <Form.Control key={idx} {...defaultProps} {...valueProps} as={field.element}>
-                                                    {field.options.map((option,idx)=>(
-                                                        <option key={idx} value={field.optionsValues[idx]}>{option}</option>
-                                                    ))}
-                                                </Form.Control>
-                                            )
-                                        }
-                                    } else if (field.element==='asyncSelect'){
-                                        form = <AsyncSelectField {...defaultProps} 
-                                                            service={service}
-                                                            labelKeys={field.labelKeys}
-                                                            getData={field.getData}
-                                                            {...valueProps}
-                                                            key={idx}
-                                                            />
-                                    } else {
-                                        form = <Form.Control {...defaultProps} {...valueProps} {...field} key={idx} />
-                                    }
-
-                                    return (
-                                        
-                                        <Form.Row key={idx}>
-                                            <Col xs={3} >
-                                                <Form.Label className = 'font-weight-bold mb-0 py-2'>{field.label}</Form.Label> 
-                                            </Col>
-                                            <Col>
-                                                {form}   
-                                                {props.errors[field.name]?
-                                                    <p className='text-weight-bold text-danger'>{props.errors[field.name]}</p>
-                                                :''}
-                                            </Col>
-                                        </Form.Row>
-                                    )
-                                }
-                            )
-                        }
-
-                        <div className='d-flex align-items-baseline m-3'>
-                        {
-                            isUploading?
-                                <LoadingIndicator />
-                            :
-                                <Button className='mx-3' type={'submit'}>Submit</Button>
-                        }
-                        {
-                            uploadError?
-                                <p className='text-weight-bold text-danger'>uploadError.message</p>:''
-                        }
-                        {
-                            isUploaded?
-                                <p className='text-weight-bold text-success'>Данные успешно обновлены</p>:''
-                        }
-                        </div>                     
-                    </form>
-                )}
-            </ Formik>
-        </div>
+    const bottomButtonBlock = (
+        <div className='d-flex align-items-baseline m-3'>
+        {
+            isUploading?
+                <LoadingIndicator />
+            :
+                <Button className='mx-3' type={'submit'}>Submit</Button>
+        }
+        {
+            uploadError?
+                <p className='text-weight-bold text-danger'>uploadError.message</p>:''
+        }
+        {
+            isUploaded?
+                <p className='text-weight-bold text-success'>Данные успешно обновлены</p>:''
+        }
+        </div> 
     )
+    return <FormTemplate {...formConfig} 
+                        onSubmit={onSubmit} 
+                        getInitialValues={formConfig.getInitialValues(data)}
+                        bottomButtonBlock={bottomButtonBlock} 
+                        data={data}
+                        service={service}/>
 }
 
 export default EditForm;
