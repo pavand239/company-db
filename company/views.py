@@ -11,14 +11,17 @@ from .permissions import *
 class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
     def get_serializer_class(self):
-        if is_group_member(self.request, ['Chief'],):
-            return EmployeeChiefSerializer
-        elif is_group_member(self.request, ['Accounting']):
-            return EmployeeAccountingSerializer
-        elif is_group_member(self.request, ['HumanResource']):
-            return EmployeeHumanResourceSerializer
+        if self.action=='create':
+            return EmployeeCreateSerializer
         else:
-            return EmployeeDefaultSerializer 
+            if is_group_member(self.request, ['Chief'],):
+                return EmployeeChiefSerializer
+            elif is_group_member(self.request, ['Accounting']):
+                return EmployeeAccountingSerializer
+            elif is_group_member(self.request, ['HumanResource']):
+                return EmployeeHumanResourceSerializer
+            else:
+                return EmployeeDefaultSerializer 
 
     @action(detail=True)
     def get_children(self,request, pk=None):

@@ -29,12 +29,16 @@ class EmployeeAccountingSerializer(EmployeeChiefSerializer):
 class EmployeeHumanResourceSerializer(EmployeeChiefSerializer):
     class Meta:
         model=Employee
-        fields='__all__'
+        exclude=['salary']
 class EmployeeAdminSerializer(EmployeeChiefSerializer):
     class Meta:
         model=Employee
         exclude=["passport_series","passport_ID"]
         read_only_fields=["department","position"]
+class EmployeeCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Employee
+        fields='__all__'
 
 class IncomeChiefSerializer(serializers.ModelSerializer):
     class Meta:
