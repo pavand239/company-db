@@ -20,7 +20,6 @@ const EditForm = ({getData,patchData,formConfig, service=null}) => {
         return useGetData(getDataCallback);
     }
     let {data, isLoading, error} = useGetDataCallback();
-    console.log(data)
     if (isLoading && !error) {
         return <LoadingIndicator />
     }
