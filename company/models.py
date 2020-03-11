@@ -85,7 +85,7 @@ class Child(models.Model):
     employee = models.ManyToManyField('Employee',related_name='children',)
     surname = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
-    patronymic = models.CharField(max_length=100)
+    patronymic = models.CharField(max_length=100, blank=True)
     birth_date = models.DateField()
     def __str__(self):
         return '{} {} {}'.format(self.surname, self.name, self.patronymic)
