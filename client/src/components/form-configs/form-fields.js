@@ -117,11 +117,12 @@ export const totalField = (readOnly=true) => ({
     readOnly: readOnly,
     type:'number'
 });
-export const employeeField = (readOnly=true) => ({
+export const employeeField = (readOnly=true, multiple=false) => ({
     name:'employee',
     label:'Работник',
     readOnly: readOnly,
     element:'asyncSelect',
+    multiple:multiple,
     labelKeys:['surname','name','patronymic'],
     getData:'getEmployeeList'
 });
