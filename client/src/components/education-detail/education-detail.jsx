@@ -6,12 +6,6 @@ import ItemDetail from "../item-detail";
 import ItemRecord, {AsyncItemRecord} from "../item-record";
 import { useParams } from "react-router-dom"
 
-// all fields
-// 'id','employee','income_date','percent','premium','tax','salary','total'
-// fields edit by Accountig
-// [income_date,percent]
-// fields edit by chief
-// [premium]
 
 const EducationDetail=({user:{groups}})=>{
     let {getEducation, getEmployee} = useContext(CompanyDBServiceContext),
