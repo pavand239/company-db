@@ -38,7 +38,9 @@ const EmployeeList = ({employeeList, fetchEmployeeList, onClickItem,groups}) => 
             )}
             {addNewButton?
                 <ListGroup.Item onClick={()=>history.push(`/employee/create/`)}>
-                    <i className="fas fa-plus-circle"></i>
+                    <div className='d-flex justify-content-center align-items-center'>
+                        <i className="fas fa-plus-circle"></i>
+                    </div>
                 </ListGroup.Item>
             :''}
         </ListGroup>
