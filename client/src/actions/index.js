@@ -16,6 +16,17 @@ const setAfterLoginRedirectPath = (path) =>({
     type: 'SET_AFTER_LOGIN_REDIRECT',
     payload:path
 })
+const employeeListRequested=()=>({
+    type: 'FETCH_EMPLOYEE_LIST_REQUEST'
+})
+const employeeListLoaded=(list)=>({
+    type: 'FETCH_EMPLOYEE_LIST_SUCCESS',
+    payload:list
+})
+const employeeListError=(err)=>({
+    type: 'FETCH_EMPLOYEE_LIST_FAILURE',
+    payload: err
+})
 
 
 const fetchUser = (companyDBService) => (token) => (dispatch)=>{
@@ -25,11 +36,20 @@ const fetchUser = (companyDBService) => (token) => (dispatch)=>{
         .catch(error=>dispatch(userError(error)))
 }
 
+const fetchEmployeeList = (companyDBService) => (token) => (dispatch)=>{
+    console.log('fetched employee list ...')
+    dispatch(employeeListRequested());
+    companyDBService.getEmployeeList(token)
+        .then(list=>dispatch(employeeListLoaded(list)))
+        .catch(err=>dispatch(employeeListError(err)))
+}
+
 export {
     userRequested,
     userLoaded,
     userError,
     userLogout,
     setAfterLoginRedirectPath,
-    fetchUser
+    fetchUser,
+    fetchEmployeeList
 }
