@@ -1,28 +1,34 @@
-import React, {useCallback} from 'react';
+import React, {useEffect, useContext, useState} from 'react';
 import {ListGroup} from "react-bootstrap";
-import {withRouter} from "react-router-dom";
-
-import { withCompanyDBService } from '../hoc';
-import {useGetData} from "../hooks";
+import {useHistory} from "react-router-dom";
+import {connect} from "react-redux";
+import { fetchEmployeeList } from "../../actions";
+import CompanyDBServiceContext from "../company-db-service-context";
 import LoadingIndicator from "../loading-indicator";
 import EmployeeListItem from "../employee-list-item";
 
-const EmployeeList = ({onClickItem,companyDBService}) => {
-    const useGetEmployees = () => {
-        let token = localStorage.getItem('token'),
-            getEmployees = useCallback(()=>companyDBService.getEmployeeList(token),[token]);
-        return useGetData(getEmployees);
-    }
-    let {data, isLoading, error} = useGetEmployees();
+const EmployeeList = ({employeeList, fetchEmployeeList, onClickItem,groups}) => {
+    const companyDBService=useContext(CompanyDBServiceContext);
+    let {employees, isLoading, error}=employeeList,
+        history = useHistory(),
+        [addNewButton, setAddNewButton] = useState(false);
+    useEffect(()=>{
+        fetchEmployeeList(companyDBService, localStorage.getItem('token'));
+        if (groups.includes('HumanResource')) {
+            setAddNewButton(true);
+        }
+    },[])
+    console.log(employeeList);
     if (isLoading && !error) {
         return <LoadingIndicator />
     }
     if (error) {
         return error.message
     }
+    
     return (
         <ListGroup>
-            {data.map(employee => (
+            {employees.map(employee => (
                 <ListGroup.Item 
                     key = {employee.id}
                     onClick={()=>onClickItem(employee.id)} >
@@ -30,9 +36,20 @@ const EmployeeList = ({onClickItem,companyDBService}) => {
                         />
                 </ListGroup.Item>)
             )}
+            {addNewButton?
+                <ListGroup.Item onClick={()=>history.push(`/employee/create/`)}>
+                    <i className="fas fa-plus-circle"></i>
+                </ListGroup.Item>
+            :''}
         </ListGroup>
     )
 }
+const mapStateToProps=(state)=>({
+    employeeList:state.employeeList,
+    groups:state.user.user.groups
+})
+const mapDispatchToProps = (dispatch)=>({
+    fetchEmployeeList:(service, token)=>dispatch(fetchEmployeeList(service)(token))
+})
 
-
-export default withRouter(withCompanyDBService(EmployeeList))
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeList)
