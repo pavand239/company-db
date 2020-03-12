@@ -1,17 +1,20 @@
 import React, { useState} from 'react';
 import {Button} from "react-bootstrap";
+
 import LoadingIndicator from "../loading-indicator";
 import { FormTemplate } from "./form-template";
 
-const CreateForm = ({createData,formConfig, service=null}) => {
+
+const CreateForm = ({createData,formConfig, afterUpload, getResponseData, service=null}) => {
     let [isUploading, setIsUploading] = useState(false),
         [isUploaded, setIsUploaded] = useState(false),
-        [uploadError, setUploadError] = useState(null);
+        [uploadError, setUploadError] = useState(null),
+        [newId, setNewId] = useState('');
 
     const onSubmit = (values) => {
         setIsUploading(true);
         createData(localStorage.getItem('token'), values)
-            .then(()=>{setIsUploading(false);setIsUploaded(true);})
+            .then((data)=>{getResponseData(data);setIsUploading(false);setIsUploaded(true);})
             .catch(err=>setUploadError(err));
     }
     const bottomButtonBlock = (
@@ -32,6 +35,9 @@ const CreateForm = ({createData,formConfig, service=null}) => {
         }
         </div> 
     )
+    if (isUploaded){
+        afterUpload();
+    }
     return <FormTemplate {...formConfig} 
                         onSubmit={onSubmit} 
                         bottomButtonBlock={bottomButtonBlock} 

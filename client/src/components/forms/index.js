@@ -10,7 +10,7 @@ import {
 } from "./income-edit"
 import { EducationEditDefault } from "./education-edit";
 import { ChildEditDefault } from "./child-edit";
-import { EmployeeCreate } from "./employee-create";
+import  EmployeeCreate  from "./employee-create";
 export {
     EmployeeEditChief,
     EmployeeEditAccounting,
