@@ -70,24 +70,24 @@ export const attToConsField = (readOnly=true) => ({
     label:'Отношение к воинской обязанности',
     readOnly: readOnly,
     element:'select',
-    options:['Негативное','Нейтральное','Позитивное'],
-    optionsValues:['neg','neu','pos']
+    options:['---','Негативное','Нейтральное','Позитивное'],
+    optionsValues:['','neg','neu','pos']
 });
 export const maritalStatusField = (readOnly=true) => ({
     name:'marital_status',
     label:'Семейное положение',
     readOnly: readOnly,
     element:'select',
-    options:['Не женат/не замужем','Женат/замужем'],
-    optionsValues:['y','n']
+    options:['---','Не женат/не замужем','Женат/замужем'],
+    optionsValues:['','y','n']
 });
 export const genderField = (readOnly=true) => ({
     name:'gender',
     label:'Пол',
     readOnly: readOnly,
     element:'select',
-    options:['Мужской', 'Женский'],
-    optionsValues:['m','f']
+    options:['---','Мужской', 'Женский'],
+    optionsValues:['','m','f']
 });
 export const incomeDateField = (readOnly=true) => ({
     name:'income_date',
