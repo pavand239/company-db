@@ -4,14 +4,18 @@ import {Form, Col, Button} from "react-bootstrap";
 import {Formik} from "formik";
 import {AsyncSelectField} from "./async-select-field";
 export const FormTemplate = ({formName, formFields, getInitialValues, validationSchema,
-                              onSubmit, bottomButtonBlock, data=null, service=null}) => {
+                              onSubmit, bottomButtonBlock, showBackButton=true, showFormName = true,data=null, service=null}) => {
     let history = useHistory();
     return (
         <div>
-            <div className='d-flex flex-row-reverse'>
-                <i className="fa fa-times p-1" aria-hidden="true" onClick={()=>history.goBack()}></i>
-            </div>
-            <h3>{formName}</h3>
+            {showBackButton?
+                <div className='d-flex flex-row-reverse'>
+                    <i className="fa fa-times p-1" aria-hidden="true" onClick={()=>history.goBack()}></i>
+                </div>
+            :''}
+            {showFormName?
+                <h3>{formName}</h3>
+            :''}
             <Formik
                 initialValues={getInitialValues}
                 validationSchema={validationSchema}
