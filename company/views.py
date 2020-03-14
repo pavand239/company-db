@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import generics, viewsets
+from rest_framework import generics, viewsets, filters
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -10,6 +10,8 @@ from .permissions import *
 
 class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['surname', 'name','patronymic', 'department','position']
     def get_serializer_class(self):
         if self.action=='create':
             return EmployeeCreateSerializer
@@ -22,7 +24,12 @@ class EmployeeViewSet(viewsets.ModelViewSet):
                 return EmployeeHumanResourceSerializer
             else:
                 return EmployeeDefaultSerializer 
-
+    # def get_permissions(self):
+    #     if self.action=='create':
+    #         permission_classes = [is_group_member_perm(['HumanResource'])]
+    #     else:
+    #         permission_classes = [IsAuthenticated]
+    #     return [permission() for permission in permission_classes]
     @action(detail=True)
     def get_children(self,request, pk=None):
         children=Child.objects.filter(employee=pk)
@@ -49,9 +56,9 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     def get_income_last_year(self,request, pk=None):
         income=Income.objects.filter(employee=pk)[:12]
         def get_serializer(self):
-            if (self.request.user.groups.filter(name = 'Chief').exists()):
+            if is_group_member(self.request,['Chief']):
                 return IncomeChiefSerializer(income,many=True)
-            elif (self.request.user.groups.filter(name = 'Accounting').exists()):
+            elif is_group_member(self.request,['Accounting']):
                 return IncomeAccountingSerializer(income,many=True)
         return Response(get_serializer(self).data)
 
