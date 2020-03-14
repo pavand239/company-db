@@ -26,7 +26,9 @@ const EmployeeList = ({employeeList, fetchEmployeeList, onClickItem,groups}) => 
     if (error) {
         return error.message
     }
-    
+    if (employees.length===0) {
+        return <p>Работников не найдено</p>
+    }
     return (
         <ListGroup>
             {employees.map(employee => (

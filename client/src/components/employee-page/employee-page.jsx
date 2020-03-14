@@ -15,12 +15,13 @@ import {
     IncomeEditAccounting,
     EducationEditDefault,
     ChildEditDefault,
-    EmployeeCreate
+    EmployeeCreate,
+    EmployeeSearchDefault,
+    EmployeeSearchChief
 } from "../forms";
 import IncomeDetail from "../income-detail";
 import EducationDetail from "../education-detail";
 import ChildDetail from "../child-detail";
-import {EmployeeSearch} from "../forms";
 
 
 const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
@@ -33,10 +34,12 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
         editIncomePage = <h3>У вас не доступа для редактирования этого содержимого</h3>,
         editEducationPage = <h3>У вас не доступа для редактирования этого содержимого</h3>,
         editChildPage = <h3>У вас не доступа для редактирования этого содержимого</h3>,
+        searchForm = <EmployeeSearchDefault />,
         {groups} = user;
     if (groups.includes('Chief')) {
         editEmployeePage = <EmployeeEditChief />;
         editIncomePage = <IncomeEditChief />;
+        searchForm = <EmployeeSearchChief/>;
     } else if (groups.includes('Accounting')) {
         editEmployeePage = <EmployeeEditAccounting />
         editIncomePage = <IncomeEditAccounting />;
@@ -44,10 +47,12 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
         editEmployeePage = <EmployeeEditHumanResource />;
         editEducationPage = <EducationEditDefault />;
         editChildPage = <ChildEditDefault />
+        searchForm = <EmployeeSearchChief/>;
     } else if (groups.includes('Admin')) {
         editEducationPage = <EducationEditDefault />;
         editChildPage = <ChildEditDefault />;
         editEmployeePage = <EmployeeEditAdmin />;
+        searchForm = <EmployeeSearchChief/>;
     }
     return (
         <Row  className='m-4'>
@@ -59,7 +64,7 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="0">
                             <Card.Body>
-                                <EmployeeSearch />
+                                {searchForm}
                             </Card.Body>
                         </Accordion.Collapse>
                     </Card>

@@ -11,7 +11,10 @@ import {
 import { EducationEditConfig } from "./education-edit-configs";
 import { ChildEditConfig } from "./child-edit-configs";
 import { EmployeeCreateConfig } from "./employee-create-config";
-import { EmployeeSearchConfig } from "./employee-search-config";
+import { 
+    EmployeeSearchConfigDefault,
+    EmployeeSearchConfigChief
+} from "./employee-search-config";
 export {
     EmployeeEditChiefConfig,
     EmployeeEditAccountingConfig,
@@ -22,5 +25,6 @@ export {
     EducationEditConfig,
     ChildEditConfig,
     EmployeeCreateConfig,
-    EmployeeSearchConfig
+    EmployeeSearchConfigDefault,
+    EmployeeSearchConfigChief
 }

@@ -3,9 +3,12 @@ import {useDispatch} from "react-redux";
 import {SearchForm }from "./search-form";
 import CompanyDBServiceContext from "../company-db-service-context"
 import { fetchEmployeeList } from "../../actions";
-import { EmployeeSearchConfig } from "../form-configs";
+import {
+    EmployeeSearchConfigDefault,
+    EmployeeSearchConfigChief
+ } from "../form-configs";
 
-export const EmployeeSearch =()=>{
+const EmployeeSearch =({formConfig})=>{
     const   companyDBService = useContext(CompanyDBServiceContext),
             dispatch = useDispatch(),
             onSubmit = (values)=> {
@@ -17,7 +20,10 @@ export const EmployeeSearch =()=>{
                 }
                 dispatch(fetchEmployeeList(companyDBService)(localStorage.getItem('token'),notEmptyValues));
             };
-    return <SearchForm formConfig={EmployeeSearchConfig}
+    return <SearchForm formConfig={formConfig}
                 onSubmit={onSubmit} />
 }
+
+export const EmployeeSearchDefault = () => <EmployeeSearch formConfig={EmployeeSearchConfigDefault} />
+export const EmployeeSearchChief = () => <EmployeeSearch formConfig={EmployeeSearchConfigChief} />
 
