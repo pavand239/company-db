@@ -187,3 +187,8 @@ export const degreeField = (readOnly=true) => ({
     type:'text'
 });
 
+export const searchField = () => ({
+    name:'search',
+    label:'Поиск',
+    type:'text'
+})

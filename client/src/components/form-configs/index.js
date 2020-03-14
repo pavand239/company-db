@@ -11,6 +11,7 @@ import {
 import { EducationEditConfig } from "./education-edit-configs";
 import { ChildEditConfig } from "./child-edit-configs";
 import { EmployeeCreateConfig } from "./employee-create-config";
+import { EmployeeSearchConfig } from "./employee-search-config";
 export {
     EmployeeEditChiefConfig,
     EmployeeEditAccountingConfig,
@@ -20,5 +21,6 @@ export {
     IncomeEditAccountingConfig,
     EducationEditConfig,
     ChildEditConfig,
-    EmployeeCreateConfig
+    EmployeeCreateConfig,
+    EmployeeSearchConfig
 }

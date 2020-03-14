@@ -1,5 +1,5 @@
 import React from 'react';
-import {Row, Col} from "react-bootstrap";
+import {Row, Col, Accordion, Card} from "react-bootstrap";
 
 import {setAfterLoginRedirectPath} from "../../actions";
 import EmployeeList from "../employee-list";
@@ -20,6 +20,7 @@ import {
 import IncomeDetail from "../income-detail";
 import EducationDetail from "../education-detail";
 import ChildDetail from "../child-detail";
+import {EmployeeSearch} from "../forms";
 
 
 const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
@@ -50,10 +51,22 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
     }
     return (
         <Row  className='m-4'>
-            <Col sm={3}>
+            <Col sm={4}>
+                <Accordion>
+                    <Card>
+                        <Accordion.Toggle as={Card.Header} eventKey="0">
+                            <p className='font-weight-bold'>Поиск и фильтрация</p>
+                        </Accordion.Toggle>
+                        <Accordion.Collapse eventKey="0">
+                            <Card.Body>
+                                <EmployeeSearch />
+                            </Card.Body>
+                        </Accordion.Collapse>
+                    </Card>
+                </Accordion>
                 <EmployeeList onClickItem = {(id)=>{history.push(`/employee/${id}/`)}}/>
             </Col>
-            <Col sm={9}>
+            <Col sm={8}>
                 <div  className='border rounded p-5 w-100'>
                     <Switch>
                         <Route  path='/employee/create/'>

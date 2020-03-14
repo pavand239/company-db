@@ -11,6 +11,7 @@ import {
 import { EducationEditDefault } from "./education-edit";
 import { ChildEditDefault } from "./child-edit";
 import  EmployeeCreate  from "./employee-create";
+import { EmployeeSearch } from "./employee-search";
 export {
     EmployeeEditChief,
     EmployeeEditAccounting,
@@ -20,5 +21,6 @@ export {
     IncomeEditAccounting,
     EducationEditDefault,
     ChildEditDefault,
-    EmployeeCreate
+    EmployeeCreate, 
+    EmployeeSearch
 }

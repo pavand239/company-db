@@ -5,7 +5,7 @@ import LoadingIndicator from "../loading-indicator";
 import { FormTemplate } from "./form-template";
 
 
-const CreateForm = ({createData,formConfig, afterUpload, getResponseData, service=null}) => {
+export const CreateForm = ({createData,formConfig, afterUpload, getResponseData, service=null}) => {
     let [isUploading, setIsUploading] = useState(false),
         [isUploaded, setIsUploaded] = useState(false),
         [uploadError, setUploadError] = useState(null),
@@ -43,5 +43,3 @@ const CreateForm = ({createData,formConfig, afterUpload, getResponseData, servic
                         bottomButtonBlock={bottomButtonBlock} 
                         service={service}/>
 }
-
-export default CreateForm;

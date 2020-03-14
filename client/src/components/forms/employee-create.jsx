@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import CreateForm from "./create-form";
+import {CreateForm} from "./create-form";
 import CompanyDBServiceContext from "../company-db-service-context"
 import { EmployeeCreateConfig } from "../form-configs";
 import {connect} from "react-redux";
