@@ -42,8 +42,12 @@ export default class CompanyDBService {
             throw new Error(`Что-то пошло не так... ${response.status}`)
         }
     }
-    getEmployeeList = async (token) => {
-        let response = await fetch('http://localhost:8000/api/1.0/employee/',{
+    getEmployeeList = async (token, params=null) => {
+        let paramString = '';
+        if (params && Object.keys(params).length) {
+           paramString = '?'+Object.entries(params).map(param=>param.join('=')).join('&');
+        }
+        let response = await fetch(`http://localhost:8000/api/1.0/employee${paramString}`,{
             headers:{
                 'Authorization':`Token ${token}`
             }
