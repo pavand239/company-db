@@ -21,7 +21,7 @@ class Employee(models.Model):
                                                 choices=[
                                                     ('pos','Позитивное'),
                                                     ('neu','Нейтральное'),
-                                                    ('neg','Негати вное')
+                                                    ('neg','Негативное')
                                                 ], default='neu')
     marital_status = models.CharField(max_length=1,
                             choices=[
