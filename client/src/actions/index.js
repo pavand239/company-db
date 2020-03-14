@@ -36,10 +36,10 @@ const fetchUser = (companyDBService) => (token) => (dispatch)=>{
         .catch(error=>dispatch(userError(error)))
 }
 
-const fetchEmployeeList = (companyDBService) => (token) => (dispatch)=>{
+const fetchEmployeeList = (companyDBService) => (token, params=null) => (dispatch)=>{
     console.log('fetched employee list ...')
     dispatch(employeeListRequested());
-    companyDBService.getEmployeeList(token)
+    companyDBService.getEmployeeList(token, params)
         .then(list=>dispatch(employeeListLoaded(list)))
         .catch(err=>dispatch(employeeListError(err)))
 }
