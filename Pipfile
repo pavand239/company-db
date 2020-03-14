@@ -11,6 +11,7 @@ django-rest-framework = "*"
 django-cors-headers = "*"
 djoser = "*"
 django-filter = "*"
+mysqlclient = "*"
 
 [requires]
 python_version = "3.8"
