@@ -3,6 +3,7 @@ from rest_framework import generics, viewsets, filters
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import Employee, Income, Education
 from .serializers import *
@@ -10,8 +11,9 @@ from .permissions import *
 
 class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
-    filter_backends = [filters.SearchFilter]
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend]
     search_fields = ['surname', 'name','patronymic', 'department','position']
+    filterset_fields=['gender','marital_status','attitude_to_conscription']
     def get_serializer_class(self):
         if self.action=='create':
             return EmployeeCreateSerializer
