@@ -10,6 +10,7 @@ django = "*"
 django-rest-framework = "*"
 django-cors-headers = "*"
 djoser = "*"
+django-filter = "*"
 
 [requires]
 python_version = "3.8"
