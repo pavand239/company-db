@@ -138,6 +138,11 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
+DJOSER = {
+    'SERIALIZERS':{
+        'current_user':'company.serializers.UserSerializer'
+    }
+}
 
 CORS_ORIGIN_ALLOW_ALL = True
 

@@ -1,5 +1,23 @@
 from rest_framework import serializers
+from django.contrib.auth import get_user_model
 from .models import Employee, Education, Reward, Child, Income
+
+User = get_user_model()
+
+class UserSerializer(serializers.ModelSerializer):
+    groups = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field='name'
+    )
+    class Meta:
+        model = User
+        fields = tuple(User.REQUIRED_FIELDS) + (
+            User._meta.pk.name,
+            User.USERNAME_FIELD,
+            'groups'
+        )
+        read_only_fields = (User.USERNAME_FIELD,)
 
 class EmployeeDefaultSerializer(serializers.ModelSerializer):
     gender= serializers.CharField(source='get_gender_display')
