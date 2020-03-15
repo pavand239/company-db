@@ -2,7 +2,7 @@ import * as fields from "./form-fields";
 import * as Yup from "yup";
 
 export const EmployeeCreateConfig = {
-    formName:"Создание нового работника",
+    formName:"Добавление нового работника",
     getInitialValues:{
         gender:"m",
         attitude_to_conscription:"neu",
