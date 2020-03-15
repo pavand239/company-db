@@ -12,12 +12,15 @@ const AppHeader = ({user,userLogout}) => (
         </Navbar.Brand>
         {user?
             <Navbar.Collapse className="justify-content-end">
-                <Navbar.Text>
-                    Signed in as: {user.username}
+                <div className='d-flex flex-column align-items-end'> 
+                <Navbar.Text className="text-dark">
+                    Вы вошли как: <span className="font-weight-bold">{user.username}</span>
                 </Navbar.Text>
                 <Button 
                     variant='outline-danger'
+                    size='sm'
                     onClick={userLogout}>Выход</Button>
+                </div> 
             </Navbar.Collapse>
         :''}
     </Navbar>

@@ -1,6 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react';
 import {connect} from 'react-redux';
-import {Form, Button} from "react-bootstrap" ;
+import {Form, Button, Row, Col} from "react-bootstrap" ;
 import CompanyDBServiceContext from "../company-db-service-context";
 import {withCompanyDBService} from "../hoc";
 import {fetchUser} from '../../actions';
@@ -39,7 +39,8 @@ const LoginPage = ({user, error, isLoading, afterLoginRedirectPath, fetchUser}) 
         return <LoadingIndicator />
     }
     return (
-            <Form className='w-50 mx-auto'>
+        <Col lg={{span:6,offset:3}}  sm={{span:8, offset:2}}>
+            <Form className='m-md-5 m-2'>
                 {errorLogin?
                     <Form.Text className='text-danger'>
                         {errorLogin}
@@ -55,24 +56,25 @@ const LoginPage = ({user, error, isLoading, afterLoginRedirectPath, fetchUser}) 
                     <Redirect to={afterLoginRedirectPath}/>:''
                 }
                 <Form.Group controlId="formUsername">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control placeholder="Username" 
+                    <Form.Label>Имя пользователя</Form.Label>
+                    <Form.Control placeholder="Имя пользователя" 
                                     value={username} 
                                     onChange={e=>setUsername(e.target.value)}/>
                 </Form.Group>
 
                 <Form.Group controlId="formPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label>Пароль</Form.Label>
                     <Form.Control type="password" 
-                                    placeholder="Password" 
+                                    placeholder="Пароль" 
                                     value={password} 
                                     onChange={e=>setPassword(e.target.value)}/>
                 </Form.Group>
                 {isTokenLoading?<LoadingIndicator />:
                     <Button variant="primary" type="submit" onClick={handlerOnSubmit}>
-                        Submit
+                        Вход
                     </Button>}
             </Form>
+        </Col>
     )
 }
 
