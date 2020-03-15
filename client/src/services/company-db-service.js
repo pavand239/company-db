@@ -1,19 +1,23 @@
 
 export default class CompanyDBService {
     getToken = async (username,password)=>{
-        let response = await fetch('http://localhost:8000/auth/token/login/',{
-            method:'POST',
-            headers:{
-                'Content-Type':'application/x-www-form-urlencoded'
-            },
-            body:`username=${username}&password=${password}`
-        })
-        if (response.ok){
-            return response.json()
-        } else if (response.status===400) {
-            throw new Error('Неверные учетные данные')
+        if (username==='' || password==='') {
+            throw new Error('Введите имя пользователя и пароль')
         } else {
-            throw new Error(`Что-то пошло не так... ${response.status}`)
+            let response = await fetch('http://localhost:8000/auth/token/login/',{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/x-www-form-urlencoded'
+                },
+                body:`username=${username}&password=${password}`
+            })
+            if (response.ok){
+                return response.json()
+            } else if (response.status===400) {
+                throw new Error('Неверные учетные данные')
+            } else {
+                throw new Error(`Что-то пошло не так... ${response.status}`)
+            }
         }
     }
     destroyToken = async (token) =>{
