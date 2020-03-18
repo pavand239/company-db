@@ -1,6 +1,7 @@
-import React, { useContext } from 'react'
-import CompanyDBServiceContext from "../company-db-service-context"
-import EmployeeDetailAdditionalTable from "../employee-detail-additional-table"
+import React, { useContext } from 'react';
+import {useSelector} from 'react-redux';
+import CompanyDBServiceContext from "../company-db-service-context";
+import EmployeeDetailAdditionalTable from "../employee-detail-additional-table";
 import { useHistory } from 'react-router-dom';
 
 // const {
@@ -11,12 +12,18 @@ import { useHistory } from 'react-router-dom';
 
 export const EmployeeIncomeTable = () => {
     const {getEmployeeIncome} = useContext(CompanyDBServiceContext);
-    let history = useHistory();
+    let history = useHistory(),
+        groups = useSelector(state=>state.user.user.groups),
+        createFunc = null;
+        if (groups.includes('Accounting')){
+            createFunc = ()=>history.push(`income/create`);
+        }
     return <EmployeeDetailAdditionalTable getData = {getEmployeeIncome}
                 tableLabel={'Доходы'}
                 fields = {['income_date','salary','percent','premium','total']}
                 labels = {["Дата","Оклад","Процент","Премия","Всего"]}
-                onClick ={(id)=>history.push(`/employee/income/${id}/`)}  />
+                onClick ={(id)=>history.push(`/employee/income/${id}/`)} 
+                create = {createFunc} />
 }
 export const EmployeeEducationTable = () => {
     const {getEmployeeEducation} = useContext(CompanyDBServiceContext);

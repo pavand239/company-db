@@ -6,6 +6,7 @@ import {AsyncSelectField} from "./async-select-field";
 export const FormTemplate = ({formName, formFields, getInitialValues, validationSchema,
                               onSubmit, bottomButtonBlock, showBackButton=true, showFormName = true,data=null, service=null}) => {
     let history = useHistory();
+    console.log(data);
     return (
         <div>
             {showBackButton?
@@ -17,7 +18,7 @@ export const FormTemplate = ({formName, formFields, getInitialValues, validation
                 <h3>{formName}</h3>
             :''}
             <Formik
-                initialValues={getInitialValues}
+                initialValues={getInitialValues(data)}
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
             >
@@ -66,7 +67,6 @@ export const FormTemplate = ({formName, formFields, getInitialValues, validation
                                     } else {
                                         form = <Form.Control {...defaultProps} {...valueProps} {...field} key={idx} />
                                     }
-                                    console.log(props.touched[field.name])
                                     return (
                                         
                                         <Form.Row key={idx}>

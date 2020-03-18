@@ -1,10 +1,10 @@
 import React, {useCallback} from 'react'
 import {withRouter} from "react-router-dom";
-import { Table } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 
 import {useGetData} from "../hooks"
 import LoadingIndicator from "../loading-indicator";
-const EmployeeDetailAdditionalTable = ({getData, match, tableLabel, fields, labels, onClick=()=>{}}) => {
+const EmployeeDetailAdditionalTable = ({getData, match, tableLabel, fields, labels, onClick=()=>{}, create=null}) => {
     let {id} = match.params;
     const useGetDataCallback = () => {
         let token = localStorage.getItem('token'),
@@ -18,9 +18,16 @@ const EmployeeDetailAdditionalTable = ({getData, match, tableLabel, fields, labe
     if (error) {
         return  error.message
     }
+    console.log(create)
     return (
         <div>
             <h4>{tableLabel}:</h4>
+            {create?
+                <Button variant='outline-dark' className='m-2' onClick={()=>create()}>
+                    <span><i className="fas fa-plus"></i> Добавить информацию</span>
+                </Button>
+            :null
+            }
             {data.length===0?
                 <p className='font-weight-bold'>Информация отсутсвует</p>
             :

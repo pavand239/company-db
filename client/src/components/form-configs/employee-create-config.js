@@ -3,7 +3,7 @@ import * as Yup from "yup";
 
 export const EmployeeCreateConfig = {
     formName:"Добавление нового работника",
-    getInitialValues:{
+    getInitialValues:()=>({
         gender:"m",
         attitude_to_conscription:"neu",
         marital_status:"n",
@@ -18,7 +18,7 @@ export const EmployeeCreateConfig = {
         passport_ID:"",
         address:"", 
         salary:0
-    },
+    }),
     validationSchema:Yup.object().shape({
         surname:Yup.string()
             .min(2,'Минимальная длина 2 символа')

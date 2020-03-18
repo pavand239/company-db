@@ -5,11 +5,10 @@ import LoadingIndicator from "../loading-indicator";
 import { FormTemplate } from "./form-template";
 
 
-export const CreateForm = ({createData,formConfig, afterUpload, getResponseData, service=null}) => {
+export const CreateForm = ({createData,formConfig, afterUpload, getResponseData, service=null, data=null}) => {
     let [isUploading, setIsUploading] = useState(false),
         [isUploaded, setIsUploaded] = useState(false),
-        [uploadError, setUploadError] = useState(null),
-        [newId, setNewId] = useState('');
+        [uploadError, setUploadError] = useState(null);
 
     const onSubmit = (values) => {
         setIsUploading(true);
@@ -23,11 +22,11 @@ export const CreateForm = ({createData,formConfig, afterUpload, getResponseData,
             isUploading?
                 <LoadingIndicator />
             :
-                <Button className='mx-3' type={'submit'}>Submit</Button>
+                <Button className='mx-3' type={'submit'}>Создать</Button>
         }
         {
             uploadError?
-                <p className='text-weight-bold text-danger'>uploadError.message</p>:''
+                <p className='text-weight-bold text-danger'>{uploadError.message}</p>:''
         }
         {
             isUploaded?
@@ -36,10 +35,11 @@ export const CreateForm = ({createData,formConfig, afterUpload, getResponseData,
         </div> 
     )
     if (isUploaded){
-        afterUpload();
+        return afterUpload();
     }
     return <FormTemplate {...formConfig} 
                         onSubmit={onSubmit} 
                         bottomButtonBlock={bottomButtonBlock} 
-                        service={service}/>
+                        service={service}
+                        data={data}/>
 }

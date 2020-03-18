@@ -17,7 +17,8 @@ import {
     ChildEditDefault,
     EmployeeCreate,
     EmployeeSearchDefault,
-    EmployeeSearchChief
+    EmployeeSearchChief,
+    IncomeCreate
 } from "../forms";
 import IncomeDetail from "../income-detail";
 import EducationDetail from "../education-detail";
@@ -34,6 +35,8 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
         editIncomePage = <h3>У вас не доступа для редактирования этого содержимого</h3>,
         editEducationPage = <h3>У вас не доступа для редактирования этого содержимого</h3>,
         editChildPage = <h3>У вас не доступа для редактирования этого содержимого</h3>,
+        createEmployeePage = <h3>У вас не доступа к этой странице</h3>,
+        createIncomePage = <h3>У вас не доступа к этой странице</h3>,
         searchForm = <EmployeeSearchDefault />,
         {groups} = user;
     if (groups.includes('Chief')) {
@@ -41,13 +44,15 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
         editIncomePage = <IncomeEditChief />;
         searchForm = <EmployeeSearchChief/>;
     } else if (groups.includes('Accounting')) {
-        editEmployeePage = <EmployeeEditAccounting />
+        editEmployeePage = <EmployeeEditAccounting />;
         editIncomePage = <IncomeEditAccounting />;
+        createIncomePage = <IncomeCreate />
     } else if (groups.includes('HumanResource')) {
         editEmployeePage = <EmployeeEditHumanResource />;
         editEducationPage = <EducationEditDefault />;
-        editChildPage = <ChildEditDefault />
+        editChildPage = <ChildEditDefault />;
         searchForm = <EmployeeSearchChief/>;
+        createEmployeePage = <EmployeeCreate />;
     } else if (groups.includes('Admin')) {
         editEducationPage = <EducationEditDefault />;
         editChildPage = <ChildEditDefault />;
@@ -75,7 +80,10 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
                 <div  className='border rounded p-5 w-100'>
                     <Switch>
                         <Route  path='/employee/create/'>
-                            <EmployeeCreate />
+                            {createEmployeePage}
+                        </Route>
+                        <Route path='/employee/:id/income/create/'>
+                            {createIncomePage}
                         </Route>
                         <Route path='/employee/:id/edit/'>
                             {editEmployeePage}

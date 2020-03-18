@@ -2,10 +2,10 @@ import * as fields from "./form-fields";
 
 export const EmployeeSearchConfigDefault = {
     formName:"Поиск и фильтрация",
-    getInitialValues: {
+    getInitialValues:()=> ({
         search:'',
         gender:''
-    },
+    }),
     formFields:[
         fields.searchField(),
         fields.genderField(false),

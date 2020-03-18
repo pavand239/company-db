@@ -67,7 +67,7 @@ class IncomeAccountingSerializer(serializers.ModelSerializer):
     class Meta:
         model=Income
         fields=['id','employee','income_date','percent','premium','tax','salary','total']
-        read_only_fields=['premium','salary','get_total']
+        read_only_fields=['premium','salary','total', 'tax']
 
         
 class ChildSerializer(serializers.ModelSerializer):
