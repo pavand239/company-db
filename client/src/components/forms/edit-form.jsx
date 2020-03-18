@@ -50,7 +50,6 @@ const EditForm = ({getData,patchData,formConfig, service=null}) => {
     )
     return <FormTemplate {...formConfig} 
                         onSubmit={onSubmit} 
-                        getInitialValues={formConfig.getInitialValues(data)}
                         bottomButtonBlock={bottomButtonBlock} 
                         data={data}
                         service={service}/>

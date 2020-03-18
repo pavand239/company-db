@@ -18,7 +18,8 @@ import {
     EmployeeCreate,
     EmployeeSearchDefault,
     EmployeeSearchChief,
-    IncomeCreate
+    IncomeCreate,
+    ChildCreate
 } from "../forms";
 import IncomeDetail from "../income-detail";
 import EducationDetail from "../education-detail";
@@ -27,16 +28,19 @@ import ChildDetail from "../child-detail";
 
 const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
     let history = useHistory();
+    const permDenied = <h3>У вас не доступа к этой странице</h3>;
     if (!user) {
         setAfterLoginRedirectPath(history.location.pathname);
         return <Redirect to='/'/>
     }
-    let editEmployeePage = <h3>У вас не доступа для редактирования этого содержимого</h3>,
-        editIncomePage = <h3>У вас не доступа для редактирования этого содержимого</h3>,
-        editEducationPage = <h3>У вас не доступа для редактирования этого содержимого</h3>,
-        editChildPage = <h3>У вас не доступа для редактирования этого содержимого</h3>,
-        createEmployeePage = <h3>У вас не доступа к этой странице</h3>,
-        createIncomePage = <h3>У вас не доступа к этой странице</h3>,
+    let editEmployeePage = permDenied,
+        editIncomePage = permDenied,
+        editEducationPage = permDenied,
+        editChildPage = permDenied,
+        createEmployeePage = permDenied,
+        createIncomePage = permDenied,
+        createChildPage = permDenied,
+        createEductionPage = permDenied,
         searchForm = <EmployeeSearchDefault />,
         {groups} = user;
     if (groups.includes('Chief')) {
@@ -53,11 +57,13 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
         editChildPage = <ChildEditDefault />;
         searchForm = <EmployeeSearchChief/>;
         createEmployeePage = <EmployeeCreate />;
+        createChildPage = <ChildCreate />;
     } else if (groups.includes('Admin')) {
         editEducationPage = <EducationEditDefault />;
         editChildPage = <ChildEditDefault />;
         editEmployeePage = <EmployeeEditAdmin />;
         searchForm = <EmployeeSearchChief/>;
+        createChildPage = <ChildCreate />;
     }
     return (
         <Row  className='m-4'>
@@ -84,6 +90,9 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
                         </Route>
                         <Route path='/employee/:id/income/create/'>
                             {createIncomePage}
+                        </Route>
+                        <Route path='/employee/:id/child/create/'>
+                            {createChildPage}
                         </Route>
                         <Route path='/employee/:id/edit/'>
                             {editEmployeePage}

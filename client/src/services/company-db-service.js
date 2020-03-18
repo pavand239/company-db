@@ -285,4 +285,24 @@ export default class CompanyDBService {
             throw new Error(`Что-то пошло не так... ${response.status}`)
         }
     }
+    createChild= async (token, data) => {
+        let response = await fetch(`http://localhost:8000/api/1.0/child/`,{
+            method:'POST',
+            headers:{
+                'Authorization':`Token ${token}`,
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        if (response.ok){
+            return response.json()
+        } else if (response.status===401 || response.status===403) {
+            throw new Error('У вас нет прав для изменения')
+        } else if (response.status===400) {
+            console.error(JSON.stringify(response.body))
+            throw new Error(`Что-то пошло не так... ${response.status}`)
+        } else {
+            throw new Error(`Что-то пошло не так... ${response.status}`)
+        }
+    }
 }

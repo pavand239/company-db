@@ -6,7 +6,7 @@ import {AsyncSelectField} from "./async-select-field";
 export const FormTemplate = ({formName, formFields, getInitialValues, validationSchema,
                               onSubmit, bottomButtonBlock, showBackButton=true, showFormName = true,data=null, service=null}) => {
     let history = useHistory();
-    console.log(data);
+    console.log(getInitialValues);
     return (
         <div>
             {showBackButton?
@@ -63,6 +63,7 @@ export const FormTemplate = ({formName, formFields, getInitialValues, validation
                                                             getData={field.getData}
                                                             {...valueProps}
                                                             key={idx}
+                                                            {...field}
                                                             />
                                     } else {
                                         form = <Form.Control {...defaultProps} {...valueProps} {...field} key={idx} />

@@ -13,12 +13,12 @@ export const EmployeeSearchConfigDefault = {
 }
 export const EmployeeSearchConfigChief = {
     formName:"Поиск и фильтрация",
-    getInitialValues: {
+    getInitialValues:()=> ({
         search:'',
         gender:'',
         marital_status:'',
         attitude_to_conscription:'',
-    },
+    }),
     formFields:[
         fields.searchField(),
         fields.genderField(false),
