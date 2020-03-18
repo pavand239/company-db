@@ -17,6 +17,7 @@ import {
 } from "./employee-search";
 import { IncomeCreate } from './income-create';
 import { ChildCreate } from './child-create';
+import { EducationCreate } from './education-create';
 export {
     EmployeeEditChief,
     EmployeeEditAccounting,
@@ -30,5 +31,6 @@ export {
     EmployeeSearchDefault,
     EmployeeSearchChief,
     IncomeCreate,
-    ChildCreate
+    ChildCreate,
+    EducationCreate,
 }

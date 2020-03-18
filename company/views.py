@@ -90,6 +90,11 @@ class ChildViewSet(viewsets.ModelViewSet):
 class EducationViewSet(viewsets.ModelViewSet):
     serializer_class=EducationSerializer
     queryset = Education.objects.all()
+    def get_serializer_class(self):
+        if self.action=='create':
+            return EducationCreateSerializer
+        else:
+            return EducationSerializer
 
 
 

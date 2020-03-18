@@ -1,10 +1,19 @@
 import * as fields from "./form-fields";
 import * as Yup from "yup";
 
-export const EducationEditConfig = {
+export const EducationCreateConfig = {
     formName: 'Редактирование информации об образовании сотрудника',
-    getInitialValues:   (data)=>({
-                            ...data
+    getInitialValues:   ({id})=>({
+                            employee:id,
+                            edu_type:"",
+                            edu_inst_name:"",
+                            edu_inst_address:"",
+                            admission_year:'',
+                            graduate_year:'',
+                            faculty_name:"",
+                            speciality_name:"",
+                            diploma_num:"",
+                            degree:""
                         }),
     validationSchema: Yup.object().shape({
         employee:Yup.number()

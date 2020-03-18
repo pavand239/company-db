@@ -19,7 +19,8 @@ import {
     EmployeeSearchDefault,
     EmployeeSearchChief,
     IncomeCreate,
-    ChildCreate
+    ChildCreate,
+    EducationCreate
 } from "../forms";
 import IncomeDetail from "../income-detail";
 import EducationDetail from "../education-detail";
@@ -40,7 +41,7 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
         createEmployeePage = permDenied,
         createIncomePage = permDenied,
         createChildPage = permDenied,
-        createEductionPage = permDenied,
+        createEducationPage = permDenied,
         searchForm = <EmployeeSearchDefault />,
         {groups} = user;
     if (groups.includes('Chief')) {
@@ -58,12 +59,14 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
         searchForm = <EmployeeSearchChief/>;
         createEmployeePage = <EmployeeCreate />;
         createChildPage = <ChildCreate />;
+        createEducationPage = <EducationCreate />;
     } else if (groups.includes('Admin')) {
         editEducationPage = <EducationEditDefault />;
         editChildPage = <ChildEditDefault />;
         editEmployeePage = <EmployeeEditAdmin />;
         searchForm = <EmployeeSearchChief/>;
         createChildPage = <ChildCreate />;
+        createEducationPage = <EducationCreate />;
     }
     return (
         <Row  className='m-4'>
@@ -93,6 +96,9 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
                         </Route>
                         <Route path='/employee/:id/child/create/'>
                             {createChildPage}
+                        </Route>
+                        <Route path='/employee/:id/education/create/'>
+                            {createEducationPage}
                         </Route>
                         <Route path='/employee/:id/edit/'>
                             {editEmployeePage}

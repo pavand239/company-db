@@ -14,7 +14,7 @@ export const CreateForm = ({createData,formConfig, afterUpload, getResponseData,
         setIsUploading(true);
         createData(localStorage.getItem('token'), values)
             .then((data)=>{getResponseData(data);setIsUploading(false);setIsUploaded(true);})
-            .catch(err=>setUploadError(err));
+            .catch(err=>{setUploadError(err);setIsUploading(false)});
     }
     const bottomButtonBlock = (
         <div className='d-flex align-items-baseline m-3'>

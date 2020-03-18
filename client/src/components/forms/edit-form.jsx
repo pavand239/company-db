@@ -21,7 +21,7 @@ const EditForm = ({getData,patchData,formConfig, service=null}) => {
         setIsUploading(true);
         patchData(localStorage.getItem('token'), id, values)
             .then(()=>{setIsUploading(false);setIsUploaded(true);})
-            .catch(err=>setUploadError(err));
+            .catch(err=>{setUploadError(err);setIsUploaded(true);})
     }
     let {data, isLoading, error} = useGetDataCallback();
     if (isLoading && !error) {
@@ -40,7 +40,7 @@ const EditForm = ({getData,patchData,formConfig, service=null}) => {
         }
         {
             uploadError?
-                <p className='text-weight-bold text-danger'>uploadError.message</p>:''
+                <p className='text-weight-bold text-danger'>{uploadError.message}</p>:''
         }
         {
             isUploaded?

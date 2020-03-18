@@ -75,7 +75,29 @@ class ChildSerializer(serializers.ModelSerializer):
         model=Child
         fields='__all__'
 
-class EducationSerializer(serializers.ModelSerializer):
+
+class EducationCreateSerializer(serializers.ModelSerializer):
+    graduate_year = serializers.CharField(required=False, allow_null=True, allow_blank=True)
+    admission_year = serializers.CharField(required=True)
+    def validate_graduate_year(self, value):
+        if not value:
+            return None
+        try:
+            return int(value)
+        except ValueError:
+            raise serializers.ValidationError('You must supply an integer')
+    def validate_admission_year(self, value):
+        if not value:
+            return None
+        try:
+            return int(value)
+        except ValueError:
+            raise serializers.ValidationError('You must supply an integer')
+    class Meta:
+        model=Education
+        fields='__all__'
+        
+class EducationSerializer(EducationCreateSerializer):
     edu_type=serializers.CharField(source='get_edu_type_display')
     class Meta:
         model=Education

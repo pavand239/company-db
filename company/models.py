@@ -57,12 +57,7 @@ class Education(models.Model):
             MinValueValidator(limit_value=1900,
                             message='Минимальная дата поступления - 1900 год')
         ])
-    graduate_year = models.IntegerField(validators=[
-            MaxValueValidator(limit_value=datetime.date.today().year,
-                              message='Дата окончания не может быть в будущем'),
-            MinValueValidator(limit_value=1900,
-                              message='Минимальная дата окончания - 1900 год')
-        ],
+    graduate_year = models.IntegerField(
         blank=True,
         null=True)
     faculty_name = models.CharField(max_length=100, blank=True)

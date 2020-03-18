@@ -27,14 +27,20 @@ export const EmployeeIncomeTable = () => {
 }
 export const EmployeeEducationTable = () => {
     const {getEmployeeEducation} = useContext(CompanyDBServiceContext);
-    let history = useHistory();
+        let history = useHistory(),
+        groups = useSelector(state=>state.user.user.groups),
+        createFunc = null;
+    if (groups.includes('HumanResource')||groups.includes('Admin')){
+        createFunc = ()=>history.push(`education/create`);
+    }
     return <EmployeeDetailAdditionalTable getData = {getEmployeeEducation}
                 tableLabel={'Образование'}
                 fields = {['edu_inst_name','edu_inst_address','faculty_name','edu_type','admission_year',
                             'graduate_year','speciality_name','diploma_num','degree']}
                 labels = {["УЗ","Адрес УЗ","Факультет","Форма обучения","Год поступления",
                             "Год окончания","Специальность","№ диплома", "Научная степень, звание"]} 
-                onClick = {(id)=>history.push(`/employee/education/${id}/`)}/>
+                onClick = {(id)=>history.push(`/employee/education/${id}/`)}
+                create={createFunc}/>
 }
 export const EmployeeChildrenTable = () => {
     const {getEmployeeChildren} = useContext(CompanyDBServiceContext);

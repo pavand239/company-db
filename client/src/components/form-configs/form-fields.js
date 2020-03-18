@@ -132,7 +132,7 @@ export const eduInstNameField = (readOnly=true) => ({
     readOnly: readOnly,
     type:'text'
 });
-export const eduInstAdddressField = (readOnly=true) => ({
+export const eduInstAddressField = (readOnly=true) => ({
     name:'edu_inst_address',
     label:'Адрес УЗ',
     readOnly: readOnly,
@@ -143,8 +143,8 @@ export const eduTypeField = (readOnly=true) => ({
     label:'Форма обучения',
     readOnly: readOnly,
     element:'select',
-    options:['Очная', 'Заочная'],
-    optionsValues:['ft','pt']
+    options:['---','Очная', 'Заочная'],
+    optionsValues:['','ft','pt']
 });
 export const admYearField = (readOnly=true) => ({
     name:'admission_year',
