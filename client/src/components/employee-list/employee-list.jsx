@@ -12,11 +12,15 @@ const EmployeeList = ({employeeList, fetchEmployeeList, onClickItem,groups}) => 
     const companyDBService=useContext(CompanyDBServiceContext);
     let {employees, isLoading, error}=employeeList,
         history = useHistory(),
-        [addNewButton, setAddNewButton] = useState(false);
+        [addNewButton, setAddNewButton] = useState(false),
+        [changeTaxButton, setChangeTaxButton] = useState(false);
     useEffect(()=>{
         fetchEmployeeList(companyDBService, localStorage.getItem('token'));
         if (groups.includes('HumanResource')) {
             setAddNewButton(true);
+        }
+        if (groups.includes('Admin')) {
+            setChangeTaxButton(true);
         }
     },[])
     console.log(employeeList);
@@ -40,12 +44,20 @@ const EmployeeList = ({employeeList, fetchEmployeeList, onClickItem,groups}) => 
                 </ListGroup.Item>)
             )}
             {addNewButton?
-                <ListGroup.Item onClick={()=>history.push(`/employee/create/`)}>
+                <ListGroup.Item onClick={()=>history.push(`/create/`)}>
                     <div className='d-flex justify-content-center align-items-center'>
                         <i className="fas fa-plus-circle"></i>
                     </div>
                 </ListGroup.Item>
             :''}
+            {changeTaxButton?
+                <ListGroup.Item onClick={()=>history.push(`/tax/edit/`)}>
+                    <div className='d-flex justify-content-center align-items-center'>
+                        <span className='font-weight-bold'>Изменить ставку НДФЛ</span>
+                    </div>
+                </ListGroup.Item>
+            :''}
+
         </ListGroup>
     )
 }

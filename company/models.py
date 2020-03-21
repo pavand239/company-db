@@ -111,7 +111,7 @@ class Income(models.Model):
         return self.employee.salary
     @property
     def get_tax(self):
-        return Taxes.objects.get(name='НДФЛ').value
+        return Tax.objects.get(name='НДФЛ').value
     @property
     def get_total(self):
         return (self.salary+self.salary*float(self.percent)+self.premium)*(1-self.tax)
@@ -124,7 +124,7 @@ class Income(models.Model):
         self.total=self.get_total
         super(Income, self).save(*args, **kwargs)
 
-class Taxes(models.Model):
+class Tax(models.Model):
     name=models.CharField(default='НДФЛ',max_length=50)
     value=models.FloatField(default=0.13)
     def __str__(self):

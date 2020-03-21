@@ -22,7 +22,7 @@ export const EmployeeIncomeTable = () => {
                 tableLabel={'Доходы'}
                 fields = {['income_date','salary','percent','premium','total']}
                 labels = {["Дата","Оклад","Процент","Премия","Всего"]}
-                onClick ={(id)=>history.push(`/employee/income/${id}/`)} 
+                onClick ={(id)=>history.push(`/income/${id}/`)} 
                 create = {createFunc} />
 }
 export const EmployeeEducationTable = () => {
@@ -39,7 +39,7 @@ export const EmployeeEducationTable = () => {
                             'graduate_year','speciality_name','diploma_num','degree']}
                 labels = {["УЗ","Адрес УЗ","Факультет","Форма обучения","Год поступления",
                             "Год окончания","Специальность","№ диплома", "Научная степень, звание"]} 
-                onClick = {(id)=>history.push(`/employee/education/${id}/`)}
+                onClick = {(id)=>history.push(`/education/${id}/`)}
                 create={createFunc}/>
 }
 export const EmployeeChildrenTable = () => {
@@ -54,6 +54,6 @@ export const EmployeeChildrenTable = () => {
                 tableLabel={'Дети'}
                 fields = {['surname','name','patronymic','birth_date']}
                 labels = {["Фамилия","Имя","Отчество","Дата рождения"]} 
-                onClick = {(id)=>history.push(`/employee/child/${id}/`)}
+                onClick = {(id)=>history.push(`/child/${id}/`)}
                 create = {createFunc}/>
 }

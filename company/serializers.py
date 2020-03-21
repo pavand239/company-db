@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from .models import Employee, Education, Reward, Child, Income
+from .models import Employee, Education, Reward, Child, Income, Tax
 
 User = get_user_model()
 
@@ -101,4 +101,9 @@ class EducationSerializer(EducationCreateSerializer):
     edu_type=serializers.CharField(source='get_edu_type_display')
     class Meta:
         model=Education
+        fields='__all__'
+
+class TaxSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Tax
         fields='__all__'

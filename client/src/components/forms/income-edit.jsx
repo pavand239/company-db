@@ -11,10 +11,10 @@ const IncomeEdit = ({formConfig}) => {
     const   companyDBService = useContext(CompanyDBServiceContext),
             {id} = useParams(),
             afterUpload=()=>{
-                return <Redirect to={`/employee/income/${id}`} />
+                return <Redirect to={`/income/${id}`} />
             },
             afterDelete=()=>{
-                return <Redirect to='/employee/' />
+                return <Redirect to='/' />
             }
     let {getIncome, patchIncome, deleteIncome} = companyDBService;
     return <EditForm 

@@ -22,7 +22,7 @@ const EditForm = ({getData,patchData,formConfig, deleteData, afterUpload=()=>{},
         setIsUploading(true);
         setIsUploaded(false);
         setUploadError(null);
-        patchData(localStorage.getItem('token'), id, values)
+        patchData(localStorage.getItem('token'), id, data=values)
             .then(()=>{setIsUploading(false);setIsUploaded(true);})
             .catch(err=>{setUploadError(err);setIsUploaded(true);})
     }

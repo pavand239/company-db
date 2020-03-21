@@ -18,6 +18,7 @@ import {
 import { IncomeCreate } from './income-create';
 import { ChildCreate } from './child-create';
 import { EducationCreate } from './education-create';
+import { TaxEdit } from './tax-edit'
 export {
     EmployeeEditChief,
     EmployeeEditAccounting,
@@ -33,4 +34,5 @@ export {
     IncomeCreate,
     ChildCreate,
     EducationCreate,
+    TaxEdit
 }

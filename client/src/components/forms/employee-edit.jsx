@@ -16,11 +16,11 @@ const EmployeeEdit = ({formConfig}) => {
             {id} = useParams(),
             dispatch=useDispatch(),
             afterUpload=()=>{
-                return <Redirect to={`/employee/${id}`} />
+                return <Redirect to={`/${id}`} />
             },
             afterDelete=()=>{
                 dispatch(fetchEmployeeList(companyDBService)(localStorage.getItem('token')))
-                return <Redirect to='/employee/' />
+                return <Redirect to='/' />
             }
     let {getEmployee, patchEmployee, deleteEmployee} = companyDBService;
     return <EditForm 

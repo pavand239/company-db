@@ -106,5 +106,9 @@ class EducationViewSet(viewsets.ModelViewSet):
         else:
             return EducationSerializer
 
+class TaxRetrieveUpdateView(generics.RetrieveUpdateAPIView):
+    queryset = Tax.objects.all()
+    serializer_class = TaxSerializer
+    permission_classes = [is_group_member_perm(['Admin'])]
 
 

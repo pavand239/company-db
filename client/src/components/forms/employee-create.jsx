@@ -12,7 +12,7 @@ const EmployeeCreate = ({fetchEmployeeList})=>{
         [newId,setNewId] = useState(null),
         afterUpload =()=> {
             fetchEmployeeList(companyDBService, localStorage.getItem('token'));
-            return <Redirect to={`/employee/${newId}/`} />
+            return <Redirect to={`/${newId}/`} />
         }
     return <CreateForm  createData={createEmployee}
                         formConfig={EmployeeCreateConfig}

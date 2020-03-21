@@ -20,7 +20,8 @@ import {
     EmployeeSearchChief,
     IncomeCreate,
     ChildCreate,
-    EducationCreate
+    EducationCreate,
+    TaxEdit
 } from "../forms";
 import IncomeDetail from "../income-detail";
 import EducationDetail from "../education-detail";
@@ -32,7 +33,7 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
     const permDenied = <h3>У вас не доступа к этой странице</h3>;
     if (!user) {
         setAfterLoginRedirectPath(history.location.pathname);
-        return <Redirect to='/'/>
+        return <Redirect to='/login'/>
     }
     let editEmployeePage = permDenied,
         editIncomePage = permDenied,
@@ -83,48 +84,50 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
                         </Accordion.Collapse>
                     </Card>
                 </Accordion>
-                <EmployeeList onClickItem = {(id)=>{history.push(`/employee/${id}/`)}}/>
+                <EmployeeList onClickItem = {(id)=>{history.push(`/${id}/`)}}/>
             </Col>
             <Col sm={8}>
                 <div  className='border rounded p-5 w-100'>
                     <Switch>
-                        <Route  path='/employee/create/'>
+                        <Route  path='/create/'>
                             {createEmployeePage}
                         </Route>
-                        <Route path='/employee/:id/income/create/'>
-                            {createIncomePage}
+                        <Route exact path='/tax/edit/'>
+                            <TaxEdit />
                         </Route>
-                        <Route path='/employee/:id/child/create/'>
-                            {createChildPage}
-                        </Route>
-                        <Route path='/employee/:id/education/create/'>
-                            {createEducationPage}
-                        </Route>
-                        <Route path='/employee/:id/edit/'>
-                            {editEmployeePage}
-                        </Route>
-                        <Route exact path='/employee/:id?/'>
-                            <EmployeeDetail />
-                        </Route>
-                        <Route exact path='/employee/income/:id/'>
+                        <Route exact path='/income/:id/'>
                             <IncomeDetail />
                         </Route>
-                        <Route  path='/employee/income/:id/edit'>
+                        <Route  path='/income/:id/edit'>
                             {editIncomePage}
                         </Route>
-                        <Route exact path='/employee/education/:id/'>
+                        <Route exact path='/education/:id/'>
                             <EducationDetail />
                         </Route>
-                        <Route  path='/employee/education/:id/edit'>
+                        <Route  path='/education/:id/edit'>
                             {editEducationPage}
                         </Route>
-                        <Route exact path='/employee/child/:id/'>
+                        <Route exact path='/child/:id/'>
                             <ChildDetail />
                         </Route>
-                        <Route  path='/employee/child/:id/edit'>
+                        <Route  path='/child/:id/edit'>
                             {editChildPage}
                         </Route>
-
+                        <Route path='/:id/income/create/'>
+                            {createIncomePage}
+                        </Route>
+                        <Route path='/:id/child/create/'>
+                            {createChildPage}
+                        </Route>
+                        <Route path='/:id/education/create/'>
+                            {createEducationPage}
+                        </Route>
+                        <Route path='/:id/edit/'>
+                            {editEmployeePage}
+                        </Route>
+                        <Route exact path='/:id?/'>
+                            <EmployeeDetail />
+                        </Route>
                     </Switch>
                 </div>
             </Col>

@@ -192,3 +192,18 @@ export const searchField = () => ({
     label:'Поиск',
     type:'text'
 })
+
+export const taxValueField = (readOnly=true) => ({
+    name:'value',
+    label:'Значение',
+    readOnly: readOnly,
+    type:'number',
+    step:'0.01',
+    min:'0',
+    max:'1'
+})
+export const taxNameField = (readOnly=true) => ({
+    name:'name',
+    label:'Наименование',
+    readOnly: readOnly,
+})

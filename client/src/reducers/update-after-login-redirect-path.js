@@ -1,6 +1,6 @@
 export const updateAfterLoginRedirectPath = (state, action) => {
     if (state===undefined) {
-        return '/employee/'
+        return '/'
     }
     switch (action.type) {
         case 'SET_AFTER_LOGIN_REDIRECT':

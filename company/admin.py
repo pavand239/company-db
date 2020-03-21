@@ -30,6 +30,6 @@ class IncomeAdmin(admin.ModelAdmin):
     )
     readonly_fields=('salary','total', 'tax')
 
-@admin.register(Taxes)
-class TaxesAdmin(admin.ModelAdmin):
+@admin.register(Tax)
+class TaxAdmin(admin.ModelAdmin):
     pass

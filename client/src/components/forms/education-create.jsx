@@ -11,7 +11,7 @@ export const EducationCreate = () => {
         [newId, setNewId] = useState(null),
         afterUpload =()=> {
             console.log('after upload')
-            return <Redirect to={`/employee/education/${newId}/`} />
+            return <Redirect to={`/education/${newId}/`} />
         };
     return <CreateForm  createData={createEducation}
                     formConfig={EducationCreateConfig}

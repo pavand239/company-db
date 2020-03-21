@@ -10,10 +10,10 @@ const ChildEdit = ({formConfig}) => {
     const   companyDBService = useContext(CompanyDBServiceContext),
             {id} = useParams(),
             afterUpload=()=>{
-                return <Redirect to={`/employee/child/${id}`} />
+                return <Redirect to={`/child/${id}`} />
             },
             afterDelete=()=>{
-                return <Redirect to='/employee/' />
+                return <Redirect to='/' />
             };  
     let {getChild, patchChild, deleteChild} = companyDBService;
     return <EditForm 

@@ -11,7 +11,7 @@ export const IncomeCreate = () => {
         [newId, setNewId] = useState(null),
         afterUpload =()=> {
             console.log('after upload')
-            return <Redirect to={`/employee/income/${newId}/`} />
+            return <Redirect to={`/income/${newId}/`} />
         };
     return <CreateForm  createData={createIncome}
                     formConfig={IncomeCreateConfig}

@@ -11,7 +11,6 @@ export const ChildCreate = () => {
         [newId, setNewId] = useState(null),
         afterUpload =()=> {
             console.log('after upload')
-            return <Redirect to={`/employee/child/${newId}/`} />
         };
     return <CreateForm  createData={createChild}
                     formConfig={ChildCreateConfig}

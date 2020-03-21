@@ -13,13 +13,14 @@ export const App = () => {
             <AppHeader />
             <Container fluid>
                 <Switch>
-                    <Route path='/employee/:id?/'>
+                    <Route exact path='/login/'>
+                        <LoginPage />
+                    </Route>
+                    <Route path='/:id?/'>
                         <EmployeePage/>
                     </Route>
 
-                    <Route exact path='/'>
-                        <LoginPage />
-                    </Route>
+
                     <Route>
                         <h2 className='m-5 text-center'>Page not found</h2>
                     </Route>
