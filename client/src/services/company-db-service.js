@@ -80,7 +80,7 @@ export default class CompanyDBService {
         }
     }
     getEmployeeIncome = async (token,id) =>{
-        let response = await fetch(`http://localhost:8000/api/1.0/employee/${id}/get_income_last_year`,{
+        let response = await fetch(`http://localhost:8000/api/1.0/employee/${id}/income`,{
             headers:{
                 'Authorization':`Token ${token}`
             }
@@ -94,7 +94,7 @@ export default class CompanyDBService {
         }
     }
     getEmployeeChildren = async (token,id) =>{
-        let response = await fetch(`http://localhost:8000/api/1.0/employee/${id}/get_children`,{
+        let response = await fetch(`http://localhost:8000/api/1.0/employee/${id}/children`,{
             headers:{
                 'Authorization':`Token ${token}`
             }
@@ -108,7 +108,7 @@ export default class CompanyDBService {
         }
     }
     getEmployeeEducation = async (token,id) =>{
-        let response = await fetch(`http://localhost:8000/api/1.0/employee/${id}/get_education`,{
+        let response = await fetch(`http://localhost:8000/api/1.0/employee/${id}/education`,{
             headers:{
                 'Authorization':`Token ${token}`
             }
