@@ -325,4 +325,56 @@ export default class CompanyDBService {
             throw new Error(`Что-то пошло не так... ${response.status}`)
         }
     }
+    deleteEmployee = async (token, id) => {
+        let response = await fetch(`http://localhost:8000/api/1.0/employee/${id}`,{
+            method:'DELETE',
+            headers:{
+                'Authorization':`Token ${token}`,
+            },
+        })
+        if (response.status===401 || response.status===403) {
+            throw new Error('У вас нет прав для удаления')
+        } else if (!response.ok){
+            throw new Error(`Что-то пошло не так... ${response.status}`)
+        }
+    }
+    deleteChild = async (token, id) => {
+        let response = await fetch(`http://localhost:8000/api/1.0/child/${id}`,{
+            method:'DELETE',
+            headers:{
+                'Authorization':`Token ${token}`,
+            },
+        })
+        if (response.status===401 || response.status===403) {
+            throw new Error('У вас нет прав для удаления')
+        } else if (!response.ok){
+            throw new Error(`Что-то пошло не так... ${response.status}`)
+        }
+    }
+    deleteIncome = async (token, id) => {
+        let response = await fetch(`http://localhost:8000/api/1.0/income/${id}`,{
+            method:'DELETE',
+            headers:{
+                'Authorization':`Token ${token}`,
+            },
+        })
+        if (response.status===401 || response.status===403) {
+            throw new Error('У вас нет прав для удаления')
+        } else if (!response.ok){
+            throw new Error(`Что-то пошло не так... ${response.status}`)
+        }
+    }
+    deleteEducation = async (token, id) => {
+        let response = await fetch(`http://localhost:8000/api/1.0/education/${id}`,{
+            method:'DELETE',
+            headers:{
+                'Authorization':`Token ${token}`,
+            },
+        })
+        if (response.status===401 || response.status===403) {
+            throw new Error('У вас нет прав для удаления')
+        } else if (!response.ok){
+            throw new Error(`Что-то пошло не так... ${response.status}`)
+        }
+    }
 }

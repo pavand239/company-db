@@ -35,6 +35,7 @@ export const IncomeEditAccountingConfig = {
             .min(0,'Миниамльное значение 0')
             .max(1,'Максимальное значение 1')
     }),
+    deletePerm:true,
     formFields:[
         fields.employeeField(false),
         fields.incomeDateField(false),

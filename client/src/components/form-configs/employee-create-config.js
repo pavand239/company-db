@@ -41,6 +41,12 @@ export const EmployeeCreateConfig = {
         birth_place: Yup.string()
             .max(250,'Максимальная длина 250')
             .required('Необходимое поле'),
+        position:Yup.string()
+            .max(100,'Максимальная длина 100')
+            .required('Необходимое поле'),
+        department:Yup.string()
+            .max(100,'Максимальная длина 100')
+            .required('Необходимое поле'),
         address:Yup.string()
             .max(200,'Максимальная длина 200')
             .required('Необходимое поле'),

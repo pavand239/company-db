@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
 import EditForm from "./edit-form";
+import {useParams, Redirect} from 'react-router-dom';
 import CompanyDBServiceContext from "../company-db-service-context"
 import {
     IncomeEditChiefConfig,
@@ -7,13 +8,23 @@ import {
 } from "../form-configs";
 
 const IncomeEdit = ({formConfig}) => {
-    const companyDBService = useContext(CompanyDBServiceContext);
-    let {getIncome, patchIncome} = companyDBService;
+    const   companyDBService = useContext(CompanyDBServiceContext),
+            {id} = useParams(),
+            afterUpload=()=>{
+                return <Redirect to={`/employee/income/${id}`} />
+            },
+            afterDelete=()=>{
+                return <Redirect to='/employee/' />
+            }
+    let {getIncome, patchIncome, deleteIncome} = companyDBService;
     return <EditForm 
                     getData = {getIncome} 
                     formConfig = {formConfig}
                     patchData = {patchIncome}
-                    service ={companyDBService}/>
+                    service ={companyDBService}
+                    deleteData={deleteIncome}
+                    afterUpload={afterUpload}
+                    afterDelete={afterDelete}/>
 }
 
 export const IncomeEditChief =()=> <IncomeEdit formConfig={IncomeEditChiefConfig} />

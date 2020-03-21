@@ -35,6 +35,7 @@ export const EducationEditConfig = {
         degree: Yup.string()
             .max(100,'Максимальная длина 100'),
     }),
+    deletePerm:true,
     formFields:[
         fields.employeeField(false),
         fields.eduInstNameField(false),

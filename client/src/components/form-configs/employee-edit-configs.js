@@ -82,6 +82,7 @@ export const EmployeeEditHumanResourceConfig = {
     getInitialValues:(data)=>({
         ...data
     }),
+    deletePerm:true,
     validationSchema:Yup.object().shape({
         surname:Yup.string()
             .min(2,'Минимальная длина 2 символа')

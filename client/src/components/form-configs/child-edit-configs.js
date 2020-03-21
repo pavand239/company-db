@@ -22,6 +22,7 @@ export const ChildEditConfig = {
         .min(2,'Минимальная длина 2 символа')
         .max(100,'Максимальная длина 100 символов')
     }),
+    deletePerm:true,
     formFields:[
         fields.employeeField(false, true),
         fields.surnameField(false),
