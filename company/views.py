@@ -9,6 +9,11 @@ from .models import Employee, Income, Education
 from .serializers import *
 from .permissions import *
 
+from django.views.generic import TemplateView
+
+class MainView(TemplateView):
+    template_name = "index.html"
+
 class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
     filter_backends = [filters.SearchFilter, DjangoFilterBackend]

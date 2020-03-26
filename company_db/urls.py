@@ -14,7 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
+from django.conf.urls import url
 from company.views import *
 from rest_framework import routers
 
@@ -24,11 +25,14 @@ router.register(r'api/1.0/child', ChildViewSet)
 router.register(r'api/1.0/education', EducationViewSet)
 router.register(r'api/1.0/income', IncomeViewSet)
 
-urlpatterns = [
+urlpatterns =router.urls
+
+urlpatterns += [
     path('admin/', admin.site.urls),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
-    path('api/1.0/tax/<int:pk>/',TaxRetrieveUpdateView.as_view())
+    path('api/1.0/tax/<int:pk>/',TaxRetrieveUpdateView.as_view()),
+    url(r'^(?:.*)/?$', TemplateView.as_view(template_name="index.html")),
     # path('api/1.0/employee/', EmployeeListView.as_view(),name='employee-list'),
     # path('api/1.0/employee/<int:pk>/', EmployeeDetailView.as_view(), name='employee-detail'),
     # path('api/1.0/employee/<int:pk>/children', EmployeeChildListView.as_view(), name='employee-child-list'),
@@ -41,5 +45,3 @@ urlpatterns = [
     # path('api/1.0/education/', EducationListView.as_view(), name='education-list'),
     # path('api/1.0/education/<int:pk>/', EducationDetailView.as_view(), name='education-detail'),
 ]
-
-urlpatterns += router.urls
