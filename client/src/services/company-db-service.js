@@ -4,7 +4,7 @@ export default class CompanyDBService {
         if (username==='' || password==='') {
             throw new Error('Введите имя пользователя и пароль')
         } else {
-            let response = await fetch('http://localhost:8000/auth/token/login/',{
+            let response = await fetch('/auth/token/login/',{
                 method:'POST',
                 headers:{
                     'Content-Type':'application/x-www-form-urlencoded'
@@ -21,7 +21,7 @@ export default class CompanyDBService {
         }
     }
     destroyToken = async (token) =>{
-        let response = await fetch('http://localhost:8000/auth/token/logout/',{
+        let response = await fetch('/auth/token/logout/',{
             method:'POST',
             headers:{
                 'Content-Type':'application/x-www-form-urlencoded',
@@ -33,7 +33,7 @@ export default class CompanyDBService {
         }
     }
     getMe = async (token) =>{
-        let response = await fetch('http://localhost:8000/auth/users/me/',{
+        let response = await fetch('/auth/users/me/',{
             headers:{
                 'Authorization':`Token ${token}`
             }
@@ -51,7 +51,7 @@ export default class CompanyDBService {
         if (params && Object.keys(params).length) {
            paramString = '?'+Object.entries(params).map(param=>param.join('=')).join('&');
         }
-        let response = await fetch(`http://localhost:8000/api/1.0/employee${paramString}`,{
+        let response = await fetch(`/api/1.0/employee${paramString}`,{
             headers:{
                 'Authorization':`Token ${token}`
             }
@@ -66,7 +66,7 @@ export default class CompanyDBService {
     }
 
     getEmployee = async (token,id) => {
-        let response = await fetch(`http://localhost:8000/api/1.0/employee/${id}/`,{
+        let response = await fetch(`/api/1.0/employee/${id}/`,{
             headers:{
                 'Authorization':`Token ${token}`
             }
@@ -80,7 +80,7 @@ export default class CompanyDBService {
         }
     }
     getEmployeeIncome = async (token,id) =>{
-        let response = await fetch(`http://localhost:8000/api/1.0/employee/${id}/income`,{
+        let response = await fetch(`/api/1.0/employee/${id}/income`,{
             headers:{
                 'Authorization':`Token ${token}`
             }
@@ -94,7 +94,7 @@ export default class CompanyDBService {
         }
     }
     getEmployeeChildren = async (token,id) =>{
-        let response = await fetch(`http://localhost:8000/api/1.0/employee/${id}/children`,{
+        let response = await fetch(`/api/1.0/employee/${id}/children`,{
             headers:{
                 'Authorization':`Token ${token}`
             }
@@ -108,7 +108,7 @@ export default class CompanyDBService {
         }
     }
     getEmployeeEducation = async (token,id) =>{
-        let response = await fetch(`http://localhost:8000/api/1.0/employee/${id}/education`,{
+        let response = await fetch(`/api/1.0/employee/${id}/education`,{
             headers:{
                 'Authorization':`Token ${token}`
             }
@@ -122,7 +122,7 @@ export default class CompanyDBService {
         }
     }
     getIncome = async (token,id) => {
-        let response = await fetch(`http://localhost:8000/api/1.0/income/${id}/`,{
+        let response = await fetch(`/api/1.0/income/${id}/`,{
             headers:{
                 'Authorization':`Token ${token}`
             }
@@ -136,7 +136,7 @@ export default class CompanyDBService {
         }
     }
     getIncomeList = async (token) => {
-        let response = await fetch(`http://localhost:8000/api/1.0/income/`,{
+        let response = await fetch(`/api/1.0/income/`,{
             headers:{
                 'Authorization':`Token ${token}`
             }
@@ -150,7 +150,7 @@ export default class CompanyDBService {
         }
     }
     getEducation= async (token,id) => {
-        let response = await fetch(`http://localhost:8000/api/1.0/education/${id}/`,{
+        let response = await fetch(`/api/1.0/education/${id}/`,{
             headers:{
                 'Authorization':`Token ${token}`
             }
@@ -164,7 +164,7 @@ export default class CompanyDBService {
         }
     }
     getChild = async (token,id) => {
-        let response = await fetch(`http://localhost:8000/api/1.0/child/${id}/`,{
+        let response = await fetch(`/api/1.0/child/${id}/`,{
             headers:{
                 'Authorization':`Token ${token}`
             }
@@ -178,7 +178,7 @@ export default class CompanyDBService {
         }
     }
     getTax = async (token,id) => {
-        let response = await fetch(`http://localhost:8000/api/1.0/tax/1/`,{
+        let response = await fetch(`/api/1.0/tax/1/`,{
             headers:{
                 'Authorization':`Token ${token}`
             }
@@ -192,7 +192,7 @@ export default class CompanyDBService {
         }
     }
     patchEmployee = async (token,id,data) => {
-        let response = await fetch(`http://localhost:8000/api/1.0/employee/${id}/`,{
+        let response = await fetch(`/api/1.0/employee/${id}/`,{
             method:'PATCH',
             headers:{
                 'Authorization':`Token ${token}`,
@@ -209,7 +209,7 @@ export default class CompanyDBService {
         }
     }
     patchIncome = async (token,id,data) => {
-        let response = await fetch(`http://localhost:8000/api/1.0/income/${id}/`,{
+        let response = await fetch(`/api/1.0/income/${id}/`,{
             method:'PATCH',
             headers:{
                 'Authorization':`Token ${token}`,
@@ -226,7 +226,7 @@ export default class CompanyDBService {
         }
     }
     patchEducation = async (token,id,data) => {
-        let response = await fetch(`http://localhost:8000/api/1.0/education/${id}/`,{
+        let response = await fetch(`/api/1.0/education/${id}/`,{
             method:'PATCH',
             headers:{
                 'Authorization':`Token ${token}`,
@@ -243,7 +243,7 @@ export default class CompanyDBService {
         }
     }
     patchChild = async (token,id,data) => {
-        let response = await fetch(`http://localhost:8000/api/1.0/child/${id}/`,{
+        let response = await fetch(`/api/1.0/child/${id}/`,{
             method:'PATCH',
             headers:{
                 'Authorization':`Token ${token}`,
@@ -260,7 +260,7 @@ export default class CompanyDBService {
         }
     }
     patchTax = async (token,id, data) => {
-        let response = await fetch(`http://localhost:8000/api/1.0/tax/1/`,{
+        let response = await fetch(`/api/1.0/tax/1/`,{
             method:'PATCH',
             headers:{
                 'Authorization':`Token ${token}`,
@@ -277,7 +277,7 @@ export default class CompanyDBService {
         }
     }
     createEmployee = async (token, data) => {
-        let response = await fetch(`http://localhost:8000/api/1.0/employee/`,{
+        let response = await fetch(`/api/1.0/employee/`,{
             method:'POST',
             headers:{
                 'Authorization':`Token ${token}`,
@@ -297,7 +297,7 @@ export default class CompanyDBService {
         }
     }
     createIncome = async (token, data) => {
-        let response = await fetch(`http://localhost:8000/api/1.0/income/`,{
+        let response = await fetch(`/api/1.0/income/`,{
             method:'POST',
             headers:{
                 'Authorization':`Token ${token}`,
@@ -317,7 +317,7 @@ export default class CompanyDBService {
         }
     }
     createChild= async (token, data) => {
-        let response = await fetch(`http://localhost:8000/api/1.0/child/`,{
+        let response = await fetch(`/api/1.0/child/`,{
             method:'POST',
             headers:{
                 'Authorization':`Token ${token}`,
@@ -337,7 +337,7 @@ export default class CompanyDBService {
         }
     }
     createEducation= async (token, data) => {
-        let response = await fetch(`http://localhost:8000/api/1.0/education/`,{
+        let response = await fetch(`/api/1.0/education/`,{
             method:'POST',
             headers:{
                 'Authorization':`Token ${token}`,
@@ -357,7 +357,7 @@ export default class CompanyDBService {
         }
     }
     deleteEmployee = async (token, id) => {
-        let response = await fetch(`http://localhost:8000/api/1.0/employee/${id}`,{
+        let response = await fetch(`/api/1.0/employee/${id}`,{
             method:'DELETE',
             headers:{
                 'Authorization':`Token ${token}`,
@@ -370,7 +370,7 @@ export default class CompanyDBService {
         }
     }
     deleteChild = async (token, id) => {
-        let response = await fetch(`http://localhost:8000/api/1.0/child/${id}`,{
+        let response = await fetch(`/api/1.0/child/${id}`,{
             method:'DELETE',
             headers:{
                 'Authorization':`Token ${token}`,
@@ -383,7 +383,7 @@ export default class CompanyDBService {
         }
     }
     deleteIncome = async (token, id) => {
-        let response = await fetch(`http://localhost:8000/api/1.0/income/${id}`,{
+        let response = await fetch(`/api/1.0/income/${id}`,{
             method:'DELETE',
             headers:{
                 'Authorization':`Token ${token}`,
@@ -396,7 +396,7 @@ export default class CompanyDBService {
         }
     }
     deleteEducation = async (token, id) => {
-        let response = await fetch(`http://localhost:8000/api/1.0/education/${id}`,{
+        let response = await fetch(`/api/1.0/education/${id}`,{
             method:'DELETE',
             headers:{
                 'Authorization':`Token ${token}`,
