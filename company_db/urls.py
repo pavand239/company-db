@@ -32,7 +32,7 @@ urlpatterns += [
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
     path('api/1.0/tax/<int:pk>/',TaxRetrieveUpdateView.as_view()),
-    url(r'^(?:.*)/?$', TemplateView.as_view(template_name="index.html")),
+    re_path(r'^(?:.*)/?$', TemplateView.as_view(template_name="index.html")),
     # path('api/1.0/employee/', EmployeeListView.as_view(),name='employee-list'),
     # path('api/1.0/employee/<int:pk>/', EmployeeDetailView.as_view(), name='employee-detail'),
     # path('api/1.0/employee/<int:pk>/children', EmployeeChildListView.as_view(), name='employee-child-list'),

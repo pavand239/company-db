@@ -51,7 +51,7 @@ export default class CompanyDBService {
         if (params && Object.keys(params).length) {
            paramString = '?'+Object.entries(params).map(param=>param.join('=')).join('&');
         }
-        let response = await fetch(`/api/1.0/employee${paramString}`,{
+        let response = await fetch(`/api/1.0/employee/${paramString}`,{
             headers:{
                 'Authorization':`Token ${token}`
             }
@@ -80,7 +80,7 @@ export default class CompanyDBService {
         }
     }
     getEmployeeIncome = async (token,id) =>{
-        let response = await fetch(`/api/1.0/employee/${id}/income`,{
+        let response = await fetch(`/api/1.0/employee/${id}/income/`,{
             headers:{
                 'Authorization':`Token ${token}`
             }
@@ -94,7 +94,7 @@ export default class CompanyDBService {
         }
     }
     getEmployeeChildren = async (token,id) =>{
-        let response = await fetch(`/api/1.0/employee/${id}/children`,{
+        let response = await fetch(`/api/1.0/employee/${id}/children/`,{
             headers:{
                 'Authorization':`Token ${token}`
             }
@@ -108,7 +108,7 @@ export default class CompanyDBService {
         }
     }
     getEmployeeEducation = async (token,id) =>{
-        let response = await fetch(`/api/1.0/employee/${id}/education`,{
+        let response = await fetch(`/api/1.0/employee/${id}/education/`,{
             headers:{
                 'Authorization':`Token ${token}`
             }
