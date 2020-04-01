@@ -79,7 +79,7 @@ export const maritalStatusField = (readOnly=true) => ({
     readOnly: readOnly,
     element:'select',
     options:['---','Не женат/не замужем','Женат/замужем'],
-    optionsValues:['','y','n']
+    optionsValues:['','n','y']
 });
 export const genderField = (readOnly=true) => ({
     name:'gender',
