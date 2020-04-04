@@ -11,7 +11,7 @@ const IncomeEdit = ({formConfig}) => {
     const   companyDBService = useContext(CompanyDBServiceContext),
             {id} = useParams(),
             afterUpload=()=>{
-                return <Redirect to={`/income/${id}`} />
+                return <Redirect to={`/income/${id}/`} />
             },
             afterDelete=()=>{
                 return <Redirect to='/' />

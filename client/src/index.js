@@ -6,11 +6,11 @@ import {Provider} from "react-redux"
 import {BrowserRouter as Router} from "react-router-dom";
 
 import ErrorBoundry from "./components/error-boundry";
-import CompanyDBServiceTest from "./services/company-db-service-test";
 import CompanyDBService from "./services/company-db-service";
+import CompanyDBServiceDev from "./services/company-db-service-dev";
 import CompanyDBServiceContext from "./components/company-db-service-context";
 
-const companyDBService = new CompanyDBService();
+const companyDBService = new CompanyDBServiceDev();
 ReactDOM.render(
     <Provider store={store}>
         <ErrorBoundry>

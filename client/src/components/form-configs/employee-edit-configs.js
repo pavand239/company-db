@@ -33,47 +33,18 @@ export const EmployeeEditChiefConfig = {
 export const EmployeeEditAccountingConfig = {
     formName:'Редактирование информации о сотруднике (Бухгалтер)',
     validationSchema:Yup.object().shape({
-        surname:Yup.string()
-            .min(2,'Минимальная длина 2 символа')
-            .max(100,'Максимальная длина 100 символов')
-            .required('Необходимое поле'),
-        name:Yup.string()
-            .min(2,'Минимальная длина 2 символа')
-            .max(100,'Максимальная длина 100 символов')
-            .required('Необходимое поле'),
-        patronymic: Yup.string()
-            .min(2,'Минимальная длина 2 символа')
-            .max(100,'Максимальная длина 100 символов'),
-        position:Yup.string()
-            .max(100,'Максимальная длина 100')
-            .required('Необходимое поле'),
-        department:Yup.string()
-            .max(100,'Максимальная длина 100')
-            .required('Необходимое поле'),
         salary:Yup.number()
             .positive('Оклад должен быть больше 0')
             .required('Необходимое поле')
         
     }),
     getInitialValues:(data)=>({
-        surname:data['surname'],
-        name:data['name'],
-        patronymic:data['patronymic'],
-        position:data['position'],
-        department:data['department'],
         salary:data['salary']
     }),
     formFields:[
-        fields.surnameField(false),
-        fields.nameField(false),
-        fields.patronymicField(false),
-        fields.genderField(),
-        fields.birthDateField(),
-        fields.birthPlaceField(),
-        fields.positionField(false),
-        fields.departmentField(false),
-        fields.passportSeriesField(),
-        fields.passportIDField(),
+        fields.surnameField(),
+        fields.nameField(),
+        fields.patronymicField(),
         fields.salaryField(false)
     ]
 }

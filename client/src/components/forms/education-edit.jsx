@@ -10,7 +10,7 @@ const EducationEdit = ({formConfig}) => {
     const   companyDBService = useContext(CompanyDBServiceContext),
             {id} = useParams(),
             afterUpload=()=>{
-                return <Redirect to={`/education/${id}`} />
+                return <Redirect to={`/education/${id}/`} />
             },
             afterDelete=()=>{
                 return <Redirect to='/' />

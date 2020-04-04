@@ -111,6 +111,12 @@ export const premiumField = (readOnly=true) => ({
     type:'number',
     step:'1'
 });
+export const taxField = () => ({
+    name:'tax',
+    label:'НДФЛ',
+    readOnly: true,
+    type:'number',
+});
 export const totalField = (readOnly=true) => ({
     name:'total',
     label:'Итого',

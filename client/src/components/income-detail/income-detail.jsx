@@ -25,6 +25,7 @@ const IncomeDetail=({user:{groups}})=>{
             <ItemRecord label={'Оклад'} field={'salary'} />,
             <ItemRecord label={'Процент'} field={'percent'} />,
             <ItemRecord label={'Премия'} field={'premium'} />,
+            <ItemRecord label={'НДФЛ'} field={'tax'} />,
             <ItemRecord label={'Итого'} field={'total'} />,
         ];
 

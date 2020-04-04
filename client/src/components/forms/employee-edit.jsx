@@ -16,7 +16,7 @@ const EmployeeEdit = ({formConfig}) => {
             {id} = useParams(),
             dispatch=useDispatch(),
             afterUpload=()=>{
-                return <Redirect to={`/${id}`} />
+                return <Redirect to={`/${id}/`} />
             },
             afterDelete=()=>{
                 dispatch(fetchEmployeeList(companyDBService)(localStorage.getItem('token')))

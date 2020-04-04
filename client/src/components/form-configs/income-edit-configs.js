@@ -7,7 +7,8 @@ export const IncomeEditChiefConfig = {
     }),
     validationSchema:Yup.object().shape({
         premium:Yup.number()
-            .positive('Премия больше или равна 0')
+            .min(0,'Премия больше или равна 0')
+            .required('Пожалуйста, заполните это поле или установите 0'),
     }),
     formFields:[
         fields.employeeField(),
@@ -15,6 +16,7 @@ export const IncomeEditChiefConfig = {
         fields.salaryField(),
         fields.percentField(),
         fields.premiumField(false),
+        fields.taxField(),
         fields.totalField()
     ]
 }
@@ -42,6 +44,7 @@ export const IncomeEditAccountingConfig = {
         fields.salaryField(),
         fields.percentField(false),
         fields.premiumField(),
+        fields.taxField(),
         fields.totalField()
     ]
 }
