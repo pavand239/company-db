@@ -10,7 +10,7 @@ export const CreateForm = ({createData,formConfig, afterUpload, getResponseData,
         [isUploaded, setIsUploaded] = useState(false),
         [uploadError, setUploadError] = useState(null);
 
-    const onSubmit = (values) => {
+    const onSubmit = ()=>(values) => {
         setIsUploading(true);
         createData(localStorage.getItem('token'), values)
             .then((data)=>{getResponseData(data);setIsUploading(false);setIsUploaded(true);})

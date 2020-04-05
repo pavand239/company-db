@@ -59,7 +59,6 @@ const FormInputs = ({handleSubmit,handleChange, values,setFieldValue, errors, bo
                         if (field.readOnly) {
                             form = <Form.Control key={idx} {...defaultProps} {...valueProps}/>
                         } else {
-                            console.log(valueProps)
                             form = (
                                 <Form.Control key={idx} {...defaultProps} {...valueProps} as={field.element}>
                                     {field.options.map((option,idx)=>(
