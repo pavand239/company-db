@@ -18,6 +18,9 @@ from django.urls import path, include, re_path
 from django.conf.urls import url
 from company.views import *
 from rest_framework import routers
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf import settings
 
 router = routers.SimpleRouter()
 router.register(r'api/1.0/employee', EmployeeViewSet)
@@ -32,7 +35,6 @@ urlpatterns += [
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
     path('api/1.0/tax/<int:pk>/',TaxRetrieveUpdateView.as_view()),
-    re_path(r'^(?:.*)/?$', TemplateView.as_view(template_name="index.html")),
     # path('api/1.0/employee/', EmployeeListView.as_view(),name='employee-list'),
     # path('api/1.0/employee/<int:pk>/', EmployeeDetailView.as_view(), name='employee-detail'),
     # path('api/1.0/employee/<int:pk>/children', EmployeeChildListView.as_view(), name='employee-child-list'),
@@ -44,4 +46,6 @@ urlpatterns += [
     # path('api/1.0/child/<int:pk>/', ChildDetailView.as_view(), name='child-detail'),
     # path('api/1.0/education/', EducationListView.as_view(), name='education-list'),
     # path('api/1.0/education/<int:pk>/', EducationDetailView.as_view(), name='education-detail'),
-]
+] 
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += [re_path(r'^(?:.*)/?$', TemplateView.as_view(template_name="index.html"))]

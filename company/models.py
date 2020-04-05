@@ -38,6 +38,7 @@ class Employee(models.Model):
                                     max_length=6)
     address = models.CharField(max_length=200)
     salary = models.FloatField(validators=[MinValueValidator(limit_value=0,message='Оклад не меньше 0')])
+    photo = models.ImageField('Фото работника',upload_to='photos', default='photos/default.jpg')
 
     def __str__(self):
         return '{} {}.{}.'.format(self.surname, self.name[0], self.patronymic[0])

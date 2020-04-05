@@ -13,6 +13,7 @@ djoser = "*"
 django-filter = "*"
 mysqlclient = "*"
 uwsgi = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.8"

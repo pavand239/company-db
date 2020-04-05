@@ -23,8 +23,8 @@ class EmployeeDefaultSerializer(serializers.ModelSerializer):
     gender= serializers.CharField(source='get_gender_display')
     class Meta:
         model=Employee
-        fields=['id','surname','name', 'patronymic','birth_date','birth_place','department','position','gender']
-        read_only_fields=['id','surname','name', 'patronymic','birth_date','birth_place','department','position']
+        fields=['id','surname','name', 'patronymic','birth_date','birth_place','department','position','gender', 'photo']
+        read_only_fields=['id','surname','name', 'patronymic','birth_date','birth_place','department','position', 'photo']
 
 class EmployeeChiefSerializer(EmployeeDefaultSerializer):
     attitude_to_conscription = serializers.CharField(source='get_attitude_to_conscription_display')
@@ -36,7 +36,7 @@ class EmployeeChiefSerializer(EmployeeDefaultSerializer):
             "id","surname","name",
             "patronymic","birth_date","birth_place","gender",
             "department","attitude_to_conscription",
-            "marital_status","passport_series","passport_ID","address","salary"
+            "marital_status","passport_series","passport_ID","address","salary", 'photo'
         ]
 class EmployeeAccountingSerializer(EmployeeChiefSerializer):
     attitude_to_conscription = None
@@ -46,7 +46,7 @@ class EmployeeAccountingSerializer(EmployeeChiefSerializer):
         exclude=["attitude_to_conscription","marital_status","address"]
         read_only_fields = ["id","surname","name",
             "patronymic","birth_date","birth_place","gender",
-            "department","position","passport_series","passport_ID",
+            "department","position","passport_series","passport_ID",'photo'
         ]
 class EmployeeHumanResourceSerializer(EmployeeChiefSerializer):
     class Meta:
