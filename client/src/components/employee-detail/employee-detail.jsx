@@ -103,6 +103,7 @@ const EmployeeDetail = () => {
         <ItemDetail 
             getData={getEmployee} 
             buttonEdit={buttonEdit && id}
+            buttonEditText={groups.includes('Accounting')?'Изменить оклад':'' }
             actionWithItem={(employee)=>dispatch(selectEmployee(employee))}>
             {detail}
         </ItemDetail>

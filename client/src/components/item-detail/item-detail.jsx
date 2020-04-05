@@ -6,7 +6,7 @@ import LoadingIndicator from "../loading-indicator";
 import { ListGroup } from 'react-bootstrap';
 
 
-const ItemDetail = ({getData, buttonEdit, children, actionWithItem = null}) => {
+const ItemDetail = ({getData, buttonEdit, children, buttonEditText, actionWithItem = null}) => {
     let {id} = useParams(),
         history = useHistory(),
         returnButton = false,
@@ -37,7 +37,10 @@ const ItemDetail = ({getData, buttonEdit, children, actionWithItem = null}) => {
                     <i className="fa fa-times p-1" aria-hidden="true" onClick={()=>{history.push(`/${selectedEmployee.id}/`);}}></i>:''
                 }
                 {buttonEdit && id?
-                    <i className="fa fa-cog p-1" aria-hidden="true" onClick={()=>history.push('edit')}></i>:''
+                    <div className='font-weight-bold' onClick={()=>history.push('edit')}>
+                        {buttonEditText?<span>{buttonEditText}</span>:''}
+                        <i className="fa fa-cog p-1" aria-hidden="true"></i>
+                    </div>:''
                 }
             </div>
             <ListGroup>
