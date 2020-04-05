@@ -200,7 +200,7 @@ export default class CompanyDBService {
             }
         }
         console.log(formData)
-        let response = await fetch(`http://localhost:8000/api/1.0/employee/${id}/`,{
+        let response = await fetch(`/api/1.0/employee/${id}/`,{
             method:'PATCH',
             headers:{
                 'Authorization':`Token ${token}`,
@@ -290,7 +290,7 @@ export default class CompanyDBService {
                 formData.append(key,data[key])
             }
         }
-        let response = await fetch(`http://localhost:8000/api/1.0/employee/`,{
+        let response = await fetch(`/api/1.0/employee/`,{
             method:'POST',
             headers:{
                 'Authorization':`Token ${token}`,
