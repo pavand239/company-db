@@ -29,6 +29,8 @@ class EmployeeViewSet(viewsets.ModelViewSet):
                 return EmployeeAccountingSerializer
             elif is_group_member(self.request, ['HumanResource']):
                 return EmployeeHumanResourceSerializer
+            elif is_group_member(self.request, ['Admin']):
+                return EmployeeAdminSerializer
             else:
                 return EmployeeDefaultSerializer 
     def get_permissions(self):

@@ -37,7 +37,7 @@ const EmployeeDetail = () => {
             <ItemRecord label={'Должность'} field={'position'} />
         ],
         adminDetail = [
-            <ItemRecord label={'Адрес:'} field={'address'} />,
+            <ItemRecord label={'Адрес'} field={'address'} />,
             <ItemRecord label={'Семейное положение'} field={'marital_status'} />,
             <ItemRecord label={'Отношение к воинской обязанности'} field={'attitude_to_conscription'} />,
         ],
