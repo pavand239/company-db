@@ -192,13 +192,20 @@ export default class CompanyDBService {
         }
     }
     patchEmployee = async (token,id,data) => {
-        let response = await fetch(`/api/1.0/employee/${id}/`,{
+        let formData = new FormData();
+        
+        for (let key in data) {
+            if (data[key] && data[key]!=='' ){
+                formData.append(key,data[key])
+            }
+        }
+        console.log(formData)
+        let response = await fetch(`http://localhost:8000/api/1.0/employee/${id}/`,{
             method:'PATCH',
             headers:{
                 'Authorization':`Token ${token}`,
-                'Content-Type':'application/json'
             },
-            body: JSON.stringify(data)
+            body: formData
         })
         if (response.ok){
             return response.json()
@@ -277,13 +284,18 @@ export default class CompanyDBService {
         }
     }
     createEmployee = async (token, data) => {
-        let response = await fetch(`/api/1.0/employee/`,{
+        let formData = new FormData(); 
+        for (let key in data) {
+            if (data[key] && data[key]!=='' ){
+                formData.append(key,data[key])
+            }
+        }
+        let response = await fetch(`http://localhost:8000/api/1.0/employee/`,{
             method:'POST',
             headers:{
                 'Authorization':`Token ${token}`,
-                'Content-Type':'application/json'
             },
-            body: JSON.stringify(data)
+            body: formData
         })
         if (response.ok){
             return response.json()

@@ -192,7 +192,6 @@ export default class CompanyDBServiceDev {
         }
     }
     patchEmployee = async (token,id,data) => {
-        console.log(data);
         let formData = new FormData();
         
         for (let key in data) {
@@ -205,7 +204,6 @@ export default class CompanyDBServiceDev {
             method:'PATCH',
             headers:{
                 'Authorization':`Token ${token}`,
-                // 'Content-Type':'multipart/form-data; boundary=???'
             },
             body: formData
         })
@@ -286,13 +284,18 @@ export default class CompanyDBServiceDev {
         }
     }
     createEmployee = async (token, data) => {
+        let formData = new FormData(); 
+        for (let key in data) {
+            if (data[key] && data[key]!=='' ){
+                formData.append(key,data[key])
+            }
+        }
         let response = await fetch(`http://localhost:8000/api/1.0/employee/`,{
             method:'POST',
             headers:{
                 'Authorization':`Token ${token}`,
-                'Content-Type':'application/json'
             },
-            body: JSON.stringify(data)
+            body: formData
         })
         if (response.ok){
             return response.json()
