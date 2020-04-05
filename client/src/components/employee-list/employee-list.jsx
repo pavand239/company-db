@@ -1,16 +1,19 @@
 import React, {useEffect, useContext, useState} from 'react';
 import {ListGroup} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
-import {connect} from "react-redux";
-import { fetchEmployeeList } from "../../actions";
+import {useSelector, useDispatch} from "react-redux";
+import { fetchEmployeeList as fetchEmployeeListAction , selectEmployee } from "../../actions";
 import CompanyDBServiceContext from "../company-db-service-context";
 import LoadingIndicator from "../loading-indicator";
 import EmployeeListItem from "../employee-list-item";
 
 
-const EmployeeList = ({employeeList, fetchEmployeeList, onClickItem,groups}) => {
-    const companyDBService=useContext(CompanyDBServiceContext);
-    let {employees, isLoading, error}=employeeList,
+const EmployeeList = () => {
+    const companyDBService=useContext(CompanyDBServiceContext),
+          dispatch = useDispatch(),
+          fetchEmployeeList = (service, token)=>dispatch(fetchEmployeeListAction(service)(token));
+    let {employees, isLoading, error}=useSelector(state=>state.employeeList),
+        groups = useSelector(state =>state.user.user.groups),
         history = useHistory(),
         [addNewButton, setAddNewButton] = useState(false),
         [changeTaxButton, setChangeTaxButton] = useState(false);
@@ -22,8 +25,7 @@ const EmployeeList = ({employeeList, fetchEmployeeList, onClickItem,groups}) => 
         if (groups.includes('Admin')) {
             setChangeTaxButton(true);
         }
-    },[])
-    console.log(employeeList);
+    },[]);
     if (isLoading && !error) {
         return <LoadingIndicator />
     }
@@ -38,7 +40,9 @@ const EmployeeList = ({employeeList, fetchEmployeeList, onClickItem,groups}) => 
             {employees.map(employee => (
                 <ListGroup.Item 
                     key = {employee.id}
-                    onClick={()=>onClickItem(employee.id)} >
+                    onClick={()=>{
+                        history.push(`/${employee.id}/`);
+                    }} >
                         <EmployeeListItem employee={employee}
                         />
                 </ListGroup.Item>)
@@ -61,12 +65,6 @@ const EmployeeList = ({employeeList, fetchEmployeeList, onClickItem,groups}) => 
         </ListGroup>
     )
 }
-const mapStateToProps=(state)=>({
-    employeeList:state.employeeList,
-    groups:state.user.user.groups
-})
-const mapDispatchToProps = (dispatch)=>({
-    fetchEmployeeList:(service, token)=>dispatch(fetchEmployeeList(service)(token))
-})
 
-export default connect(mapStateToProps, mapDispatchToProps)(EmployeeList)
+
+export default EmployeeList;

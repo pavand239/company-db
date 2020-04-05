@@ -12,10 +12,12 @@ const userError=(err)=>({
 const userLogout=()=>({
     type: 'USER_LOGOUT'
 })
+
 const setAfterLoginRedirectPath = (path) =>({
     type: 'SET_AFTER_LOGIN_REDIRECT',
     payload:path
 })
+
 const employeeListRequested=()=>({
     type: 'FETCH_EMPLOYEE_LIST_REQUEST'
 })
@@ -28,6 +30,13 @@ const employeeListError=(err)=>({
     payload: err
 })
 
+const selectEmployee=(employee)=>({
+    type: 'SELECT_EMPLOYEE',
+    payload: employee
+})
+const clearEmployee=()=>({
+    type: 'CLEAR_EMPLOYEE'
+})
 
 const fetchUser = (companyDBService) => (token) => (dispatch)=>{
     dispatch(userRequested());
@@ -51,5 +60,7 @@ export {
     userLogout,
     setAfterLoginRedirectPath,
     fetchUser,
-    fetchEmployeeList
+    fetchEmployeeList,
+    selectEmployee, 
+    clearEmployee
 }

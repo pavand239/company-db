@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import {useParams} from "react-router-dom";
-import {connect} from 'react-redux';
-
+import {useDispatch, useSelector} from 'react-redux';
+import { selectEmployee } from '../../actions';
 import CompanyDBServiceContext from "../company-db-service-context";
 import {
     EmployeeIncomeTable,
@@ -20,10 +20,12 @@ import ItemRecord, {ManyFieldItemRecord} from "../item-record";
 //['Admin','Chief','Accounting','HumanResource','Union']
 
 
-const EmployeeDetail = ({ user:{groups}}) => {
+const EmployeeDetail = () => {
     let {getEmployee} = useContext(CompanyDBServiceContext),
         [detail, setDetail] = useState([]),
-        [buttonEdit, setButtonEdit] = useState(false);
+        [buttonEdit, setButtonEdit] = useState(false),
+        groups=useSelector(state =>state.user.user.groups),
+        dispatch=useDispatch();
     let defaultDetail = [
             <ManyFieldItemRecord fieldToDisplay={['surname','name','patronymic']} className='h3'/>,
             <ItemRecord label={'Имя'} field={'name'} />,
@@ -92,15 +94,19 @@ const EmployeeDetail = ({ user:{groups}}) => {
 
 
     let {id} = useParams();
+    if (!id) {
+        return <h3>Выберите объект из списка</h3>
+    }
+
     return (
-        <ItemDetail getData={getEmployee} buttonEdit={buttonEdit && id}>
+        <ItemDetail 
+            getData={getEmployee} 
+            buttonEdit={buttonEdit && id}
+            actionWithItem={(employee)=>dispatch(selectEmployee(employee))}>
             {detail}
         </ItemDetail>
     )
 }
 
 
-const mapStateToProps = (state) => ({
-    ...state.user
-})
-export default connect(mapStateToProps)(EmployeeDetail);
+export default EmployeeDetail;

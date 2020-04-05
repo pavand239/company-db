@@ -44,6 +44,10 @@ class EmployeeAccountingSerializer(EmployeeChiefSerializer):
     class Meta:
         model=Employee
         exclude=["attitude_to_conscription","marital_status","address"]
+        read_only_fields = ["id","surname","name",
+            "patronymic","birth_date","birth_place","gender",
+            "department","position","passport_series","passport_ID",
+        ]
 class EmployeeHumanResourceSerializer(EmployeeChiefSerializer):
     class Meta:
         model=Employee

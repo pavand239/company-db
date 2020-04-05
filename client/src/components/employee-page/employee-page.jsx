@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {Row, Col, Accordion, Card} from "react-bootstrap";
 
-import {setAfterLoginRedirectPath} from "../../actions";
+import {
+    setAfterLoginRedirectPath,
+    selectEmployee,
+    clearEmployee
+} from "../../actions";
 import EmployeeList from "../employee-list";
 import EmployeeDetail from "../employee-detail";
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Route, Switch , useHistory} from 'react-router-dom';
 import {
     EmployeeEditChief,
@@ -28,11 +32,16 @@ import EducationDetail from "../education-detail";
 import ChildDetail from "../child-detail";
 
 
-const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
-    let history = useHistory();
-    const permDenied = <h3>У вас не доступа к этой странице</h3>;
+const EmployeePage = () => {
+    let history = useHistory(),
+        user = useSelector(state=>state.user.user);
+    const permDenied = <h3>У вас не доступа к этой странице</h3>,
+          dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch(clearEmployee());
+    },[])
     if (!user) {
-        setAfterLoginRedirectPath(history.location.pathname);
+        dispatch(setAfterLoginRedirectPath(history.location.pathname));
         return <Redirect to='/login'/>
     }
     let editEmployeePage = permDenied,
@@ -84,7 +93,7 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
                         </Accordion.Collapse>
                     </Card>
                 </Accordion>
-                <EmployeeList onClickItem = {(id)=>{history.push(`/${id}/`)}}/>
+                <EmployeeList />
             </Col>
             <Col sm={8}>
                 <div  className='border rounded p-5 w-100'>
@@ -134,11 +143,6 @@ const EmployeePage = ({user, setAfterLoginRedirectPath}) => {
         </Row>
     )
 }
-const mapStateToProps = (state) => ({
-    ...state.user
-})
-const mapActionsToProps = (dispatch) => ({
-    setAfterLoginRedirectPath:(path) => dispatch(setAfterLoginRedirectPath(path))
-})
 
-export default connect(mapStateToProps,mapActionsToProps)(EmployeePage)
+
+export default EmployeePage;
