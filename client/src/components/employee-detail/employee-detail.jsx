@@ -9,7 +9,7 @@ import {
     EmployeeChildrenTable
 } from '../tables';
 import ItemDetail from "../item-detail";
-import ItemRecord, {ManyFieldItemRecord} from "../item-record";
+import ItemRecord, {ManyFieldItemRecord, ImageRecord} from "../item-record";
 
 // Possible data fields
 // {surname, name, patronymic, birth_date, birth_place, 
@@ -28,6 +28,7 @@ const EmployeeDetail = () => {
         dispatch=useDispatch();
     let defaultDetail = [
             <ManyFieldItemRecord fieldToDisplay={['surname','name','patronymic']} className='h3'/>,
+            <ImageRecord alt='Фото работника' field='photo'/>,
             <ItemRecord label={'Имя'} field={'name'} />,
             <ItemRecord label={'Отчество'} field={'patronymic'} />,
             <ItemRecord label={'Пол'} field={'gender'} />,

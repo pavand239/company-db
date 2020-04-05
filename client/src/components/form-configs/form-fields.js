@@ -213,3 +213,10 @@ export const taxNameField = (readOnly=true) => ({
     label:'Наименование',
     readOnly: readOnly,
 })
+
+export const photoField = () => ({
+    name:'photo',
+    label:'Фотография',
+    type:'file',
+    accept:'image/jpeg,image/png'
+})

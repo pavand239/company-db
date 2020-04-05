@@ -98,6 +98,7 @@ export const EmployeeEditHumanResourceConfig = {
             .required('Необходимое поле'),
     }),
     formFields:[
+        fields.photoField(),
         fields.surnameField(false),
         fields.nameField(false),
         fields.patronymicField(false),
@@ -114,7 +115,7 @@ export const EmployeeEditHumanResourceConfig = {
     ]
 }
 export const EmployeeEditAdminConfig = {
-    formName:'Редактирование информации о сотруднике (Отдел кадров)',
+    formName:'Редактирование информации о сотруднике (Администратор)',
     getInitialValues:(data)=>({
         ...data
     }),

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics, viewsets, filters
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -16,6 +17,7 @@ class MainView(TemplateView):
 
 class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
+    parser_classes = [MultiPartParser]
     filter_backends = [filters.SearchFilter, DjangoFilterBackend]
     search_fields = ['surname', 'name','patronymic', 'department','position']
     filterset_fields=['gender','marital_status','attitude_to_conscription']

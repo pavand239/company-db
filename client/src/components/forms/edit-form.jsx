@@ -18,11 +18,18 @@ const EditForm = ({getData,patchData,formConfig, deleteData, afterUpload=()=>{},
             getDataCallback = useCallback(()=>getData(token,id),[id, token]);
         return useGetData(getDataCallback);
     }
-    const onSubmit = (values) => {
+    const onSubmit = (initialValues)=>(values) => {
+        let filteredValues={};
+        for (let key in values) {
+            if (values[key]!==initialValues[key]){
+                filteredValues[key]=values[key]
+            }
+        }
+        console.log(initialValues)
         setIsUploading(true);
         setIsUploaded(false);
         setUploadError(null);
-        patchData(localStorage.getItem('token'), id, data=values)
+        patchData(localStorage.getItem('token'), id, data=filteredValues)
             .then(()=>{setIsUploading(false);setIsUploaded(true);})
             .catch(err=>{setUploadError(err);setIsUploaded(true);})
     }

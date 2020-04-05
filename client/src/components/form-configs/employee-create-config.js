@@ -17,7 +17,8 @@ export const EmployeeCreateConfig = {
         passport_series:"",
         passport_ID:"",
         address:"", 
-        salary:0
+        salary:0,
+        photo:""
     }),
     validationSchema:Yup.object().shape({
         surname:Yup.string()
@@ -67,6 +68,7 @@ export const EmployeeCreateConfig = {
             .required('Необходимое поле')
     }),
     formFields:[
+        fields.photoField(),
         fields.surnameField(false),
         fields.nameField(false),
         fields.patronymicField(false),
