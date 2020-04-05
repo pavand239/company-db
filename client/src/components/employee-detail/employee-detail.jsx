@@ -29,6 +29,7 @@ const EmployeeDetail = () => {
     let defaultDetail = [
             <ManyFieldItemRecord fieldToDisplay={['surname','name','patronymic']} className='h3'/>,
             <ImageRecord alt='Фото работника' field='photo'/>,
+            <ItemRecord label={'Фамилия'} field={'surname'} />,
             <ItemRecord label={'Имя'} field={'name'} />,
             <ItemRecord label={'Отчество'} field={'patronymic'} />,
             <ItemRecord label={'Пол'} field={'gender'} />,
