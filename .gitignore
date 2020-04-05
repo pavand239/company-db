@@ -113,3 +113,5 @@ local_settings.py
 db.sqlite3
 .vscode
 static
+media
+!media/default.jpg
