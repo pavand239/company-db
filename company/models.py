@@ -43,7 +43,7 @@ class Employee(models.Model):
     def presents_num(self):
         return len([child for child in self.children.all() if child.age<14])
     class Meta:
-        ordering = ['surname']
+        ordering = ['department','surname', 'name', 'patronymic']
 
     def __str__(self):
         return '{} {}.{}.'.format(self.surname, self.name[0], self.patronymic[0])
