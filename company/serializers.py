@@ -57,6 +57,15 @@ class EmployeeAdminSerializer(EmployeeChiefSerializer):
         model=Employee
         exclude=["passport_series","passport_ID"]
         read_only_fields=["department","position"]
+
+class EmployeeUnionSerializer(EmployeeDefaultSerializer):
+    gender= serializers.CharField(source='get_gender_display')
+    presents_num=serializers.IntegerField()
+    class Meta:
+        model=Employee
+        fields=['id','surname','name', 'patronymic','birth_date','birth_place','department','position','gender', 'photo', 'presents_num']
+        read_only_fields=['id','surname','name', 'patronymic','birth_date','birth_place','department','position', 'photo', 'presents_num']
+
 class EmployeeCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model=Employee

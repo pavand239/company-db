@@ -39,6 +39,11 @@ class Employee(models.Model):
     address = models.CharField(max_length=200)
     salary = models.FloatField(validators=[MinValueValidator(limit_value=0,message='Оклад не меньше 0')])
     photo = models.ImageField('Фото работника',upload_to='photos', default='photos/default.jpg')
+    @property
+    def presents_num(self):
+        return len([child for child in self.children.all() if child.age<14])
+    class Meta:
+        ordering = ['surname']
 
     def __str__(self):
         return '{} {}.{}.'.format(self.surname, self.name[0], self.patronymic[0])
@@ -83,6 +88,9 @@ class Child(models.Model):
     name = models.CharField(max_length=100)
     patronymic = models.CharField(max_length=100, blank=True)
     birth_date = models.DateField()
+    @property
+    def age(self):
+        return int((datetime.date.today()-self.birth_date).days/365.25)
     def __str__(self):
         return '{} {} {}'.format(self.surname, self.name, self.patronymic)
 

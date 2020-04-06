@@ -33,6 +33,8 @@ class EmployeeViewSet(viewsets.ModelViewSet):
                 return EmployeeHumanResourceSerializer
             elif is_group_member(self.request, ['Admin']):
                 return EmployeeAdminSerializer
+            elif is_group_member(self.request, ['Union']):
+                return EmployeeUnionSerializer
             else:
                 return EmployeeDefaultSerializer 
     def get_permissions(self):
@@ -64,6 +66,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
             elif is_group_member(self.request,['Accounting']):
                 return IncomeAccountingSerializer(income,many=True)
         return Response(get_serializer(self).data)
+
 
 
     
