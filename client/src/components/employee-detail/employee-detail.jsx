@@ -49,7 +49,10 @@ const EmployeeDetail = () => {
         ],
         accountingDetail = [
             <ItemRecord label={'Оклад'} field={'salary'} />,
-        ];
+        ],
+        unionDetail = [
+            <ItemRecord label={'Необходимо подарков'} field={'presents_num'} />
+        ]
     useEffect(()=>{
         if (groups.includes('Chief')) {
             setDetail([...defaultDetail, ...adminDetail, ...humanResDetail, ...accountingDetail])
@@ -59,6 +62,8 @@ const EmployeeDetail = () => {
             setDetail([...defaultDetail, ...adminDetail, ...humanResDetail])
         } else if (groups.includes('Admin')) {
             setDetail([...defaultDetail, ...adminDetail])
+        } else if (groups.includes('Union')) {
+            setDetail([...defaultDetail, ...unionDetail])
         } else {
             setDetail([...defaultDetail])
         }

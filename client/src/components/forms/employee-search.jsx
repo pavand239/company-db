@@ -11,7 +11,7 @@ import {
 const EmployeeSearch =({formConfig})=>{
     const   companyDBService = useContext(CompanyDBServiceContext),
             dispatch = useDispatch(),
-            onSubmit = (values)=> {
+            onSubmit = ()=> (values)=> {
                 let notEmptyValues={};
                 for (let value in values) {
                     if(values[value]!=='') {
